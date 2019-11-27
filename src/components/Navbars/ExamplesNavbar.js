@@ -107,7 +107,8 @@ function ExamplesNavbar() {
                 data-placement="bottom"
                 to={{
                   pathname: "/register-modal",
-                  state: { modal: true },
+                 state: {modal: true}
+                  
                 }}
                 title="to Register Modal"
                 tag={Link}

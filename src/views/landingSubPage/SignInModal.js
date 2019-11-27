@@ -16,8 +16,9 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React,{Component}from "react";
 import {NavLink, Link} from "react-router-dom";
+import Axios from "axios";
 
 // react plugin used to create datetimepicker
 
@@ -40,18 +41,60 @@ import {
 // core components
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
 
-function SignInModal() {
-  const [modal, setModal] = React.useState(false);
-  const toggleModal = () => {
-    setModal(!modal);
-  };
-  document.documentElement.classList.remove("nav-open");
-  React.useEffect(() => {
+class SignInModal extends Component {
+  constructor(props) {
+      super(props);
+
+      this.onChangeInput = this.onChangeInput.bind(this);
+      this.onSigninClick = this.onSigninClick.bind(this);
+      this.toggleModal = this.toggleModal.bind(this);
+
+      this.state = {
+        usernameInput: '',
+        passwordInput: '',
+        modal: false
+      }
+
+    document.documentElement.classList.remove("nav-open"); 
+  }
+
+  componentDidMount() {
     document.body.classList.add("register-page");
-    return function cleanup() {
-      document.body.classList.remove("register-page");
+  }
+
+  componentDidUpdate() {
+    document.body.classList.remove("register-page");
+  }
+
+  toggleModal (){
+    this.setState({
+      modal: !this.state.modal
+    });
+  };
+
+  //button handler
+  onSigninClick(e) {
+    e.preventDefault();
+    const signinDetails = {
+      username: this.state.usernameInput,
+      password: this.state.passwordInput
     };
-  });
+    
+    Axios.post('http://localhost:5000/signin', signinDetails)
+    .then(res => {console.log(res.data)});
+  }
+
+  onChangeInput(e) {
+      const target = e.target;
+      const value = target.value;
+      const name = target.name;
+      
+      this.setState({
+        [name]: value
+      });
+  }
+    
+render(){
   return (
     <>
         <ExamplesNavbar />
@@ -67,7 +110,7 @@ function SignInModal() {
             <Col className="ml-auto mr-auto" lg="4">
               <Card className="card-register ml-auto mr-auto">
                 <h3 className="title mx-auto">Welcome</h3>
-                <Form className="register-form">
+                <Form className="register-form" onSubmit={this.onSigninClick}>
                   <label>User Name</label>
                   <InputGroup className="form-group-no-border">
                     <InputGroupAddon addonType="prepend">
@@ -75,7 +118,9 @@ function SignInModal() {
                         <i className="nc-icon nc-circle-10" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input placeholder="User Name" type="text" />
+                    <Input placeholder="User Name" type="text" name="usernameInput"
+                      onChange={this.onChangeInput}
+                    />
                   </InputGroup>
                   <label>Password</label>
                   <InputGroup className="form-group-no-border">
@@ -84,9 +129,16 @@ function SignInModal() {
                         <i className="nc-icon nc-key-25" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input placeholder="Password" type="password" />
+                    <Input placeholder="Password" type="password" name="passwordInput"
+                      onChange={this.onChangeInput}
+                    />
                   </InputGroup>
-                  <Button block className="btn-round" color="success">
+                  <Button 
+                    block 
+                    className="btn-round" 
+                    color="success" 
+                    type="Submit"
+                  >
                     Sign In
                   </Button><br></br>
                   <input type="checkbox" name="remember" value="rememberpassword" /> Remember Password 
@@ -114,20 +166,21 @@ function SignInModal() {
                     title="to Register Modal"
                     outline
                     type="button"
-                    onClick={toggleModal}
+                    name="modal"
+                    onClick={this.toggleModal}
                   >
                     Not yet a Member?
                   </Button>
                 </NavLink>
               {/* Modal */}
-        <Modal isOpen={modal} toggle={toggleModal} size="xl"
+        <Modal isOpen={this.state.modal} toggle={this.toggleModal} size="xl"
         >
             <div className="modal-header">
                 <button
                 aria-label="Close"
                 className="close"
                 type="button"
-                onClick={toggleModal}
+                onClick={this.toggleModal}
                 >
                 <span aria-hidden={true}>×</span>
                 </button>
@@ -221,7 +274,7 @@ function SignInModal() {
                     className="btn-link"
                     color="Info"
                     type="button"
-                    onClick={toggleModal}
+                    onClick={this.toggleModal}
                 >
                     Register
                 </Button>
@@ -247,6 +300,7 @@ function SignInModal() {
       </div>
     </>
   );
+}
 }
 
 export default SignInModal;
