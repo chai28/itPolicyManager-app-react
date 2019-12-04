@@ -118,7 +118,7 @@ render(){
                         <i className="nc-icon nc-circle-10" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input placeholder="User Name" type="text" name="usernameInput"
+                    <Input placeholder="User Name" type="text" name="usernameInput" autocomplete="on"
                       onChange={this.onChangeInput}
                     />
                   </InputGroup>

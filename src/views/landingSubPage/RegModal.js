@@ -146,7 +146,7 @@ class RegModal extends Component {
                           <i className="nc-icon nc-key-25" />
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input placeholder="Password" type="password" />
+                      <Input placeholder="Password" type="password" autocomplete="on"/>
                     </InputGroup>
                     <Button block className="btn-round" color="success">
                       Sign In
@@ -209,12 +209,11 @@ class RegModal extends Component {
                               <Row>
                               <InputGroup className="form-group-no-border">
                                   <Col className="car-register-nzbn" lg="8">
-                                      <Input placeholder="NZBN" type="text" />
+                                      <Input placeholder="NZBN" type="text"  name="nzbnInput" 
+                                      onChange={this.onChangeInput}/>
                                   </Col>
                                   <Col lg="4">
-                                      <Input type="checkbox" value="nzbn" 
-                                      name="nzbnInput"
-                                      onChange={this.onChangeInput}/>
+                                      <Input type="checkbox" value="nzbn"/>
                                   </Col>
                               </InputGroup>
                               </Row>

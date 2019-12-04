@@ -188,6 +188,25 @@ textarea.form-control {
   position: relative;
 }
 
+.survey-form {
+  background-color: grey;
+  color: white;
+  font-weight: bold;
+  border: 2px solid #cdc6cd;
+  border-radius: 3px;
+  padding-left: 15px;
+  padding-right: 15px;
+  box-shadow: 9px 12px 9px rgb(101, 98, 98);
+  margin-top: 120px;
+}
+
+.survey-title{
+  text-align: center;
+  text-decoration: underline;
+  font-size: 20px;
+  font-weight: bold;
+}
+
 .register-form {
   .form-control {
     border: 1px solid rgb(112, 62, 184) !important;

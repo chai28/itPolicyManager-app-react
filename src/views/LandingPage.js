@@ -17,6 +17,7 @@
 
 */
 import React from "react";
+import { Link } from "react-router-dom";
 
 // reactstrap components
 import {
@@ -150,16 +151,24 @@ function LandingPage() {
             </Row>
           </Container>
         </div>
-        <div className="section section-dark text-center">
+        <div className="section section-brown text-center">
           <Container>
             <h2 className="title">Take A free Survey</h2>
             <h3>
               Take our free survey and will provide you the policy you need.
             </h3>
             <br></br><br></br>
-            <Button className="btn-fill" color="danger" size="lg">
+            <Button 
+              className="btn-fill" 
+              color="danger" 
+              size="lg"
+              to={{
+                pathname: "/survey-page"
+              }}
+              title="to Survey Page"
+              tag={Link}>
                       START SURVEY
-                    </Button>
+            </Button>
           </Container>
         </div>
         <div className="section landing-section">
