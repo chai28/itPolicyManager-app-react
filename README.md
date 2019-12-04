@@ -10,3 +10,6 @@ mongodb install
 # serve with hot reload at localhost:3000
 npm start
 
+# install APIs
+npm install axios
+
