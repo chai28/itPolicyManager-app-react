@@ -20,6 +20,7 @@ import DashboardContent from "views/dashboardAdminSubPage/DashboardContent.jsx";
 import Policies from "views/dashboardAdminSubPage/Policies.jsx";
 import Subscribers from "views/dashboardAdminSubPage/Subscribers.jsx";
 import EditProfile from "views/commonPage/EditProfile.jsx";
+import KeyPerson from "views/dashboardUserSubPage/AddKeyContact.jsx";
 
 var routes = [{
     path: "/dashboardcontent",
@@ -45,12 +46,20 @@ var routes = [{
     layout: "/dashboard"
   },
   {
-    pro: false,
+    pro: true,
     path: "/edit-profile",
-    name: "EditProfile",
+    name: "Edit Profile",
     icon: "nc-icon nc-badge",
     component: EditProfile,
     layout: "/dashboard"
-  }
+  },
+  {
+    pro: true,
+    path: "/AddKeyContact",
+    name: "Add Key Contact",
+    icon: "nc-icon nc-simple-add",
+    component: KeyPerson,
+    layout: "/dashboard"
+  } 
 ];
 export default routes;
