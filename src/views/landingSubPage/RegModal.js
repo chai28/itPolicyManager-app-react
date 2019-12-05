@@ -17,11 +17,8 @@
 
 */
 import React, {Component} from "react";
-import {NavLink, Link} from "react-router-dom";
+import { NavLink, Link} from "react-router-dom";
 import Axios from "axios";
-
-
-// react plugin used to create datetimepicker
 
 // reactstrap components
 import {
@@ -50,9 +47,13 @@ class RegModal extends Component {
       this.onChangeInput = this.onChangeInput.bind(this);
       this.onRegisterClick = this.onRegisterClick.bind(this);
       this.toggleModal = this.toggleModal.bind(this);
-
+      this.routeChange = this.routeChange.bind(this);
+      this.toggleNotificationModal = this.toggleNotificationModal.bind(this);
+      this.handleClickOutside = this.handleClickOutside.bind(this);
+      
       this.state = {
         modal: true,
+        regNotification: false,
         bNameInput: '',
         nzbnInput: '',
         bEmail: '',
@@ -62,7 +63,8 @@ class RegModal extends Component {
         bCity: '',
         bState: '',
         bZip: '',
-        bDescription: ''
+        bDescription: '',
+        pop:''
       }
 
     document.documentElement.classList.remove("nav-open"); 
@@ -70,22 +72,48 @@ class RegModal extends Component {
 
   componentDidMount() {
     document.body.classList.add("register-page");
+    document.addEventListener('mousedown', this.handleClickOutside, true);
   }
 
   componentDidUpdate() {
     document.body.classList.remove("register-page");
   }
 
-  toggleModal (){
+  routeChange() {
+    let path = `/signin-page`;
+    this.props.history.push(path);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickOutside, true);
+}
+
+/**
+ * Alert if clicked on outside of element
+ */
+handleClickOutside(event) {
+  if (!this.pop.contains(event.target)) {
+    this.routeChange();
+  }
+}
+
+  toggleModal(){
     this.setState({
       modal: !this.state.modal
     });
   };
 
+  toggleNotificationModal(){
+    this.setState({
+      regNotification: !this.state.regNotification
+    });
+  }
+
   //button handler
   onRegisterClick(e) {
     e.preventDefault();
-    console.log("onRegisterClick clicked!");
+    this.toggleModal();
+    console.log("onRegisterClick clicked! ");
     const RegisterDetails = {
       bNameInput: this.state.bNameInput,
       nzbnInput: this.state.nzbnInput,
@@ -101,6 +129,8 @@ class RegModal extends Component {
     
     Axios.post('http://localhost:5000/register', RegisterDetails)
     .then(res => {console.log(res.data)});
+
+    this.toggleNotificationModal();
   }
 
   onChangeInput(e) {
@@ -137,7 +167,7 @@ class RegModal extends Component {
                           <i className="nc-icon nc-circle-10" />
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input placeholder="User Name" type="text" />
+                      <Input placeholder="User Name" type="text" autoComplete="username"/>
                     </InputGroup>
                     <label>Password</label>
                     <InputGroup className="form-group-no-border">
@@ -146,7 +176,7 @@ class RegModal extends Component {
                           <i className="nc-icon nc-key-25" />
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input placeholder="Password" type="password" autocomplete="on"/>
+                      <Input placeholder="Password" type="password" autoComplete="current-password"/>
                     </InputGroup>
                     <Button block className="btn-round" color="success">
                       Sign In
@@ -171,14 +201,15 @@ class RegModal extends Component {
                   color="info"
                   outline
                   type="button"
-                  onClick={e => e.preventDefault()}
+                  onClick={this.toggleModal}
                 >
                   Not yet a Member?
                 </Button>
                 {/* Modal */}
-          <Modal isOpen={this.state.modal} toggle={this.toggleModal} size="xl"
-          >
-              <div className="modal-header">
+                
+          <Modal isOpen={this.state.modal} toggle={this.toggleModal} size="xl">
+            <div id='pop' ref={node=>{this.pop = node;}}>
+              <div  className="modal-header">
                   <NavLink to="/signin-page" 
                       tag={Link}
                       aria-label="Close"
@@ -295,19 +326,33 @@ class RegModal extends Component {
                       color="Info"
                       type="button"
                       onClick={this.onRegisterClick}
+                      to="/signin-page"
                   >
                       Register
                   </Button>
                   </div>
                   <div className="divider" />
                   <div className="right-side">
-                  <Button className="btn-link" color="danger" type="button">
-                      Already a member?
-                  </Button>
+                  {/* <NavLink
+                    to="/signin-page" 
+                    tag={Link}
+                  > */}
+                    <Button 
+                      className="btn-link" 
+                      color="danger" 
+                      type="button"
+                      modal={false}
+                      onClick={this.routeChange}
+                    >
+                        Already a member?
+                    </Button>
+                  {/* </NavLink> */}
                   </div>
+              </div>
               </div>
                 </Modal>
                 </div>
+                
                 </Card>
               </Col>
             </Row>
@@ -318,6 +363,35 @@ class RegModal extends Component {
             </h6>
           </div>
         </div>
+        <Container>
+        <Card className="ml-auto mr-auto">
+          <Row>
+            <Col className="ml-auto mr-auto" lg="4">
+              <Modal 
+                isOpen={this.state.regNotification}
+                toggle={this.toggleNotificationModal} 
+                size="l" 
+              >
+                <div className="modal-header">
+                  <NavLink to="/signin-page" 
+                      tag={Link}
+                      aria-label="Close"
+                      className="close"
+                  >
+                      <span aria-hidden={true}>×</span>
+                  </NavLink>
+                  <label><h6>Thank You for registering</h6></label>
+                </div>
+                <div className="modal-body">
+                  <p>Please check your email for your login credentials and update you password.</p>
+                </div>
+                </Modal>
+              </Col>
+            </Row>
+        </Card>
+        </Container>
+        {/* </div> */}
+        
       </>
     );
   }
