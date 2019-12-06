@@ -27,7 +27,7 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  Container,
+  Container
 } from "reactstrap";
 
 import routes from "routes.js";
@@ -43,6 +43,13 @@ class Header extends React.Component {
     this.toggle = this.toggle.bind(this);
     this.dropdownToggle = this.dropdownToggle.bind(this);
     this.sidebarToggle = React.createRef();
+    this.changeRoute = this.changeRoute.bind(this);
+  }
+
+  changeRoute() {
+    localStorage.clear();
+    let path = `/landing-page`;
+    this.props.history.push(path);
   }
   toggle() {
     if (this.state.isOpen) {
@@ -154,13 +161,22 @@ class Header extends React.Component {
                 nav
                 isOpen={this.state.dropdownOpen}
                 toggle={e => this.dropdownToggle(e)}
-                style={{color:'grey'}}
+                style={{ color: "grey" }}
               >
-                <DropdownToggle caret nav style={{fontSize:18, color:'black'}}>
-                  <i className="nc-icon nc-settings-gear-65" style={{fontSize:23, color:'black'}}/>
+                <DropdownToggle
+                  caret
+                  nav
+                  style={{ fontSize: 18, color: "black" }}
+                >
+                  <i
+                    className="nc-icon nc-settings-gear-65"
+                    style={{ fontSize: 23, color: "black" }}
+                  />
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem tag="a">Logout</DropdownItem>
+                  <div onClick={this.changeRoute}>
+                    <DropdownItem tag="a">Logout</DropdownItem>
+                  </div>
                 </DropdownMenu>
               </Dropdown>
             </Nav>

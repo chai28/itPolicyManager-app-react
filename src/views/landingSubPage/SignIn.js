@@ -48,11 +48,11 @@ class SignIn extends Component {
 
       this.state = {
         usernameInput: '',
-        passwordInput: '',
-        value: ''
+        passwordInput: ''
       }
 
     document.documentElement.classList.remove("nav-open"); 
+    console.log(localStorage.getItem('session_id'));
   }
 
   componentDidMount() {
@@ -80,7 +80,10 @@ class SignIn extends Component {
     .then(res => {
       console.log(res.data)
       if(res.data.value === true){
-        console.log("redirect to dashboard");
+        console.log(res);
+        //set session with res.data.userId
+        localStorage.setItem('session_id', res.data.userId);
+        console.log(localStorage.getItem('session_id'));
         this.routeChange();
       }
       else{

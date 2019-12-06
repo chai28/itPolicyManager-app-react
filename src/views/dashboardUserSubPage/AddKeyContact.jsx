@@ -18,7 +18,6 @@
 */
 import React from "react";
 import Axios from "axios";
-import {NavLink, Link} from "react-router-dom";
 
 // reactstrap components
 import {
@@ -46,7 +45,9 @@ class Policies extends React.Component {
       fname: '',
       lname: '',
       email: '',
-      position: ''
+      position: '',
+      userId: localStorage.getItem('session_id')
+
     }
 }
   
@@ -59,8 +60,8 @@ class Policies extends React.Component {
       [name]: value
       
     });
-    console.log([name] + ': ' + value);
   }
+  
   onAddKeyContactClick(e) {
     e.preventDefault();
     console.log("add key contact clicked!");
@@ -68,7 +69,8 @@ class Policies extends React.Component {
       fname: this.state.fname,
       lname: this.state.lname,
       email: this.state.email,
-      position: this.state.position
+      position: this.state.position,
+      userId: this.state.userId
     };
     
     Axios.post('http://localhost:5000/addKeyContact',addKeyContactDetails)
