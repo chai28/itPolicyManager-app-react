@@ -64,7 +64,8 @@ class RegModal extends Component {
         bState: '',
         bZip: '',
         bDescription: '',
-        pop:''
+        pop:'',
+        pop2:''
       }
 
     document.documentElement.classList.remove("nav-open"); 
@@ -92,7 +93,11 @@ class RegModal extends Component {
  * Alert if clicked on outside of element
  */
 handleClickOutside(event) {
-  if (!this.pop.contains(event.target)) {
+  console.log("POP"+this.pop)
+  console.log("2"+this.pop2)
+
+  if ((this.pop!==null?!this.pop.contains(event.target):false) 
+    || (this.pop2!==undefined?!this.pop2.contains(event.target):false)) {
     this.routeChange();
   }
 }
@@ -333,10 +338,6 @@ handleClickOutside(event) {
                   </div>
                   <div className="divider" />
                   <div className="right-side">
-                  {/* <NavLink
-                    to="/signin-page" 
-                    tag={Link}
-                  > */}
                     <Button 
                       className="btn-link" 
                       color="danger" 
@@ -346,51 +347,51 @@ handleClickOutside(event) {
                     >
                         Already a member?
                     </Button>
-                  {/* </NavLink> */}
                   </div>
               </div>
               </div>
                 </Modal>
                 </div>
-                
                 </Card>
               </Col>
             </Row>
           </Container>
+          {/* modal for notification */}
+          <Container>
+            <Card className="ml-auto mr-auto">
+              <Row>
+                <Col className="ml-auto mr-auto" lg="4">
+                  <Modal 
+                    isOpen={this.state.regNotification}
+                    toggle={this.toggleNotificationModal} 
+                    size="l" 
+                  >
+                    <div id='pop2' ref={node=>{this.pop2 = node;}}>
+                      <div className="modal-header">
+                        <NavLink to="/signin-page" 
+                            tag={Link}
+                            aria-label="Close"
+                            className="close"
+                        >
+                            <span aria-hidden={true}>×</span>
+                        </NavLink>
+                        <label><h6>Thank You for registering</h6></label>
+                      </div>
+                      <div className="modal-body">
+                        <p>Please check your email for your login credentials and update you password.</p>
+                      </div>
+                    </div>
+                    </Modal>
+                  </Col>
+                </Row>
+              </Card>
+            </Container>
           <div className="footer register-footer text-center">
             <h6>
               © {new Date().getFullYear()}, by IT Psychiatrist
             </h6>
           </div>
-        </div>
-        <Container>
-        <Card className="ml-auto mr-auto">
-          <Row>
-            <Col className="ml-auto mr-auto" lg="4">
-              <Modal 
-                isOpen={this.state.regNotification}
-                toggle={this.toggleNotificationModal} 
-                size="l" 
-              >
-                <div className="modal-header">
-                  <NavLink to="/signin-page" 
-                      tag={Link}
-                      aria-label="Close"
-                      className="close"
-                  >
-                      <span aria-hidden={true}>×</span>
-                  </NavLink>
-                  <label><h6>Thank You for registering</h6></label>
-                </div>
-                <div className="modal-body">
-                  <p>Please check your email for your login credentials and update you password.</p>
-                </div>
-                </Modal>
-              </Col>
-            </Row>
-        </Card>
-        </Container>
-        {/* </div> */}
+        </div> 
         
       </>
     );

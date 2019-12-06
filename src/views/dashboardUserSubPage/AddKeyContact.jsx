@@ -61,7 +61,7 @@ class Policies extends React.Component {
       
     });
   }
-  
+
   onAddKeyContactClick(e) {
     e.preventDefault();
     console.log("add key contact clicked!");
@@ -148,14 +148,13 @@ class Policies extends React.Component {
                     </FormGroup>
 
                     <Button
-                        className="btn-round"
-                        style={{'margin-right':'20px'}}
-                        color="success"
-                        href="#"
-                        type="button"
-                        onClick={this.onAddKeyContactClick}
+                      className="btn-round"
+                      style={{'margin-right':'7px'}}
+                      color="success"
+                      href="#pablo"
+                      onClick={this.onAddKeyContactClick}
                     >
-                        Submit
+                      Submit
                     </Button>
               </Form> 
            
