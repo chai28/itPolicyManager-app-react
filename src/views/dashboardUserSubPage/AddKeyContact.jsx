@@ -34,22 +34,42 @@ import {
   CardTitle,
 } from "reactstrap";
 
-
+// import Modals from "components/Modals.jsx";
+//the custom modal component 
+// import ModalSetup from "components/Modals.jsx"; 
 
 class Policies extends React.Component {
   constructor(props) {
     super(props);
     this.onChangeInput = this.onChangeInput.bind(this);
     this.onAddKeyContactClick = this.onAddKeyContactClick.bind(this);
+    // this.toggleShowModal = this.toggleShowModal.bind(this);
+
     this.state = {
       fname: '',
       lname: '',
       email: '',
       position: '',
-      userId: localStorage.getItem('session_id')
+      userId: localStorage.getItem('session_id'),
+      message: '',
+      messageHeader: ''
+      // showmodal: false
 
     }
+    console.log("value of sshowmodal: " + this.state.showmodal)
 }
+
+// openModalHandler = () => {
+//   this.setState({
+//     showmodal: true
+//   });
+// }
+
+// closeModalHandler = () => {
+//   this.setState({
+//     showmodal: false
+//   });
+// }
   
   onChangeInput(e) {
     const target = e.target;
@@ -58,7 +78,6 @@ class Policies extends React.Component {
     
     this.setState({
       [name]: value
-      
     });
   }
 
@@ -74,95 +93,115 @@ class Policies extends React.Component {
     };
     
     Axios.post('http://localhost:5000/addKeyContact',addKeyContactDetails)
-    .then(res => {console.log(res.data)});
+    .then(res => {console.log(res.data);
+      if(res.data.value === true){
+        console.log("added successfully")
+        // this.setState({
+        //   message: "Contact added succesfully",
+        //   messageHeader: "Adding Key Contact"
+        // });
+        
+      }else{
+        console.log("contact already exist")
+        // this.setState({
+        //   message: "This contact akready exist.",
+        //   messageHeader: "Adding Key Contact Failed"
+        // });
+      }
+    });
+
+    // this.openModalHandler();
+
   }
 
   render() {
     return (
       <>
       <div className="content">
-          <Row>
+        <Row>
           <Col className="ml-auto mr-auto" md="8">
-        <Card className="card-upgrade" style={{transform: 'none'}}>
-          <CardHeader className="text-center">
-            <CardTitle tag="h4">Add key contacts for your company</CardTitle>
-          </CardHeader>
-
-          <CardBody> 
-              <Form className="edit-profile-form">
-
-                    <FormGroup>
-                      <label>
-                        <h6>First Name</h6>
-                      </label>
-                      <Row>
-                      <InputGroup className="form-group-no-border">
-                         <Col className="car-register-nzbn" lg="12">
-                           <Input placeholder="First Name" type="text" name="fname" 
-                                   onChange={this.onChangeInput}/>
-                        </Col>
-                      </InputGroup>
-                      </Row>
-                    </FormGroup>
-
-                    <FormGroup>
-                      <label>
-                        <h6>Last Name</h6>
-                      </label>
-                      <Row>
-                        <InputGroup className="form-group-no-border">
-                          <Col className="car-register-nzbn" lg="12">
-                            <Input placeholder="Last Name" type="text" name="lname"
-                                   onChange={this.onChangeInput}/>
-                          </Col>
-                        </InputGroup>
-                      </Row>
-                    </FormGroup>
-
-                    <FormGroup>
-                      <label>
-                        <h6>Email</h6>
-                      </label>
-                      <Row>
-                       <InputGroup className="form-group-no-border">
+            <Card className="card-upgrade" style={{transform: 'none'}}>
+              <CardHeader className="text-center">
+                <CardTitle tag="h4">Add key contacts for your company</CardTitle>
+              </CardHeader>
+              <CardBody> 
+                <Form className="edit-profile-form">
+                  <FormGroup>
+                    <label>
+                      <h6>First Name</h6>
+                    </label>
+                    <Row>
+                    <InputGroup className="form-group-no-border">
                         <Col className="car-register-nzbn" lg="12">
-                          <Input placeholder="Email@email.com" type="text" name="email"
-                                   onChange={this.onChangeInput} />
+                          <Input placeholder="First Name" type="text" name="fname" 
+                                  onChange={this.onChangeInput}/>
+                      </Col>
+                    </InputGroup>
+                    </Row>
+                  </FormGroup>
+
+                  <FormGroup>
+                    <label>
+                      <h6>Last Name</h6>
+                    </label>
+                    <Row>
+                      <InputGroup className="form-group-no-border">
+                        <Col className="car-register-nzbn" lg="12">
+                          <Input placeholder="Last Name" type="text" name="lname"
+                                  onChange={this.onChangeInput}/>
                         </Col>
                       </InputGroup>
-                      </Row>
-                    </FormGroup>
+                    </Row>
+                  </FormGroup>
 
-                    <FormGroup>
-                      <label>
-                        <h6>Position</h6>
-                      </label>
-                      <Row>
+                  <FormGroup>
+                    <label>
+                      <h6>Email</h6>
+                    </label>
+                    <Row>
                       <InputGroup className="form-group-no-border">
-                       <Col className="car-register-nzbn" lg="12">
-                        <Input placeholder="Position" type="text" name="position"
-                                   onChange={this.onChangeInput} />
-                       </Col> 
-                      </InputGroup>
-                      </Row>
-                    </FormGroup>
+                      <Col className="car-register-nzbn" lg="12">
+                        <Input placeholder="Email@email.com" type="text" name="email"
+                                  onChange={this.onChangeInput} />
+                      </Col>
+                    </InputGroup>
+                    </Row>
+                  </FormGroup>
 
-                    <Button
-                      className="btn-round"
-                      style={{'margin-right':'7px'}}
-                      color="success"
-                      href="#pablo"
-                      onClick={this.onAddKeyContactClick}
-                    >
-                      Submit
-                    </Button>
-              </Form> 
-           
-         </CardBody>
-        </Card>
-      </Col>
-    </Row>
-  </div>
+                  <FormGroup>
+                    <label>
+                      <h6>Position</h6>
+                    </label>
+                    <Row>
+                    <InputGroup className="form-group-no-border">
+                      <Col className="car-register-nzbn" lg="12">
+                      <Input placeholder="Position" type="text" name="position"
+                                  onChange={this.onChangeInput} />
+                      </Col> 
+                    </InputGroup>
+                    </Row>
+                  </FormGroup>
+                  <Button
+                    className="btn-round"
+                    style={{'margin-right':'7px'}}
+                    color="success"
+                    href="#pablo"
+                    onClick={this.onAddKeyContactClick}
+                  >
+                    Submit
+                  </Button>
+                </Form> 
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+        {/* <ModalSetup 
+           show={this.state.isShowing}
+           messageclose={this.closeModalHandler}
+           message={this.state.message}
+           messageHeader={this.state.messageHeader}
+        /> */}
+      </div>
       </>
     );
   }

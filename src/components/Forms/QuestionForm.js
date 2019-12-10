@@ -1,74 +1,85 @@
-import React,{Component}from "react";
+import React, {
+    Component
+} from "react";
 import Axios from "axios";
 
 import {
-    FormGroup, 
+    FormGroup,
     Input,
     InputGroup,
-  } from "reactstrap";
-
-// reactstrap components
-//import { Row, Container } from "reactstrap";
-
+} from "reactstrap";
 
 class QuestionForm extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {questions: []};
+        this.state = {
+            questions: [],
+            policies: [],
+        };
     }
 
     componentDidMount() {
         Axios.get('http://localhost:5000/questions')
             .then(response => {
-                this.setState({ questions: response.data });
+                console.log('response', response)
+                this.setState({
+                    questions: response.data
+                });
             })
-            .catch(function (error){
+            .catch(function (error) {
                 console.log(error);
             })
     }
 
     questionList() {
-        return this.state.questions.map(function(question, i){
-            return (
+        const handleOnChange = (option, questionIndex) => {
+            const policies = this.state.policies;
+            policies[questionIndex] = option.policy
+            this.setState({ policies: policies });
+            this.props.onPoliciesChange(this.state.policies);
+            
+        }
+        return this.state.questions.map(function (question, questionIndex) {
+            return ( 
                 <FormGroup>
-                    <label>{question.question_content}</label> 
-                    <InputGroup className="form-group-no-border">
-                    <div className="form-check">
-                    {
-                        question.options.map(function(options, i){
-                            return(
-                                <div> 
-                                <label>
-                                <Input
-                                    type="radio"
-                                    name="option1"
-                                    value={options}
-                                    checked={false}
-                                    className="form-check-input"
-                                    />
-                                {options}
-                                </label>
-                                </div>
-
-                            )
-                        })
-                    }
-                    </div>
-                    </InputGroup>
+                    <label>{ question.question_content }</label>  
+                    <InputGroup className = "form-group-no-border" >
+                        <div className = "form-check"> 
+                        {
+                            question.options.map(function (option, optionIndex) {
+                                return ( 
+                                    <div>
+                                        <label>
+                                            <Input type = "radio"
+                                            name = { questionIndex }
+                                            value = { option.name }
+                                            className = "form-check-input"
+                                            onClick = {() => handleOnChange(option, questionIndex)}
+                                            /> 
+                                            {option.name} 
+                                        </label> 
+                                    </div >
+                                )
+                            })
+                        } 
+                        </div> 
+                    </InputGroup> 
                 </FormGroup>
             )
-        })
-    }
+        }
+    )
+}
 
-    render(){
-        return(
+render() {
+    return( 
         <>
-            <h5>Start Survey</h5>
-            { this.questionList() }
+            <h5 > Start Survey </h5> {
+            this.questionList()
+        } 
         </>
-        );
-    }
+    );
+}
 
 }
 

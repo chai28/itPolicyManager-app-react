@@ -1,4 +1,5 @@
 import React,{Component}from "react";
+import Axios from "axios";
 
 
 // reactstrap components
@@ -22,12 +23,9 @@ import {
     constructor(props) {
         super(props);
   
-        // this.onChangeInput = this.onChangeInput.bind(this);
-        // this.onSigninClick = this.onSigninClick.bind(this);
-        // this.toggleModal = this.toggleModal.bind(this);
-  
         this.state = {
-            navbarColor: "navbar-transparent"
+            navbarColor: "navbar-transparent",
+            policies: [],
         }
   
       document.documentElement.classList.remove("nav-open"); 
@@ -39,6 +37,44 @@ import {
 
     componentDidUpdate() {
         document.body.classList.remove("register-page");
+    }
+
+    submitToDB(){
+        const matchPolicies = this.state.policies;
+
+        const RegisterDetails = {
+            bNameInput: this.state.bNameInput,
+            nzbnInput: this.state.nzbnInput,
+            bEmail: this.state.bEmail
+        };
+
+        Axios.post('http://localhost:5000/register', RegisterDetails)
+        .then(res => {console.log(res.data);
+            const company = {
+                id: res.data.id,
+                policies: matchPolicies,
+            }
+            Axios.post('http://localhost:5000/company', company)
+            .then(response => {
+                console.log('response', response)
+            })
+            .catch(function (error) {
+                console.log(error);
+            }) 
+          if(res.data.value === true){
+            this.setState({
+              message: "Please check your email for your login credentials and update you password.",
+              messageHeader: "Login for survey result"
+            });
+            
+          }else{
+            this.setState({
+              message: "Company already exist, login instead.",
+              messageHeader: "Login for survey result"
+            });
+          }
+        });
+        
     }
 
 
@@ -55,7 +91,7 @@ import {
                 <FormGroup>
                     <label >Business Name</label>
                     <InputGroup className="form-group-no-border">
-                        <Input placeholder="Business Name" type="text" />
+                        <Input placeholder="Business Name" type="text" name="bNameInput"/>
                     </InputGroup>
                 </FormGroup>
                 <FormGroup>
@@ -63,11 +99,10 @@ import {
                     <Row>
                         <InputGroup className="form-group-no-border">
                             <Col className="car-register-nzbn" lg="8">
-                                <Input placeholder="NZBN" type="text" />
+                                <Input placeholder="NZBN" type="text" name="nzbnInput"/>
                             </Col>
                             <Col lg="4">
-                                <Input type="checkbox" value="nzbn" 
-                                name="nzbnInput"/>
+                                <Input type="checkbox" value="nzbn"/>
                             </Col>
                         </InputGroup>
                     </Row>
@@ -81,9 +116,11 @@ import {
                     </InputGroup>
                 </FormGroup>
                 <br></br>
-                <QuestionForm />
+                <QuestionForm 
+                    onPoliciesChange={(policies) => this.setState({ policies: policies})}
+                />
 
-                <Button className="btn-round" color="success">
+                <Button className="btn-round" color="success" onClick={this.submitToDB()}>
                     Submit
                 </Button>
             </Form>

@@ -65,7 +65,9 @@ class RegModal extends Component {
         bZip: '',
         bDescription: '',
         pop:'',
-        pop2:''
+        pop2:'',
+        message:'',
+        messageHeader:''
       }
 
     document.documentElement.classList.remove("nav-open"); 
@@ -90,12 +92,9 @@ class RegModal extends Component {
 }
 
 /**
- * Alert if clicked on outside of element
+ * close modal if clicked outside of element
  */
 handleClickOutside(event) {
-  console.log("POP"+this.pop)
-  console.log("2"+this.pop2)
-
   if ((this.pop!==null?!this.pop.contains(event.target):false) 
     || (this.pop2!==undefined?!this.pop2.contains(event.target):false)) {
     this.routeChange();
@@ -133,7 +132,20 @@ handleClickOutside(event) {
     };
     
     Axios.post('http://localhost:5000/register', RegisterDetails)
-    .then(res => {console.log(res.data)});
+    .then(res => {console.log(res.data);
+      if(res.data.value === true){
+        this.setState({
+          message: "Please check your email for your login credentials and update you password.",
+          messageHeader: "Thank You for registering"
+        });
+        
+      }else{
+        this.setState({
+          message: "Company already exist, login instead.",
+          messageHeader: "Registration Failed"
+        });
+      }
+    });
 
     this.toggleNotificationModal();
   }
@@ -375,10 +387,10 @@ handleClickOutside(event) {
                         >
                             <span aria-hidden={true}>×</span>
                         </NavLink>
-                        <label><h6>Thank You for registering</h6></label>
+                        <label><h6>{this.state.messageHeader}</h6></label>
                       </div>
                       <div className="modal-body">
-                        <p>Please check your email for your login credentials and update you password.</p>
+                        <p>{this.state.message}</p>
                       </div>
                     </div>
                     </Modal>
