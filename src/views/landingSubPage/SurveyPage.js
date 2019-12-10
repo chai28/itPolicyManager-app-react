@@ -23,12 +23,13 @@ import {
     constructor(props) {
         super(props);
   
+        this.onChangeInput = this.onChangeInput.bind(this);
         this.state = {
             navbarColor: "navbar-transparent",
             policies: [],
-            bNameInput: this.state.bNameInput,
-            nzbnInput: this.state.nzbnInput,
-            bEmail: this.state.bEmail,
+            bNameInput: '',
+            nzbnInput: '',
+            bEmail: '',
         }
   
       document.documentElement.classList.remove("nav-open"); 
