@@ -50,7 +50,7 @@ class SignIn extends Component {
       }
 
     document.documentElement.classList.remove("nav-open"); 
-    console.log(localStorage.getItem('session_id'));
+    console.log("before: " + (localStorage.getItem('session_id')));
   }
 
   componentDidMount() {
@@ -76,12 +76,12 @@ class SignIn extends Component {
     
     Axios.post('http://localhost:5000/signin', signinDetails)
     .then(res => {
-      console.log(res.data)
       if(res.data.value === true){
         console.log(res);
         //set session with res.data.userId
         localStorage.setItem('session_id', res.data.userId);
-        console.log(localStorage.getItem('session_id'));
+        localStorage.setItem('session_type', res.data.userType);
+        console.log(localStorage.getItem('session_id') + (localStorage.getItem('session_type')));
         this.routeChange();
       }
       else{

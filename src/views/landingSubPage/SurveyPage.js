@@ -26,6 +26,9 @@ import {
         this.state = {
             navbarColor: "navbar-transparent",
             policies: [],
+            bNameInput: this.state.bNameInput,
+            nzbnInput: this.state.nzbnInput,
+            bEmail: this.state.bEmail,
         }
   
       document.documentElement.classList.remove("nav-open"); 
@@ -37,6 +40,16 @@ import {
 
     componentDidUpdate() {
         document.body.classList.remove("register-page");
+    }
+
+    onChangeInput(e) {
+        const target = e.target;
+        const value = target.value;
+        const name = target.name;
+        
+        this.setState({
+          [name]: value
+        });
     }
 
     submitToDB(){
@@ -91,7 +104,8 @@ import {
                 <FormGroup>
                     <label >Business Name</label>
                     <InputGroup className="form-group-no-border">
-                        <Input placeholder="Business Name" type="text" name="bNameInput"/>
+                        <Input placeholder="Name" type="text" name="bNameInput"
+                                   onChange={this.onChangeInput}/>
                     </InputGroup>
                 </FormGroup>
                 <FormGroup>
@@ -99,7 +113,8 @@ import {
                     <Row>
                         <InputGroup className="form-group-no-border">
                             <Col className="car-register-nzbn" lg="8">
-                                <Input placeholder="NZBN" type="text" name="nzbnInput"/>
+                                <Input placeholder="NZBN" type="text"  name="nzbnInput" 
+                                      onChange={this.onChangeInput}/>
                             </Col>
                             <Col lg="4">
                                 <Input type="checkbox" value="nzbn"/>
@@ -110,9 +125,9 @@ import {
                 <FormGroup>
                     <label>Business Email</label>
                     <InputGroup className="form-group-no-border">
-                        <Input placeholder="Business_Email@email.com" type="text" 
-                        name="bEmail"
-                        onChange={this.onChangeInput}/>
+                        <Input placeholder="Email@email.com" type="text" 
+                                  name="bEmail"
+                                  onChange={this.onChangeInput}/>
                     </InputGroup>
                 </FormGroup>
                 <br></br>

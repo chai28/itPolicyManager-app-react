@@ -23,7 +23,8 @@ import EditProfile from "views/commonPage/EditProfile.jsx";
 import KeyPerson from "views/dashboardUserSubPage/AddKeyContact.jsx";
 import Questions from "views/dashboardAdminSubPage/Questions.jsx";
 
-localStorage.getItem('session_id')
+  const userType = localStorage.getItem('session_type')
+  console.log("userType" + userType);
 
 var routesAdmin = [{
   path: "/dashboardcontent",
@@ -99,5 +100,14 @@ var routesClient = [{
   },
 ];
 
-var routes = routesClient;
+
+var routes= []
+
+if(userType === "admin"){
+  routes = routesAdmin;
+}else{
+  routes = routesClient;
+}
+
+ 
 export default routes;
