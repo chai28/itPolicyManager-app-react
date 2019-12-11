@@ -73,7 +73,7 @@ class Sidebar extends React.Component {
       >
         <div className="logo">
           <a
-            href="http://localhost:3000/dashboard/dashboard-content"
+            href="/dashboard/dashboardcontent"
             className="simple-text logo-mini"
           >
             <div className="logo-img">
@@ -81,7 +81,7 @@ class Sidebar extends React.Component {
             </div>
           </a>
           <a
-            href="http://localhost:3000/dashboard/dashboard-content"
+            href="/dashboard/dashboardcontent"
             className="simple-text logo-normal"
           >
             {this.getBrand()}

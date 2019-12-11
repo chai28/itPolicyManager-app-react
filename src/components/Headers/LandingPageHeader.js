@@ -67,7 +67,7 @@ function LandingPageHeader() {
               Watch video
             </Button>
             <Button 
-              href="http://localhost:3000/survey-page"
+              href="/survey-page"
               className="btn-round" 
               color="neutral"
               outline

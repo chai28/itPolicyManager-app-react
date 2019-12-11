@@ -1,7 +1,6 @@
 import React,{Component}from "react";
 import Axios from "axios";
 
-
 // reactstrap components
 import {
     Button,
@@ -12,6 +11,8 @@ import {
     Container,
     Row,
     Col,
+    Card,
+    Modal,
   } from "reactstrap";
   
   // core components
@@ -24,12 +25,22 @@ import {
         super(props);
   
         this.submitToDB = this.submitToDB.bind(this);
+
+        //temp Modal
+        this.routeChange = this.routeChange.bind(this);
+        this.toggleNotificationModal = this.toggleNotificationModal.bind(this);
+        this.handleClickOutside = this.handleClickOutside.bind(this);
+
         this.state = {
             navbarColor: "navbar-transparent",
             policies: [],
             bNameInput: '',
             nzbnInput: '',
             bEmail: '',
+            Notification: false,
+            pop:'',
+            message:'',
+            messageHeader:''
         }
   
       document.documentElement.classList.remove("nav-open"); 
@@ -37,6 +48,8 @@ import {
 
     componentDidMount() {
         document.body.classList.add("register-page");
+        //temp Modal
+        document.addEventListener('mousedown', this.handleClickOutside, true);
     }
 
     componentDidUpdate() {
@@ -45,7 +58,6 @@ import {
 
     submitToDB(){
         const matchPolicies = this.state.policies;
-
         const RegisterDetails = {
             bNameInput: this.state.bNameInput,
             nzbnInput: this.state.nzbnInput,
@@ -67,7 +79,7 @@ import {
             }) 
           if(res.data.value === true){
             this.setState({
-              message: "Please check your email for your login credentials and update you password.",
+              message: "To view your survey result please check your email for your login credentials and update you password.",
               messageHeader: "Login for survey result"
             });
             
@@ -78,11 +90,35 @@ import {
             });
           }
         });
+        console.log("call modal");
+        this.setState({
+            Notification: true
+        });
+    }
 
-        let path = `/landing-page`;
+    //temp Modal
+    routeChange() {
+        let path = `/signin-page`;
         this.props.history.push(path);
+    }
+    
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.handleClickOutside, true);
+    }
+
+    handleClickOutside(event) {
+        if ((this.pop!==undefined?!this.pop.contains(event.target):false)) {
+          this.routeChange();
+        }
+    }
+
+    toggleNotificationModal(){
         
+        this.setState({
+          Notification: !this.state.Notification
+        });
         
+        console.log("Modal must display" + this.state.Notification)
     }
 
 
@@ -103,7 +139,7 @@ import {
             <IndexNavbar />
             <Container>
             <div>
-            <Form className="survey-form" onSubmit={this.submitToDB}>
+            <Form className="survey-form">
                 <h2 className="mb-30 survey-title">
                     Survey Form
                 </h2>
@@ -141,11 +177,43 @@ import {
                     onPoliciesChange={(policies) => this.setState({ policies: policies})}
                 />
 
-                <Button className="btn-round" color="success" type="submit">
+                <Button className="btn-round" color="success" onClick={this.submitToDB}>
                     Submit
                 </Button>
             </Form>
             </div>
+            </Container>
+            {/* modal for notification Temporary*/}
+      <Container>
+            <Card className="ml-auto mr-auto">
+              <Row>
+                <Col className="ml-auto mr-auto" lg="4">
+                  <Modal 
+                    isOpen={this.state.Notification}
+                    toggle={this.toggleNotificationModal} 
+                    size="l" 
+                    role="dialog" 
+                  >
+                    <div id='pop' ref={node=>{this.pop = node;}}>
+                      <div className="modal-header">
+                      <button
+                        aria-label="Close"
+                        className="close"
+                        type="button"
+                        onClick={this.toggleNotificationModal}
+                      >
+                        <span aria-hidden={true}>×</span>
+                      </button>
+                      <h5 className="modal-title text-center">{this.state.messageHeader}</h5>
+                      </div>
+                      <div className="modal-body">
+                        <p>{this.state.message}</p>
+                      </div>
+                    </div>
+                    </Modal>
+                  </Col>
+                </Row>
+              </Card>
             </Container>
             <DemoFooter />
           </>

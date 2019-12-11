@@ -103,6 +103,5 @@ if(userType === "admin"){
 }else{
   routes = routesClient;
 }
-
  
 export default routes;

@@ -32,18 +32,18 @@ import {
   CardHeader,
   CardBody,
   CardTitle,
+  Modal,
+  Container,
 } from "reactstrap";
 
-// import Modals from "components/Modals.jsx";
-//the custom modal component 
-// import ModalSetup from "components/Modals.jsx"; 
+// import Modals from "components/Forms/QuestionForm.js";
 
-class Policies extends React.Component {
+class AddKeyContacts extends React.Component {
   constructor(props) {
     super(props);
     this.onChangeInput = this.onChangeInput.bind(this);
     this.onAddKeyContactClick = this.onAddKeyContactClick.bind(this);
-    // this.toggleShowModal = this.toggleShowModal.bind(this);
+    this.toggleNotificationModal = this.toggleNotificationModal.bind(this);
 
     this.state = {
       fname: '',
@@ -51,26 +51,45 @@ class Policies extends React.Component {
       email: '',
       position: '',
       userId: localStorage.getItem('session_id'),
-      message: '',
-      messageHeader: ''
-      // showmodal: false
+      //temp modal
+      Notification: false,
+      pop:'',
+      message:'',
+      messageHeader:'',
+      target:''
 
     }
-    console.log("value of sshowmodal: " + this.state.showmodal)
+}
+  
+//temp modal
+  componentDidMount() {
+    document.body.classList.add("register-page");
+    //temp Modal
+    document.addEventListener('mousedown', this.handleClickOutside, true);
+  }
+
+  //temp Modal
+componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickOutside, true);
 }
 
-// openModalHandler = () => {
-//   this.setState({
-//     showmodal: true
-//   });
-// }
+handleClickOutside(event) {
+    if ((this.pop!==undefined?!this.pop.contains(event.target):false)) {
+      this.setState({
+        Notification: false
+      });
+    }
+}
 
-// closeModalHandler = () => {
-//   this.setState({
-//     showmodal: false
-//   });
-// }
-  
+toggleNotificationModal(){
+    this.setState({
+      Notification: !this.state.Notification
+    });
+
+    console.log("Modal must display" + this.state.Notification)
+}
+/**** End of Temp Modal ****/
+
   onChangeInput(e) {
     const target = e.target;
     const value = target.value;
@@ -96,22 +115,25 @@ class Policies extends React.Component {
     .then(res => {console.log(res.data);
       if(res.data.value === true){
         console.log("added successfully")
-        // this.setState({
-        //   message: "Contact added succesfully",
-        //   messageHeader: "Adding Key Contact"
-        // });
+        this.setState({
+          target: "/dashboard/dashboardcontent",
+          message: "Contact added succesfully",
+          messageHeader: "Adding Key Contact"
+        });
         
       }else{
         console.log("contact already exist")
-        // this.setState({
-        //   message: "This contact akready exist.",
-        //   messageHeader: "Adding Key Contact Failed"
-        // });
+        this.setState({
+          target: "/dashboard/AddKeyContact",
+          message: "This contact akready exist.",
+          messageHeader: "Adding Key Contact Failed"
+        });
       }
     });
-
-    // this.openModalHandler();
-
+    console.log("call the modal")
+    this.setState({
+      Notification: true,
+    });
   }
 
   render() {
@@ -183,7 +205,7 @@ class Policies extends React.Component {
                   </FormGroup>
                   <Button
                     className="btn-round"
-                    style={{'margin-right':'7px'}}
+                    style={{'marginRight':'7px'}}
                     color="success"
                     href="#pablo"
                     onClick={this.onAddKeyContactClick}
@@ -195,16 +217,47 @@ class Policies extends React.Component {
             </Card>
           </Col>
         </Row>
-        {/* <ModalSetup 
-           show={this.state.isShowing}
-           messageclose={this.closeModalHandler}
-           message={this.state.message}
-           messageHeader={this.state.messageHeader}
-        /> */}
       </div>
+      {/* modal for notification Temporary*/}
+      <Container>
+            <Card className="ml-auto mr-auto">
+              <Row>
+                <Col className="ml-auto mr-auto" lg="4">
+                  <Modal 
+                    isOpen={this.state.Notification}
+                    toggle={this.toggleNotificationModal} 
+                    size="l" 
+                    role="dialog" 
+                  >
+                    <div id='pop' ref={node=>{this.pop = node;}}>
+                      <div className="modal-header">
+                      <button
+                        aria-label="Close"
+                        className="close"
+                        type="button"
+                        onClick={this.toggleNotificationModal}
+                      >
+                        <span aria-hidden={true}>×</span>
+                      </button>
+                      <h5 className="modal-title text-center">{this.state.messageHeader}</h5>
+                      </div>
+                      <div className="modal-body">
+                        <p>{this.state.message}</p>
+                      </div>
+                    </div>
+                    </Modal>
+                  </Col>
+                </Row>
+              </Card>
+            </Container>
+      {/* <Modals onModalDisplay={(show, messageHeader, message) => this.setState({ 
+          showmodal: show,
+          messageHeader: messageHeader,
+          message: message
+      })}/> */}
       </>
     );
   }
 }
 
-export default Policies;
+export default AddKeyContacts;

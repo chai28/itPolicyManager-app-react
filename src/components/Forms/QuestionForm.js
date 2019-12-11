@@ -32,6 +32,10 @@ class QuestionForm extends Component {
             })
     }
 
+    componentDidUpdate() {
+        document.body.classList.remove("register-page");
+    }
+    
     questionList() {
         const handleOnChange = (option, questionIndex) => {
             const policies = this.state.policies;
@@ -49,6 +53,7 @@ class QuestionForm extends Component {
                         {
                             question.options.map(function (option, optionIndex) {
                                 return ( 
+                                    <>
                                     <div>
                                         <label>
                                             <Input type = "radio"
@@ -60,6 +65,7 @@ class QuestionForm extends Component {
                                             {option.name} 
                                         </label> 
                                     </div >
+                                    </>
                                 )
                             })
                         } 
