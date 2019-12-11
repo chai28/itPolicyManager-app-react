@@ -34,7 +34,6 @@ var routesAdmin = [{
   layout: "/dashboard"
 },
 {
-  pro: true,
   path: "/policies",
   name: "Policies",
   icon: "nc-icon nc-paper",
@@ -42,7 +41,6 @@ var routesAdmin = [{
   layout: "/dashboard"
 },
 {
-  pro: true,
   path: "/subscribers",
   name: "Subscribers",
   icon: "nc-icon nc-single-02",
@@ -50,7 +48,6 @@ var routesAdmin = [{
   layout: "/dashboard"
 },
 {
-  pro: true,
   path: "/edit-profile",
   name: "Edit Profile",
   icon: "nc-icon nc-badge",
@@ -58,15 +55,13 @@ var routesAdmin = [{
   layout: "/dashboard"
 },
 {
-  pro: true,
-  path: "/AddKeyContact",
-  name: "Add Key Contact",
+  path: "/AddUser",
+  name: "Add New User",
   icon: "nc-icon nc-simple-add",
-  component: KeyPerson,
+  component: KeyPerson,//needed to be changed for adding user
   layout: "/dashboard"
 },
 {
-  pro: true,
   path: "/edit-questions",
   name: "Questions",
   icon: "nc-icon nc-paper",

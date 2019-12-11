@@ -23,7 +23,7 @@ import {
     constructor(props) {
         super(props);
   
-        this.onChangeInput = this.onChangeInput.bind(this);
+        this.submitToDB = this.submitToDB.bind(this);
         this.state = {
             navbarColor: "navbar-transparent",
             policies: [],
@@ -41,16 +41,6 @@ import {
 
     componentDidUpdate() {
         document.body.classList.remove("register-page");
-    }
-
-    onChangeInput(e) {
-        const target = e.target;
-        const value = target.value;
-        const name = target.name;
-        
-        this.setState({
-          [name]: value
-        });
     }
 
     submitToDB(){
@@ -88,17 +78,32 @@ import {
             });
           }
         });
+
+        let path = `/landing-page`;
+        this.props.history.push(path);
+        
         
     }
 
 
     render(){
+        const updateInput = (e) => {
+            e.preventDefault();
+            const target = e.target;
+            const value = target.value;
+            const name = target.name;
+            
+            this.setState({
+              [name]: value
+            });
+        };
+
         return (
           <>
             <IndexNavbar />
             <Container>
             <div>
-            <Form className="survey-form">
+            <Form className="survey-form" onSubmit={this.submitToDB}>
                 <h2 className="mb-30 survey-title">
                     Survey Form
                 </h2>
@@ -106,7 +111,7 @@ import {
                     <label >Business Name</label>
                     <InputGroup className="form-group-no-border">
                         <Input placeholder="Name" type="text" name="bNameInput"
-                                   onChange={this.onChangeInput}/>
+                                   onChange={updateInput}/>
                     </InputGroup>
                 </FormGroup>
                 <FormGroup>
@@ -115,7 +120,7 @@ import {
                         <InputGroup className="form-group-no-border">
                             <Col className="car-register-nzbn" lg="8">
                                 <Input placeholder="NZBN" type="text"  name="nzbnInput" 
-                                      onChange={this.onChangeInput}/>
+                                      onChange={updateInput}/>
                             </Col>
                             <Col lg="4">
                                 <Input type="checkbox" value="nzbn"/>
@@ -128,7 +133,7 @@ import {
                     <InputGroup className="form-group-no-border">
                         <Input placeholder="Email@email.com" type="text" 
                                   name="bEmail"
-                                  onChange={this.onChangeInput}/>
+                                  onChange={updateInput}/>
                     </InputGroup>
                 </FormGroup>
                 <br></br>
@@ -136,7 +141,7 @@ import {
                     onPoliciesChange={(policies) => this.setState({ policies: policies})}
                 />
 
-                <Button className="btn-round" color="success" onClick={this.submitToDB()}>
+                <Button className="btn-round" color="success" type="submit">
                     Submit
                 </Button>
             </Form>

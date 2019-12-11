@@ -124,7 +124,7 @@ function ExamplesNavbar() {
             <NavItem>
               <NavLink
                 data-placement="bottom"
-                href="https://www.github.com/CreativeTimOfficial?ref=creativetim"
+                href="https://github.com/chai28/itPolicyManager-app-react"
                 target="_blank"
                 title="Star on GitHub"
               >

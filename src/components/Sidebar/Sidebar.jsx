@@ -56,13 +56,14 @@ class Sidebar extends React.Component {
     routes.map((prop, key) => {
       //need to change for the subscriber's company name
       if (window.location.href.indexOf(prop.layout + prop.path) !== -1) {
-        // brandName = prop.name;
-        brandName = "IT Psychiatrist";
+        //brandName = prop.name;
+        brandName = "IT Company Name"
       }
       return null;
     });
     return brandName;
   }
+
   render() {
     return (
       <div
@@ -72,7 +73,7 @@ class Sidebar extends React.Component {
       >
         <div className="logo">
           <a
-            href="https://www.creative-tim.com"
+            href="http://localhost:3000/dashboard/dashboard-content"
             className="simple-text logo-mini"
           >
             <div className="logo-img">
@@ -80,7 +81,7 @@ class Sidebar extends React.Component {
             </div>
           </a>
           <a
-            href="https://www.creative-tim.com"
+            href="http://localhost:3000/dashboard/dashboard-content"
             className="simple-text logo-normal"
           >
             {this.getBrand()}

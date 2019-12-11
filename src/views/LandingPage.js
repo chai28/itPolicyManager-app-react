@@ -88,12 +88,12 @@ function LandingPage() {
                   <div className="description">
                     <h4 className="info-title">Create Policy</h4>
                     <p className="description">
-                      Spend your time generating new ideas. You don't have to
-                      think of implementing.
+                      Create a customized IT Policy based on your company's needs. 
+                      No idea what policy you need? Answer a set of questions and we'll match policies that you may need.
                     </p>
-                    <Button className="btn-link" color="info" href="#pablo">
+                    {/* <Button className="btn-link" color="info" href="#pablo">
                       See more
-                    </Button>
+                    </Button> */}
                   </div>
                 </div>
               </Col>
@@ -103,14 +103,13 @@ function LandingPage() {
                     <i className="nc-icon nc-zoom-split" />
                   </div>
                   <div className="description">
-                    <h4 className="info-title">Have it Review</h4>
+                    <h4 className="info-title">Have it Reviewed</h4>
                     <p>
-                      Larger, yet dramatically thinner. More powerful, but
-                      remarkably power efficient.
+                      Add key contacts and have them review the Policy generated.
                     </p>
-                    <Button className="btn-link" color="info" href="#pablo">
+                    {/* <Button className="btn-link" color="info" href="#pablo">
                       See more
-                    </Button>
+                    </Button> */}
                   </div>
                 </div>
               </Col>
@@ -122,12 +121,11 @@ function LandingPage() {
                   <div className="description">
                     <h4 className="info-title">Awareness</h4>
                     <p>
-                      Choose from a veriety of many colors resembling sugar
-                      paper pastels.
+                      Have your employees bring the policy into action by taking policy related assessment.
                     </p>
-                    <Button className="btn-link" color="info" href="#pablo">
+                    {/* <Button className="btn-link" color="info" href="#pablo">
                       See more
-                    </Button>
+                    </Button> */}
                   </div>
                 </div>
               </Col>
@@ -139,12 +137,12 @@ function LandingPage() {
                   <div className="description">
                     <h4 className="info-title">Reporting</h4>
                     <p>
-                      Find unique and handmade delightful designs related items
-                      directly from our sellers.
+                      See and moniutor your policies with reports of subscribed policies 
+                      and employees participation in awareness.
                     </p>
-                    <Button className="btn-link" color="info" href="#pablo">
+                    {/* <Button className="btn-link" color="info" href="#pablo">
                       See more
-                    </Button>
+                    </Button> */}
                   </div>
                 </div>
               </Col>
@@ -155,7 +153,7 @@ function LandingPage() {
           <Container>
             <h2 className="title">Take A free Survey</h2>
             <h3>
-              Take our free survey and will provide you the policy you need.
+              Take our free survey and will recommend you the policy you need.
             </h3>
             <br></br><br></br>
             <Button 
