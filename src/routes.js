@@ -28,6 +28,7 @@ import Questions from "views/dashboardAdminSubPage/Questions.jsx";
 
 var routesAdmin = [{
   path: "/dashboardcontent",
+  pro: "true",
   name: "Dashboard",
   icon: "nc-icon nc-bank",
   component: DashboardContent,
@@ -72,13 +73,13 @@ var routesAdmin = [{
 
 var routesClient = [{
     path: "/dashboardcontent",
+    pro: "true",
     name: "Dashboard",
     icon: "nc-icon nc-bank",
     component: DashboardContent,
     layout: "/dashboard"
   },
   {
-    pro: true,
     path: "/edit-profile",
     name: "Edit Profile",
     icon: "nc-icon nc-badge",
@@ -86,7 +87,6 @@ var routesClient = [{
     layout: "/dashboard"
   },
   {
-    pro: true,
     path: "/AddKeyContact",
     name: "Add Key Contact",
     icon: "nc-icon nc-simple-add",

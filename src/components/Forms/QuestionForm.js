@@ -26,6 +26,7 @@ class QuestionForm extends Component {
                 this.setState({
                     questions: response.data
                 });
+                
             })
             .catch(function (error) {
                 console.log(error);
@@ -39,7 +40,7 @@ class QuestionForm extends Component {
     questionList() {
         const handleOnChange = (option, questionIndex) => {
             const policies = this.state.policies;
-            policies[questionIndex] = option.policy
+            policies[questionIndex] = option.policy;
             this.setState({ policies: policies });
             this.props.onPoliciesChange(this.state.policies);
             

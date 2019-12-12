@@ -19,7 +19,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
-
+import {StripeProvider} from 'react-stripe-elements';
 // styles
 import "assets/css/bootstrap.min.css";
 import "assets/scss/paper-kit.scss";
@@ -36,6 +36,7 @@ import SurveyPage from "views/landingSubPage/SurveyPage.js";
 import SignIn from "views/landingSubPage/SignIn.js";
 import Modal from "views/landingSubPage/RegModal.js";
 import Dashboard from "views/Dashboard.jsx";
+import PaySubscription from 'views/commonPage/PaySubscription.js';
 // others
 
 ReactDOM.render(
@@ -67,6 +68,13 @@ ReactDOM.render(
       <Route
         path="/dashboard"
         render={props => <Dashboard {...props} />}
+      />
+      <Route
+        path="/pay-subscription"
+        render={props => (
+        <StripeProvider apiKey="pk_test_8Y0fO0o3fsqMsbciyZKt1YTI" >
+          <PaySubscription {...props} />
+        </StripeProvider>)}
       />
       <Redirect to="/landing-page" />
     </Switch>

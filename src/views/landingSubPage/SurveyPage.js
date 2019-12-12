@@ -41,6 +41,7 @@ import {
             pop:'',
             message:'',
             messageHeader:''
+
         }
   
       document.documentElement.classList.remove("nav-open"); 
@@ -92,7 +93,10 @@ import {
         });
         console.log("call modal");
         this.setState({
-            Notification: true
+            Notification: true,
+            bNameInput: '',
+            nzbnInput: '',
+            bEmail: '',
         });
     }
 
@@ -146,7 +150,7 @@ import {
                 <FormGroup>
                     <label >Business Name</label>
                     <InputGroup className="form-group-no-border">
-                        <Input placeholder="Name" type="text" name="bNameInput"
+                        <Input value={this.state.bNameInput} placeholder="Name" type="text" name="bNameInput"
                                    onChange={updateInput}/>
                     </InputGroup>
                 </FormGroup>
@@ -155,7 +159,7 @@ import {
                     <Row>
                         <InputGroup className="form-group-no-border">
                             <Col className="car-register-nzbn" lg="8">
-                                <Input placeholder="NZBN" type="text"  name="nzbnInput" 
+                                <Input value={this.state.nzbnInput} placeholder="NZBN" type="text"  name="nzbnInput" 
                                       onChange={updateInput}/>
                             </Col>
                             <Col lg="4">
@@ -167,7 +171,7 @@ import {
                 <FormGroup>
                     <label>Business Email</label>
                     <InputGroup className="form-group-no-border">
-                        <Input placeholder="Email@email.com" type="text" 
+                        <Input value={this.state.bEmail} placeholder="Email@email.com" type="text" 
                                   name="bEmail"
                                   onChange={updateInput}/>
                     </InputGroup>

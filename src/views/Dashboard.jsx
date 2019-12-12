@@ -22,7 +22,7 @@ import PerfectScrollbar from "perfect-scrollbar";
 import { Route, Switch } from "react-router-dom";
 
 import DemoNavbar from "components/Navbars/DashboardNavBar.jsx";
-import Footer from "components/Footers/DashboardFooter.jsx";
+import Footer from "components/Footers/DemoFooter.js";
 import Sidebar from "components/Sidebar/Sidebar.jsx";
 // import FixedPlugin from "components/FixedPlugin/FixedPlugin.jsx";
 
