@@ -24,7 +24,7 @@ class Questions extends React.Component {
 
     this.state = {
       questions: [],
-      policies: [1, 2, 3, 4]
+      policies: [],
     };
 
     document.documentElement.classList.remove("nav-open");
@@ -43,16 +43,16 @@ class Questions extends React.Component {
         console.log(error);
       });
 
-    // Axios.get('http://localhost:5000/policies')
-    // .then(response => {
-    //     console.log('response', response)
-    //     this.setState({
-    //         policies: response.data
-    //     });
-    // })
-    // .catch(function (error) {
-    //     console.log(error);
-    // })
+    Axios.get('http://localhost:5000/policies')
+    .then(response => {
+        console.log('response', response)
+        this.setState({
+            policies: response.data
+        });
+    })
+    .catch(function (error) {
+        console.log(error);
+    })
   }
 
   componentDidUpdate() {
@@ -77,6 +77,8 @@ class Questions extends React.Component {
       this.state.questions[questionIndex].options.splice(optionIndex, 1)
       this.setState({ questions: this.state.questions })
     }
+
+    // console.log(question.options)
 
     return (
       <div>
@@ -109,6 +111,13 @@ class Questions extends React.Component {
       questions[questionIndex].options[optionIndex].name = e.target.value
       this.setState({ questions: questions })
     };
+    const handlePolicyChange = e => {
+      const questions = this.state.questions
+      console.log(e.target.value + questions[questionIndex].options[optionIndex].policy)
+      questions[questionIndex].options[optionIndex].policy = e.target.value
+      this.setState({ questions: questions })
+    };
+   
     return (
       <div>
         <Row style={{marginTop:'12px'}}>
@@ -116,10 +125,16 @@ class Questions extends React.Component {
             <Input value={option.name} onChange={handleNameChange} />
             </Col>
             <Col md="5">
-            <select>
-            {this.state.policies.map(policy => (
-                <option value={policy}>{policy}</option>
-            ))}
+            <select value={option.policy} onChange={handlePolicyChange}>
+              {this.state.policies.map(policy => (
+                <>
+                  <label>Match Policy:</label>
+                  <option 
+                    value={policy._id}>
+                    {policy.policy_name}
+                  </option>
+                </>
+              ))}
             </select>
             </Col>
         </Row>
