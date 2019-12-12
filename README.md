@@ -12,4 +12,5 @@ npm start
 
 # install APIs
 npm install axios
+npm install --save react-stripe-elements
 
