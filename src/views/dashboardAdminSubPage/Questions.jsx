@@ -21,7 +21,7 @@ class Questions extends React.Component {
     super(props);
     this.renderQuestion = this.renderQuestion.bind(this);
     this.renderOption = this.renderOption.bind(this);
-
+    this.onSaveClick = this.onSaveClick.bind(this);
     this.state = {
       questions: [],
       policies: [],
@@ -54,6 +54,20 @@ class Questions extends React.Component {
         console.log(error);
     })
   }
+  
+  onSaveClick(e) {
+    e.preventDefault();
+    this.toggleModal();
+    console.log("onSaveClick clicked! ");
+    const questionDetails = {
+      questionInputs: this.state.questions
+    };
+    
+    Axios.post('http://localhost:5000/questions', questionDetails)
+    .then(res => {console.log(res.data);
+     
+    });
+  }
 
   componentDidUpdate() {
     document.body.classList.remove("register-page");
@@ -85,7 +99,7 @@ class Questions extends React.Component {
         <Input
           type="textarea"
           value={question.question_content}
-          onChange={handleChange}
+          onChange={handleChange} 
         />
         <ul style={{listStyleType: "none"}}>
           {question.options.map((option, optionIndex) => (
@@ -117,20 +131,24 @@ class Questions extends React.Component {
       questions[questionIndex].options[optionIndex].policy = e.target.value
       this.setState({ questions: questions })
     };
+
    
     return (
       <div>
         <Row style={{marginTop:'12px'}}>
-            <Col md="5">
+            <Col md="4">
             <Input value={option.name} onChange={handleNameChange} />
             </Col>
-            <Col md="5">
+            <Col md="2">
+            <label>Match Policy:</label>
+            </Col>
+            <Col md="4">
             <select value={option.policy} onChange={handlePolicyChange}>
               {this.state.policies.map(policy => (
                 <>
-                  <label>Match Policy:</label>
+                  
                   <option 
-                    value={policy._id}>
+                    value={policy._id} checked>
                     {policy.policy_name}
                   </option>
                 </>
@@ -184,12 +202,12 @@ class Questions extends React.Component {
                         ))}
                     </ul>
                     <Button className="btn-round" color="success" onClick={addQuestion}>add question</Button>
+                    <Button className="btn-round" color="success" onClick={this.onSaveClick}>Save</Button>
                 </CardBody>
               </Card>
             </Col>
           </Row>
       </div>
-      <DemoFooter />
     </>
     )
   }
