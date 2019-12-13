@@ -22,56 +22,13 @@ import Subscribers from "views/dashboardAdminSubPage/Subscribers.jsx";
 import EditProfile from "views/commonPage/EditProfile.jsx";
 import KeyPerson from "views/dashboardUserSubPage/AddKeyContact.jsx";
 import Questions from "views/dashboardAdminSubPage/Questions.jsx";
+import SurveyResult from "views/dashboardUserSubPage/SurveyResult.jsx";
+import SubscribedPolicy from "views/dashboardUserSubPage/SubscribedPolicies.jsx";
 
   const userType = localStorage.getItem('session_type')
   console.log("userType" + userType);
 
 var routesAdmin = [{
-  path: "/dashboardcontent",
-  pro: "true",
-  name: "Dashboard",
-  icon: "nc-icon nc-bank",
-  component: DashboardContent,
-  layout: "/dashboard"
-},
-{
-  path: "/policies",
-  name: "Policies",
-  icon: "nc-icon nc-paper",
-  component: Policies,
-  layout: "/dashboard"
-},
-{
-  path: "/subscribers",
-  name: "Subscribers",
-  icon: "nc-icon nc-single-02",
-  component: Subscribers,
-  layout: "/dashboard"
-},
-{
-  path: "/edit-profile",
-  name: "Edit Profile",
-  icon: "nc-icon nc-badge",
-  component: EditProfile,
-  layout: "/dashboard"
-},
-{
-  path: "/AddUser",
-  name: "Add New User",
-  icon: "nc-icon nc-simple-add",
-  component: KeyPerson,//needed to be changed for adding user
-  layout: "/dashboard"
-},
-{
-  path: "/edit-questions",
-  name: "Questions",
-  icon: "nc-icon nc-paper",
-  component: Questions,
-  layout: "/dashboard"
-},
-];
-
-var routesClient = [{
     path: "/dashboardcontent",
     pro: "true",
     name: "Dashboard",
@@ -80,10 +37,62 @@ var routesClient = [{
     layout: "/dashboard"
   },
   {
+    path: "/policies",
+    name: "Policies",
+    icon: "nc-icon nc-paper",
+    component: Policies,
+    layout: "/dashboard"
+  },
+  {
+    path: "/subscribers",
+    name: "Subscribers",
+    icon: "nc-icon nc-single-02",
+    component: Subscribers,
+    layout: "/dashboard"
+  },
+  {
     path: "/edit-profile",
     name: "Edit Profile",
     icon: "nc-icon nc-badge",
     component: EditProfile,
+    layout: "/dashboard"
+  },
+  {
+    path: "/AddUser",
+    name: "Add New User",
+    icon: "nc-icon nc-simple-add",
+    component: KeyPerson,//needed to be changed for adding user
+    layout: "/dashboard"
+  },
+  {
+    path: "/edit-questions",
+    name: "Questions",
+    icon: "nc-icon nc-paper",
+    component: Questions,
+    layout: "/dashboard"
+  },
+];
+
+var routesClient = [
+  {
+    path: "/survey-result",
+    name: "Survey Result",
+    icon: "nc-icon nc-alert-circle-i",
+    component: SurveyResult,
+    layout: "/dashboard"
+  },
+  {
+    path: "/edit-profile",
+    name: "Edit Profile",
+    icon: "nc-icon nc-badge",
+    component: EditProfile,
+    layout: "/dashboard"
+  },
+  {
+    path: "/subscribed-policies",
+    name: "Subscribed Policies",
+    icon: "nc-icon nc-book-bookmark",
+    component: SubscribedPolicy,
     layout: "/dashboard"
   },
   {

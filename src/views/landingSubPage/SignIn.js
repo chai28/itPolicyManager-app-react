@@ -61,8 +61,7 @@ class SignIn extends Component {
     document.body.classList.remove("register-page");
   }
 
-  routeChange() {
-    let path = `/dashboard/dashboardcontent`;
+  routeChange(path) {
     this.props.history.push(path);
   }
 
@@ -81,8 +80,12 @@ class SignIn extends Component {
         //set session with res.data.userId
         localStorage.setItem('session_id', res.data.userId);
         localStorage.setItem('session_type', res.data.userType);
-        console.log('jhghkjhkjh', localStorage.getItem('session_id') + (localStorage.getItem('session_type')));
-        this.routeChange();
+        console.log('session: ', localStorage.getItem('session_id') + (localStorage.getItem('session_type')));
+        if(localStorage.getItem('session_type') === 'admin'){
+          this.routeChange('/dashboard/dashboardcontent');
+        }else{
+          this.routeChange('dashboard/AddKeyContact');
+        }
       }
       else{
         console.log("modal error");

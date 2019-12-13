@@ -13,9 +13,6 @@ import {
   CardTitle
 } from "reactstrap";
 
- // core components
- import DemoFooter from "components/Footers/DemoFooter.js";
-
 class Questions extends React.Component {
   constructor(props) {
     super(props);

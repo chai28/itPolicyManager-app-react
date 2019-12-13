@@ -144,7 +144,7 @@ toggleNotificationModal(){
           <Col className="ml-auto mr-auto" md="8">
             <Card className="card-upgrade" style={{transform: 'none'}}>
               <CardHeader className="text-center">
-                <CardTitle tag="h4">Add key contacts for your company</CardTitle>
+                <CardTitle tag="h4">Add key contact person</CardTitle>
               </CardHeader>
               <CardBody> 
                 <Form className="edit-profile-form">

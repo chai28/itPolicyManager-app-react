@@ -164,66 +164,92 @@ handleClickOutside(event) {
     return (
       <>
         <ExamplesNavbar />
-          <div
-          className="page-header"
-          style={{
-            backgroundImage: "url(" + require("assets/img/login-image.jpg") + ")"
-          }}
-        >
-          <div className="filter" />
-          <Container>
-            <Row>
-              <Col className="ml-auto mr-auto" lg="4">
-                <Card className="card-register ml-auto mr-auto">
-                  <h3 className="title mx-auto">Welcome</h3>
-                  <Form className="register-form">
-                    <label>User Name</label>
-                    <InputGroup className="form-group-no-border">
-                      <InputGroupAddon addonType="prepend">
-                        <InputGroupText>
-                          <i className="nc-icon nc-circle-10" />
-                        </InputGroupText>
-                      </InputGroupAddon>
-                      <Input placeholder="User Name" type="text" autoComplete="username"/>
-                    </InputGroup>
-                    <label>Password</label>
-                    <InputGroup className="form-group-no-border">
-                      <InputGroupAddon addonType="prepend">
-                        <InputGroupText>
-                          <i className="nc-icon nc-key-25" />
-                        </InputGroupText>
-                      </InputGroupAddon>
-                      <Input placeholder="Password" type="password" autoComplete="current-password"/>
-                    </InputGroup>
-                    <Button block className="btn-round" color="success">
-                      Sign In
-                    </Button><br></br>
-                    <input type="checkbox" name="remember" value="rememberpassword" /> Remember Password 
-                    <br></br>
-                  </Form>
-                  <div className="forgot">
-                    <Button
-                      className="btn-link"
-                      color="danger"
-                      href="#pablo"
-                      target="_blank"
-                      onClick={e => e.preventDefault()}
-                    >
-                      Forgot password?
-                    </Button>
-                  </div>
-                  <div className="col text-center">
+        <div
+        className="page-header"
+        style={{
+          backgroundImage: "url(" + require("assets/img/login-image.jpg") + ")"
+        }}
+      >
+        <div className="filter" />
+        <Container>
+          <Row>
+            <Col className="ml-auto mr-auto" lg="4">
+              <Card className="card-register ml-auto mr-auto">
+                <h3 className="title mx-auto">Welcome</h3>
+                <Form className="register-form" onSubmit={this.onSigninClick}>
+                  <label>User Name</label>
+                  <InputGroup className="form-group-no-border">
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="nc-icon nc-circle-10" />
+                      </InputGroupText>
+                    </InputGroupAddon>
+                    <Input placeholder="User Name" type="text" name="usernameInput" autoComplete="username"
+                      onChange={this.onChangeInput}
+                    />
+                  </InputGroup>
+                  <label>Password</label>
+                  <InputGroup className="form-group-no-border">
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="nc-icon nc-key-25" />
+                      </InputGroupText>
+                    </InputGroupAddon>
+                    <Input placeholder="Password" type="password" name="passwordInput" autoComplete="current-password"
+                      onChange={this.onChangeInput}
+                    />
+                  </InputGroup>
+                  <Button 
+                    block 
+                    className="btn-round" 
+                    color="success" 
+                    type="Submit"
+                  >
+                    Sign In
+                  </Button><br></br>
+                  <input type="checkbox" name="remember" value="rememberpassword" /> Remember Password 
+                  <br></br>
+                </Form>
+                <div className="forgot">
                   <Button
-                  className="btn-round"
-                  color="info"
-                  outline
-                  type="button"
-                  onClick={this.toggleModal}
+                    className="btn-link"
+                    color="danger"
+                    href="#pablo"
+                    target="_blank"
+                    onClick={e => e.preventDefault()}
+                  >
+                    Forgot password?
+                  </Button>
+                </div>
+                <div className="col text-center">
+                <NavLink
+                  to="/register-modal" 
+                  tag={Link}
                 >
-                  Not yet a Member?
-                </Button>
-                {/* Modal */}
-                
+                  <Button
+                    className="btn-round"
+                    color="info"
+                    title="to Register Modal"
+                    outline
+                    type="button"
+                    name="modal"
+                  >
+                    Not yet a Member?
+                  </Button>
+                </NavLink>
+              </div>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
+        <div className="footer register-footer text-center">
+          <h6>
+            © {new Date().getFullYear()}, by IT Psychiatrist
+          </h6>
+        </div>
+      </div>
+         {/* Modal */}
+         <Container>   
           <Modal isOpen={this.state.modal} toggle={this.toggleModal} size="xl">
             <div id='pop' ref={node=>{this.pop = node;}}>
               <div  className="modal-header">
@@ -241,7 +267,7 @@ handleClickOutside(event) {
                   <h4>Sign Up</h4>
                   </h5>
               </div>
-          <div className="modal-body">
+            <div className="modal-body">
               <Form className="register-form">
                   <Row>
                       <Col md="6">
@@ -362,11 +388,7 @@ handleClickOutside(event) {
                   </div>
               </div>
               </div>
-                </Modal>
-                </div>
-                </Card>
-              </Col>
-            </Row>
+            </Modal>
           </Container>
           {/* modal for notification */}
           <Container>
@@ -398,13 +420,7 @@ handleClickOutside(event) {
                 </Row>
               </Card>
             </Container>
-          <div className="footer register-footer text-center">
-            <h6>
-              © {new Date().getFullYear()}, by IT Psychiatrist
-            </h6>
-          </div>
-        </div> 
-        
+         
       </>
     );
   }
