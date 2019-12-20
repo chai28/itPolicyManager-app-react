@@ -70,7 +70,7 @@ ReactDOM.render(
         render={props => <Dashboard {...props} />}
       />
       <Route
-        path="/pay-subscription"
+        path="/subscription-payment"
         render={props => (
         <StripeProvider apiKey="pk_test_8Y0fO0o3fsqMsbciyZKt1YTI" >
           <PaySubscription {...props} />

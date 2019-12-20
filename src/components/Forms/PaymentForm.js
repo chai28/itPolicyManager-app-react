@@ -1,9 +1,25 @@
 import React from 'react';
-import {injectStripe} from 'react-stripe-elements';
+import {injectStripe, Elements, ReactStripeElements, CardElement} from 'react-stripe-elements';
 
-import CardSection from 'views/commonPage/CardPayment.js';
+// reactstrap components
+import {
+  Input,
+  FormGroup, 
+  InputGroup
+} from "reactstrap";
+
+import "assets/css/stripe.css";
 
 class PaymentForm extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      name: ""
+    }
+
+  document.documentElement.classList.remove("nav-open"); 
+}
   handleSubmit = (ev) => {
     // We don't want to let default form submission happen here, which would refresh the page.
     ev.preventDefault();
@@ -16,10 +32,25 @@ class PaymentForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <CardSection />
-        <button>Confirm order</button>
-      </form>
+      <Elements>
+        <form className="survey-form" onSubmit={this.handleSubmit}>
+           <FormGroup>
+            <label >Name</label>
+            <InputGroup className="form-group-no-border">
+                <Input value={this.state.name} placeholder="Name" type="text" name="name"/>
+            </InputGroup>
+          </FormGroup>
+          <FormGroup>
+            <label>
+              Card details
+            </label>
+            <InputGroup className="form-group-no-border">
+              <CardElement className="MyCardElement" />
+            </InputGroup>
+          </FormGroup>
+          <button className="btn-round btn btn-success">Subscribed</button>
+        </form>
+      </Elements>
     );
   }
 }

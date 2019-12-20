@@ -1,7 +1,7 @@
 /*!
 
 =========================================================
-* Paper Dashboard React - v1.1.0
+* Paper Dashboard React - v1.0
 =========================================================
 
 * Product Page: https://www.creative-tim.com/product/paper-dashboard-react
