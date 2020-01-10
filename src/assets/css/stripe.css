@@ -4,13 +4,13 @@
 .MyCardElement {
     /* height: 40px; */
     padding: 15px 15px;
-    width: 100%;
+    /* width: 100%; */
+    width: 380px;
     color: grey;
     background-color:   white;
-    border: 1px solid grey;
-    border-radius: 4px;
-    /* margin-top: 120px; */
-    box-shadow: 9px 12px 9px #e6ebf1;
+    border-left: 1px solid grey;
+    /* border-radius: 4px; */
+    /* box-shadow: 9px 12px 9px #e6ebf1; */
     -webkit-transition: box-shadow 150ms ease;
     transition: box-shadow 150ms ease;
   }
@@ -26,3 +26,63 @@
   .MyCardElement--webkit-autofill {
     background-color: #fefde5 !important;
   }
+
+  .MyCardElementTest {
+    /* height: 40px; */
+    padding: 15px 15px;
+    width: 100%;
+    /* width: 380px; */
+    color: grey;
+    background-color:   white;
+    /* border-left: 1px solid grey; */
+    /* border-radius: 4px; */
+    /* box-shadow: 9px 12px 9px #e6ebf1; */
+    -webkit-transition: box-shadow 150ms ease;
+    transition: box-shadow 150ms ease;
+  }
+  
+  .MyCardElementTest--focus {
+    box-shadow: 0 1px 3px 0 #cfd7df;
+  }
+  
+  .MyCardElementTest--invalid {
+    border-color: #fa755a;
+  }
+  
+  .MyCardElementTest--webkit-autofill {
+    background-color: #fefde5 !important;
+  }
+
+  .btn-subscribe {
+    float: right;
+    margin-top: 20px;
+  }
+
+  .fontStyle {
+    font-style: italic;
+    font-size: 18px;
+  }
+
+  .TotalAmount {
+    font-size: 36px;
+  }
+
+  .ProductSummaryTotalAmount .BillingIntervalBreak {
+    display: unset;
+  }
+
+.width-fixed {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  flex-basis: auto;
+}
+.flex-item {
+  box-sizing: border-box;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
+}

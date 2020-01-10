@@ -24,31 +24,12 @@ import { Row, Container } from "reactstrap";
 
 function DemoFooter() {
   return (
-    <footer className="footer footer-black footer-white">
+    <footer className="footer">
       <Container>
         <Row>
-          <nav className="footer-nav">
-            <ul>
-              <li>
-                <a
-                  href="#"
-                >
-                  IT Policy Manager
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.creative-tim.com/license?ref=pkr-footer"
-                  target="_blank"
-                >
-                  Licenses
-                </a>
-              </li>
-            </ul>
-          </nav>
           <div className="credits ml-auto">
             <span className="copyright">
-              © {new Date().getFullYear()}, by IT Psychiatrist
+              © {new Date().getFullYear()}, by IT Policy Manager
             </span>
           </div>
         </Row>

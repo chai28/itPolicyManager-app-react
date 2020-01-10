@@ -1,8 +1,16 @@
 .footer{
-    padding: 24px 0;
+    // padding: 24px 0;
+
+    border: $none;
+    font-size: $font-size-base;
+    transition: all 0.4s;
+    -webkit-transition: all 0.4s;
+    padding: 0;
+    background: $white-color;
+    box-shadow: -4px 10px 0px 6px rgba(0, 0, 0, 0.15);
 
     &.footer-default{
-        background-color: #f2f2f2;
+        background-color: grey;
     }
 
     nav{
@@ -43,4 +51,9 @@
         clear: both;
         content: " ";
     }
+}
+
+.footer a{
+    font-size: 24px;
+    font-style: bold;
 }

@@ -11,6 +11,9 @@ import PaymentForm from 'components/Forms/PaymentForm';
 import NavbarPlain from "components/Navbars/navbarPlain.js";
 import DemoFooter from "components/Footers/DemoFooter.js";
 
+//styles
+import  styles from "assets/scss/paper-kit.scss";
+
 class MySubscription extends React.Component {
   constructor(props) {
     super(props);
@@ -30,6 +33,8 @@ class MySubscription extends React.Component {
     return (
       <>
       <NavbarPlain />
+      <div className={styles.main}>
+      <div className="section text-center">
         <Container>
           <div>
             <Elements>
@@ -37,6 +42,8 @@ class MySubscription extends React.Component {
             </Elements>
           </div>
         </Container>
+      </div>
+      </div>
       <DemoFooter />
       </>
     );

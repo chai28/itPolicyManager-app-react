@@ -46,17 +46,30 @@ class PaymentForm extends React.Component {
       <Elements>
         <Row>
             <Col lg="6">
-              <h1 style={{  marginTop: "120px", marginRight: "15px", fontSize: "16px"}}>
-                Subscription Summary
-              </h1>
-              <span>$100 Anually</span>
+              <div>
+                <h1 style={{  marginTop: "120px", marginRight: "15px", fontSize: "16px"}}>
+                  Subscription Summary
+                </h1>
+                <span className="fontStyle">Thank you for subscribing!</span><br></br><br></br>
+                <span>Your card will be charge for an annual subscriboption to the service 
+                  and you will be notified before your subscription ends for renewal 
+                  to continue using the service.</span><br></br><br></br>
+                <span className="TotalAmount">$100</span>
+                <div className="flex-item width-fixed">
+                  <span class="ProductSummaryTotalAmount-BillingInterval">
+                    <div>annually</div>
+                  </span>
+                </div>
+              </div>
             </Col>
             <Col lg="6">
-                <form className="survey-form MyCardElement" onSubmit={this.handleSubscribed}>
+                <form className="MyCardElement" style={{  marginTop: "120px"}}
+                onSubmit={this.handleSubscribed}>
                 <FormGroup>
                   <label >Email</label>
                   <InputGroup className="form-group-no-border">
-                      <Input value={this.state.name} 
+                      <Input
+                        value={this.state.name} 
                         placeholder="sample@email.com" 
                         type="email" 
                         name="email"
@@ -103,7 +116,7 @@ class PaymentForm extends React.Component {
                 <FormGroup>
                   <label >Card Information</label>
                   <InputGroup className="form-group-no-border">
-                    <CardElement className="MyCardElement" />
+                    <CardElement className="MyCardElementTest form-control" />
                   </InputGroup>
                 </FormGroup>
                 <FormGroup>
@@ -118,7 +131,7 @@ class PaymentForm extends React.Component {
                       />
                   </InputGroup>
                 </FormGroup>
-                <button type="Submit" className="btn-round btn btn-success">Subscribed</button>
+                <button type="Submit" className="btn-round btn btn-success btn-subscribe">Subscribed</button>
               </form>
             </Col>
         </Row>
