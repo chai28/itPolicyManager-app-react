@@ -80,12 +80,15 @@ class SignIn extends Component {
         //set session with res.data.userId
         localStorage.setItem('session_id', res.data.userId);
         localStorage.setItem('session_type', res.data.userType);
+        localStorage.setItem('session_name', res.data.company_name);
         console.log('session: ', localStorage.getItem('session_id') + (localStorage.getItem('session_type')));
+        
         if(localStorage.getItem('session_type') === 'admin'){
           this.routeChange('/dashboard/dashboardcontent');
         }else{
-          this.routeChange('dashboard/AddKeyContact');
+          this.routeChange('dashboard/survey-result');
         }
+        window.location.reload();
       }
       else{
         console.log("modal error");

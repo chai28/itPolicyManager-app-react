@@ -77,7 +77,7 @@ function ExamplesNavbar() {
             title="Coded by Charity"
             tag={Link}
           >
-            IT POLICY MANAGER by IT PSYCHIATRIST
+            IT POLICY MANAGER
           </NavbarBrand>
           <button
             aria-expanded={navbarCollapse}

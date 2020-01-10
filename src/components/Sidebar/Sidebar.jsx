@@ -52,12 +52,14 @@ class Sidebar extends React.Component {
     }
   }
   getBrand() {
-    let brandName = "IT Psychiatrist";
+    let brandName = "IT Policy Manager";
     routes.map((prop, key) => {
       //need to change for the subscriber's company name
       if (window.location.href.indexOf(prop.layout + prop.path) !== -1) {
         //brandName = prop.name;
-        brandName = "IT Company Name"
+        const name = localStorage.getItem('session_name')
+    console.log("companyName" + name);
+        brandName = name
       }
       return null;
     });

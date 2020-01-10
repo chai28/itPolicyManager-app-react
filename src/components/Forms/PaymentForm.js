@@ -5,7 +5,9 @@ import {injectStripe, Elements, CardElement} from 'react-stripe-elements';
 import {
   Input,
   FormGroup, 
-  InputGroup
+  InputGroup,
+  Row,
+  Col,
 } from "reactstrap";
 
 import "assets/css/stripe.css";
@@ -42,40 +44,84 @@ class PaymentForm extends React.Component {
   render() {
     return (
       <Elements>
-        <form className="survey-form" onSubmit={this.handleSubscribed}>
-           <FormGroup>
-            <label >Name</label>
-            <InputGroup className="form-group-no-border">
-                <Input value={this.state.name} 
-                  placeholder="Name" 
-                  type="text" 
-                  name="name"
-                  onChange={(e) => this.setState({name: e.target.value})}
-                />
-            </InputGroup>
-          </FormGroup>
-          <FormGroup>
-            <label >Amount</label>
-            <InputGroup className="form-group-no-border">
-                <Input 
-                  value={this.state.amount} 
-                  placeholder="0.00" 
-                  type="text" 
-                  name="amount"
-                  onChange={(e) => this.setState({amount: e.target.value})}
-                />
-            </InputGroup>
-          </FormGroup>
-          <FormGroup>
-            <label>
-              Card details: CC Number -- Exp. Date -- CVC
-            </label>
-            <InputGroup className="form-group-no-border">
-              <CardElement className="MyCardElement" />
-            </InputGroup>
-          </FormGroup>
-          <button type="Submit" className="btn-round btn btn-success">Subscribed</button>
-        </form>
+        <Row>
+            <Col lg="6">
+              <h1 style={{  marginTop: "120px", marginRight: "15px", fontSize: "16px"}}>
+                Subscription Summary
+              </h1>
+              <span>$100 Anually</span>
+            </Col>
+            <Col lg="6">
+                <form className="survey-form MyCardElement" onSubmit={this.handleSubscribed}>
+                <FormGroup>
+                  <label >Email</label>
+                  <InputGroup className="form-group-no-border">
+                      <Input value={this.state.name} 
+                        placeholder="sample@email.com" 
+                        type="email" 
+                        name="email"
+                        onChange={(e) => this.setState({name: e.target.value})}
+                      />
+                  </InputGroup>
+                </FormGroup>
+                {/* <FormGroup>
+                  <label>
+                    Card Information
+                  </label>
+                  <fieldset className="FormFieldGroup-Fieldset">
+                      <div className="FormFieldGroup-container">
+                        <div style={{width:"100%"}}>
+                          <div className="FormFieldInput">
+                            <span className="InputContainer" data-max>
+                              <input class="CheckoutInput" 
+                                autocomplete="cc-number" autocorrect="off" spellcheck="false" id="cardNumber" 
+                                name="cardNumber" inputmode="numeric" aria-label="Card number" 
+                                placeholder="1234 1234 1234 1234" aria-invalid="false" value=""/>
+                            </span>
+                          </div>
+                          <div className="FormFieldInput-Icons " style={{opacity: "1" }}>
+                              <div>
+                                <span className="FormFieldInput-IconsIcon" is-Visible>
+                                  <img src="https://js.stripe.com/v3/fingerprinted/img/visa-365725566f9578a9589553aa9296d178.svg" alt="visa" class="BrandIcon"/>
+                                </span>
+                              </div>
+                              <div>
+                                <span className="FormFieldInput-IconsIcon" is-Visible>
+                                <img src="https://js.stripe.com/v3/fingerprinted/img/mastercard-4d8844094130711885b5e41b28c9848f.svg" alt="mastercard" class="BrandIcon"/>
+                                </span>
+                              </div>
+                              <div>
+                                <span className="FormFieldInput-IconsIcon" is-Visible>
+                                <img src="https://js.stripe.com/v3/fingerprinted/img/amex-a49b82f46c5cd6a96a6e418a6ca1717c.svg" alt="amex" class="BrandIcon"/>
+                                </span>
+                              </div>
+                            </div>   
+                        </div>
+                      </div>
+                    </fieldset>
+                </FormGroup> */}
+                <FormGroup>
+                  <label >Card Information</label>
+                  <InputGroup className="form-group-no-border">
+                    <CardElement className="MyCardElement" />
+                  </InputGroup>
+                </FormGroup>
+                <FormGroup>
+                  <label >Name on card</label>
+                  <InputGroup className="form-group-no-border">
+                      <Input 
+                        value={this.state.amount} 
+                        placeholder="name" 
+                        type="text" 
+                        name="name"
+                        onChange={(e) => this.setState({amount: e.target.value})}
+                      />
+                  </InputGroup>
+                </FormGroup>
+                <button type="Submit" className="btn-round btn btn-success">Subscribed</button>
+              </form>
+            </Col>
+        </Row>
       </Elements>
     );
   }

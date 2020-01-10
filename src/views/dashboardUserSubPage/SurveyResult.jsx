@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 // reactstrap components
 import {
@@ -61,7 +62,19 @@ class MatchedPolicies extends React.Component {
                       </tr>
                     </tbody>
                     <tfooter>
-                      <Button className="btn-round" color="success" style={{float:'right'}}>Purchase</Button>
+                      <Button 
+                        className="btn-round" 
+                        color="success" 
+                        style={{float:'right'}}
+                        to={{
+                          pathname: "/subscription-payment"
+                        }}
+                        title="to Survey Page"
+                        target="blank"
+                        tag={Link}
+                      >
+                          Subscribe
+                      </Button>
                     </tfooter>
                   </Table>
                 </CardBody>

@@ -53,7 +53,7 @@ function LandingPageHeader() {
         <div className="filter" />
         <Container>
           <div className="motto text-center">
-            <h1>IT Psychiatrist</h1>
+            <h1>IT Policy Manager</h1>
             <h3>Ypur ultimate help in IT Policy generation and management.</h3>
             <br />
             <Button
