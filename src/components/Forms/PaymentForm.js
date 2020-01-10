@@ -66,7 +66,7 @@ class PaymentForm extends React.Component {
                 <form className="MyCardElement" style={{  marginTop: "120px"}}
                 onSubmit={this.handleSubscribed}>
                 <FormGroup>
-                  <label >Email</label>
+                  <label style={{float: "left"}}>Email</label>
                   <InputGroup className="form-group-no-border">
                       <Input
                         value={this.state.name} 
@@ -114,13 +114,13 @@ class PaymentForm extends React.Component {
                     </fieldset>
                 </FormGroup> */}
                 <FormGroup>
-                  <label >Card Information</label>
+                  <label style={{float: "left"}}>Card Information</label>
                   <InputGroup className="form-group-no-border">
                     <CardElement className="MyCardElementTest form-control" />
                   </InputGroup>
                 </FormGroup>
                 <FormGroup>
-                  <label >Name on card</label>
+                  <label style={{float: "left"}}>Name on card</label>
                   <InputGroup className="form-group-no-border">
                       <Input 
                         value={this.state.amount} 
