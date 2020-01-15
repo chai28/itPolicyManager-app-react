@@ -24,7 +24,8 @@ import KeyPerson from "views/dashboardUserSubPage/AddKeyContact.jsx";
 import Questions from "views/dashboardAdminSubPage/Questions.jsx";
 import SurveyResult from "views/dashboardUserSubPage/SurveyResult.jsx";
 import SubscribedPolicy from "views/dashboardUserSubPage/SubscribedPolicies.jsx";
-
+import keyContactPerson from "views/dashboardUserSubPage/keyContactPerson.jsx";
+import AddKeyContacts from "views/dashboardUserSubPage/AddKeyContact.jsx";
   const userType = localStorage.getItem('session_type')
   console.log("userType" + userType);
 
@@ -96,10 +97,15 @@ var routesClient = [
     layout: "/dashboard"
   },
   {
-    path: "/AddKeyContact",
-    name: "Add Key Contact",
+    path: "/keyContactPerson",
+    name: "Key Contact Person",
     icon: "nc-icon nc-simple-add",
-    component: KeyPerson,
+    component: keyContactPerson,
+    layout: "/dashboard"
+  },
+  {
+    path: "/AddkeyContacts",
+    component:AddKeyContacts,//needed to be changed for adding user
     layout: "/dashboard"
   },
 ];
