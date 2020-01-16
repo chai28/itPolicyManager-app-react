@@ -15,6 +15,7 @@ import {
 } from "reactstrap";
 
 class MatchedPolicies extends React.Component {
+  
   render() {
     return (
       <>
