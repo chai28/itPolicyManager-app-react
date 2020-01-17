@@ -17,6 +17,7 @@
 
 */
 import React from "react";
+import Axios from "axios";
 
 // reactstrap components
 import {
@@ -31,6 +32,28 @@ import {
 } from "reactstrap";
 
 class SubscribedPolicies extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  componentDidMount() {
+    const idInfo = {
+      user_id: localStorage.getItem("session_id")
+    };
+    console.log("ID: " + idInfo.user_id);
+
+    Axios.get("http://localhost:5000/subscribedPolicy", {
+      params: { companyName: localStorage.getItem("session_name") }
+    })
+      .then(response => {
+        console.log("response", response);
+        this.setState({
+          sub_policy: response.data.sub_policy
+        });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }
   render() {
     return (
       <>

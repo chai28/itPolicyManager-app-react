@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Axios from "axios";
 
 // reactstrap components
 import {
@@ -15,7 +16,32 @@ import {
 } from "reactstrap";
 
 class MatchedPolicies extends React.Component {
+<<<<<<< Updated upstream
   
+=======
+  constructor(props) {
+    super(props);
+  }
+  componentDidMount() {
+    const idInfo = {
+      user_id: localStorage.getItem("session_id")
+    };
+    console.log("ID: " + idInfo.user_id);
+
+    Axios.get("http://localhost:5000/surveyResult", {
+      params: { companyName: localStorage.getItem("session_name") }
+    })
+      .then(response => {
+        console.log("response", response);
+        this.setState({
+          match_policy: response.data.surveyResult
+        });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }
+>>>>>>> Stashed changes
   render() {
     return (
       <>
@@ -40,25 +66,13 @@ class MatchedPolicies extends React.Component {
                       <tr>
                         <td>
                         <label>
-                            <Input type = "checkbox"/> 
+                        {/* {this.state. match_policy.map(policy => (
+                         <>
+                           <Input type = "checkbox"/> 
                             <span>Micro Policy</span> 
+                         </>
+                         ))} */}
                         </label>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <label>
-                              <Input type = "checkbox"/> 
-                              <span>DataPrivacy Poilicy</span> 
-                          </label>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <label>
-                              <Input type = "checkbox"/> 
-                              <span>Technology Usage Policy</span> 
-                          </label>
                         </td>
                       </tr>
                     </tbody>
