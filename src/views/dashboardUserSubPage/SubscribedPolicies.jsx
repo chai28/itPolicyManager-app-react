@@ -32,9 +32,6 @@ import {
 } from "reactstrap";
 
 class SubscribedPolicies extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   componentDidMount() {
     const idInfo = {
       user_id: localStorage.getItem("session_id")

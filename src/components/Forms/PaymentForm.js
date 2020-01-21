@@ -18,7 +18,7 @@ class PaymentForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "Policy Subscription",
+      name: localStorage.getItem('session_name'),
       amount: 100.0, 
       policyList: []
     };
@@ -37,7 +37,9 @@ class PaymentForm extends React.Component {
     console.log({ token, addresses });
     const product = {
       name: this.state.name,
-      amount: this.state.amount
+      amount: this.state.amount,
+      policies: this.state.policyList
+
     };
     const response = await Axios.post("http://localhost:5000/create_paymentintent", { token, product });
     
@@ -108,7 +110,6 @@ class PaymentForm extends React.Component {
               stripeKey="pk_test_6KfHVFBMFj3g5bsKv6qIiXbV00zomUO8sV"
               token={this.handleSubscribed}
               amount={this.state.amount * 100}
-              policies={this.state.policyList}
               currency="NZD"
               name="Policy Subscription"
             >
