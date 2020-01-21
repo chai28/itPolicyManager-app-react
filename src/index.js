@@ -74,7 +74,8 @@ ReactDOM.render(
         render={props => (
         <StripeProvider apiKey="pk_test_8Y0fO0o3fsqMsbciyZKt1YTI" >
           <PaySubscription {...props} />
-        </StripeProvider>)}
+        </StripeProvider>
+        )}
       />
       <Redirect to="/landing-page" />
     </Switch>

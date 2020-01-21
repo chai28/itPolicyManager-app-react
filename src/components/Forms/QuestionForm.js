@@ -36,7 +36,7 @@ class QuestionForm extends Component {
     componentDidUpdate() {
         document.body.classList.remove("register-page");
     }
-    
+
     questionList() {
         const handleOnChange = (option, questionIndex) => {
             const policies = this.state.policies;
@@ -48,15 +48,16 @@ class QuestionForm extends Component {
         return this.state.questions.map(function (question, questionIndex) {
             return ( 
                 <FormGroup>
-                    <label>{ question.question_content }</label>  
+                    <label key={questionIndex}>{ question.question_content }</label>  
                     <InputGroup className = "form-group-no-border" >
                         <div className = "form-check"> 
                         {
                             question.options.map(function (option, optionIndex) {
+                                console.log("option" + option.name);
                                 return ( 
                                     <>
                                     <div>
-                                        <label>
+                                        <label key={questionIndex}>
                                             <Input type = "radio"
                                             name = { questionIndex }
                                             value = { option.name }

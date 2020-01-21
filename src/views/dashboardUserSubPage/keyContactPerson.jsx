@@ -17,6 +17,8 @@
 
 */
 import React from "react";
+import Axios from "axios";
+import { toast } from "react-toastify";
 
 // reactstrap components
 import {
@@ -30,20 +32,132 @@ import {
   Col
 } from "reactstrap";
 
+toast.configure({
+  // autoClose: 8000,
+  // draggable: false,
+});
+
 class keyContactPerson extends React.Component {
   constructor(props) {
     super(props);
+
     this.onAddClick = this.onAddClick.bind(this);
+    this.renderKeyContacts = this.renderKeyContacts.bind(this);
+    // this.onEditClick = this.onEditClick.bind(this);
+    this.onDeleteClick = this.onDeleteClick.bind(this);
+
+    this.state = {
+      users: []
+    };
   }
+
+  componentDidMount() {
+    Axios.get("http://localhost:5000/company", {
+      params: { _id: localStorage.getItem("session_id"), type: "user" }
+    })
+      .then(response => {
+        console.log("user: " + response.data.company);
+        Axios.get("http://localhost:5000/keyContact", {
+          params: { companyId: response.data.company }
+        })
+          .then(response => {
+            console.log("response: " + response.data);
+            this.setState({
+              users: response.data
+            });
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }
+
   routeChange(path) {
     this.props.history.push(path);
   }
 
   onAddClick(e) {
     e.preventDefault();
-    this.routeChange('AddKeyContacts');
+    this.routeChange("AddKeyContacts");
     //window.location.reload();
   }
+
+  onDeleteClick(userId) {
+    console.log("delete clicked!");
+    const keyContactDetails = {
+      userId: userId,
+      action: "delete"
+    };
+
+    Axios.post("http://localhost:5000/keyContact", keyContactDetails).then(
+      res => {
+        console.log(res.data);
+        console.log("Response Status:", res.data.status);
+        if (res.data.status === "success") {
+          toast("Deleted successfully", {
+            type: "success",
+            position: toast.POSITION.TOP_CENTER,
+            onClose: ()=> {
+              window.location.reload()
+            }
+          });
+        } else {
+          toast("Unable to delete", {
+            type: "error",
+            position: toast.POSITION.TOP_CENTER,
+            onOpen: ()=> {
+              window.location.reload()
+            }
+          });
+        }
+      }
+    );
+  }
+
+  renderKeyContacts() {
+    const displayKeyContacts = keyContact => {
+      if (keyContact.user_type !== "comp_initiator") {
+        return (
+          <>
+            <tr key={keyContact._id}>
+              <td>{keyContact.fname + " " + keyContact.lname}</td>
+              <td>{keyContact.email}</td>
+              <td>{keyContact.position}</td>
+              {/* <td className="text-center" style={{ width: "25%" }}>
+                <Button
+                  className="btn-round"
+                  style={{ marginRight: "7px" }}
+                  color="success"
+                  onClick={e => this.onEditClick(keyContact._id)}
+                >
+                  {" "}
+                  Edit
+                </Button>
+              </td> */}
+              <td className="text-center" style={{ width: "25%" }}>
+                <Button
+                  className="btn-round"
+                  style={{ marginRight: "7px" }}
+                  color="warning"
+                  onClick={e => this.onDeleteClick(keyContact._id)}
+                >
+                  Delete
+                </Button>
+              </td>
+            </tr>
+          </>
+        );
+      }
+    };
+
+    return this.state.users.map(function(keyContact, keyContactIndex) {
+      return displayKeyContacts(keyContact);
+    });
+  }
+
   render() {
     return (
       <>
@@ -53,9 +167,7 @@ class keyContactPerson extends React.Component {
               <Card className="card-upgrade" style={{ transform: "none" }}>
                 <CardHeader className="text-center">
                   <CardTitle tag="h4">Key Contact Person</CardTitle>
-                  <p className="card-category">
-                    List of key contact persons.
-                  </p>
+                  <p className="card-category">List of key contact persons.</p>
                 </CardHeader>
                 <CardBody>
                   <Table responsive>
@@ -66,43 +178,16 @@ class keyContactPerson extends React.Component {
                         <th>Postion</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td className="text-center" style={{ width: "25%" }}>
-                        <Button className="btn-round" style={{'marginRight':'7px'}} color="success">Edit</Button>
-                        </td>
-                        <td className="text-center" style={{ width: "25%" }}>
-                        <Button className="btn-round" style={{'marginRight':'7px'}}  color="warning">Delete</Button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td className="text-center" style={{ width: "25%" }}>
-                        <Button className="btn-round" style={{'marginRight':'7px'}} color="success">Edit</Button>
-                        </td>
-                        <td className="text-center" style={{ width: "25%" }}>
-                        <Button className="btn-round" style={{'marginRight':'7px'}}  color="warning">Delete</Button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td className="text-center" style={{ width: "25%" }}>
-                        <Button className="btn-round" style={{'marginRight':'7px'}} color="success">Edit</Button>
-                        </td>
-                        <td className="text-center" style={{ width: "25%" }}>
-                        <Button className="btn-round" style={{'marginRight':'7px'}}  color="warning">Delete</Button>
-                        </td>
-                      </tr>
-                    </tbody>
+                    <tbody>{this.renderKeyContacts()}</tbody>
                   </Table>
-                  <Button className="btn-round" style={{'marginRight':'7px'}} color="success"  onClick={this.onAddClick}>Add a new peron</Button>
+                  <Button
+                    className="btn-round"
+                    style={{ marginRight: "7px" }}
+                    color="success"
+                    onClick={this.onAddClick}
+                  >
+                    Add a new peron
+                  </Button>
                 </CardBody>
               </Card>
             </Col>
@@ -114,4 +199,3 @@ class keyContactPerson extends React.Component {
 }
 
 export default keyContactPerson;
-

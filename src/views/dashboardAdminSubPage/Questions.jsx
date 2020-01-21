@@ -54,7 +54,7 @@ class Questions extends React.Component {
   
   onSaveClick(e) {
     e.preventDefault();
-    this.toggleModal();
+    // this.toggleModal();
     console.log("onSaveClick clicked! ");
     const questionDetails = {
       questionInputs: this.state.questions
@@ -143,7 +143,6 @@ class Questions extends React.Component {
             <select value={option.policy} onChange={handlePolicyChange}>
               {this.state.policies.map(policy => (
                 <>
-                  
                   <option 
                     value={policy._id} checked>
                     {policy.policy_name}

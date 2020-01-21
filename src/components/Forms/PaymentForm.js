@@ -6,9 +6,6 @@ import { toast } from "react-toastify";
 
 // reactstrap components
 import {
-  // Input,
-  // FormGroup,
-  // InputGroup,
   Row,
   Col
 } from "reactstrap";
@@ -22,12 +19,18 @@ class PaymentForm extends React.Component {
     super(props);
     this.state = {
       name: "Policy Subscription",
-      amount: 100.0
+      amount: 100.0, 
+      policyList: []
     };
 
     this.handleSubscribed = this.handleSubscribed.bind(this);
 
     document.documentElement.classList.remove("nav-open");
+  }
+
+  componentDidMount() {
+    const subscribedPolicies = localStorage.getItem('subscribedPolicies') || ''
+    this.setState({policyList: subscribedPolicies.split(',')})
   }
   
   async handleSubscribed (token, addresses){
@@ -40,10 +43,18 @@ class PaymentForm extends React.Component {
     
       console.log("Response:", response.data.status);
       if (response.data.status === "success") {
-        toast("Payment successful! Check your email for details", { type: "success", position: toast.POSITION.TOP_CENTER});
-        // window.location.href = '/landing-page'; 
+        toast("Payment successful! Check your email for details", { 
+          type: "success", 
+          position: toast.POSITION.TOP_CENTER,
+          onClose: ()=> {
+            window.location.href = '/landing-page'
+          }
+        });
       } else {
-        toast("Unsuccessful payment. Something went wrong, Try again", { type: "error" });
+        toast("Unsuccessful payment. Something went wrong, Try again", { 
+          type: "error",
+          position: toast.POSITION.TOP_CENTER,
+        });
       }
   };
 
@@ -97,6 +108,7 @@ class PaymentForm extends React.Component {
               stripeKey="pk_test_6KfHVFBMFj3g5bsKv6qIiXbV00zomUO8sV"
               token={this.handleSubscribed}
               amount={this.state.amount * 100}
+              policies={this.state.policyList}
               currency="NZD"
               name="Policy Subscription"
             >
