@@ -17,6 +17,7 @@
 
 */
 import React from "react";
+import Axios from "axios";
 import {
   Collapse,
   Navbar,
@@ -38,7 +39,8 @@ class Header extends React.Component {
     this.state = {
       isOpen: false,
       dropdownOpen: false,
-      color: "transparent"
+      color: "transparent",
+      userId: localStorage.getItem('session_id')
     };
     this.toggle = this.toggle.bind(this);
     this.dropdownToggle = this.dropdownToggle.bind(this);
@@ -48,6 +50,10 @@ class Header extends React.Component {
 
   changeRoute() {
     localStorage.clear();
+    const userDetails = {
+      userId: this.state.userId
+    };
+    Axios.get('http://localhost:5000/logout', userDetails);
     let path = `/landing-page`;
     this.props.history.push(path);
   }
