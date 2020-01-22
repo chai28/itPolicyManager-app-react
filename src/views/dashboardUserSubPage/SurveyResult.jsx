@@ -31,7 +31,7 @@ class MatchedPolicies extends React.Component {
   }
 
   componentDidMount() {
-    localStorage.removeItem('subscribedPolicies')
+    localStorage.removeItem('subscribedPolicies');
     Axios.get("http://localhost:5000/company", {
       params: { _id: localStorage.getItem("session_name"), type: "company" }
     })
@@ -60,7 +60,7 @@ class MatchedPolicies extends React.Component {
 
   checkboxHandler(e) {
     let policyPurchase = this.state.subscribedPolicies;
-    console.log("his.state.isSelected: " + this.state.isSelected);
+    // console.log("his.state.isSelected: " + this.state.isSelected);
     if (e.target.checked) {
       policyPurchase.push(e.target.value);
     } else {
@@ -76,7 +76,7 @@ class MatchedPolicies extends React.Component {
     };
     localStorage.setItem('subscribedPolicies', this.state.subscribedPolicies)
     //for testing
-    console.log(this.state.subscribedPolicies);
+    // console.log(this.state.subscribedPolicies);
   }
 
   policy() {
@@ -128,10 +128,7 @@ class MatchedPolicies extends React.Component {
                         color="success"
                         style={{ float: "right" }}
                         to={{
-                          pathname: "/subscription-payment",
-                          state: {
-                            test: 'testing',
-                          }
+                          pathname: "/subscription-payment"
                         }}
                         title="to Survey Page"
                         target="blank"

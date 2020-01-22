@@ -16,16 +16,23 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+//common
+import EditProfile from "views/commonPage/EditProfile.jsx";
+
+//admin
 import DashboardContent from "views/dashboardAdminSubPage/DashboardContent.jsx";
 import Policies from "views/dashboardAdminSubPage/Policies.jsx";
 import Subscribers from "views/dashboardAdminSubPage/Subscribers.jsx";
-import EditProfile from "views/commonPage/EditProfile.jsx";
-import KeyPerson from "views/dashboardUserSubPage/AddKeyContact.jsx";
+// import KeyPerson from "views/dashboardAdminSubPage/AddKeyContact.jsx";
 import Questions from "views/dashboardAdminSubPage/Questions.jsx";
+
+//client
 import SurveyResult from "views/dashboardUserSubPage/SurveyResult.jsx";
 import SubscribedPolicy from "views/dashboardUserSubPage/SubscribedPolicies.jsx";
 import keyContactPerson from "views/dashboardUserSubPage/keyContactPerson.jsx";
 import AddKeyContacts from "views/dashboardUserSubPage/AddKeyContact.jsx";
+import ReviewPage from "views/dashboardUserSubPage/reviewPage.jsx";
+
   const userType = localStorage.getItem('session_type')
   console.log("userType" + userType);
 
@@ -35,6 +42,7 @@ var routesAdmin = [{
     name: "Dashboard",
     icon: "nc-icon nc-bank",
     component: DashboardContent,
+    sidebar: true,
     layout: "/dashboard"
   },
   {
@@ -42,6 +50,7 @@ var routesAdmin = [{
     name: "Policies",
     icon: "nc-icon nc-paper",
     component: Policies,
+    sidebar: true,
     layout: "/dashboard"
   },
   {
@@ -49,6 +58,7 @@ var routesAdmin = [{
     name: "Subscribers",
     icon: "nc-icon nc-single-02",
     component: Subscribers,
+    sidebar: true,
     layout: "/dashboard"
   },
   {
@@ -56,20 +66,23 @@ var routesAdmin = [{
     name: "Edit Profile",
     icon: "nc-icon nc-badge",
     component: EditProfile,
+    sidebar: true,
     layout: "/dashboard"
   },
-  {
-    path: "/AddUser",
-    name: "Add New User",
-    icon: "nc-icon nc-simple-add",
-    component: KeyPerson,//needed to be changed for adding user
-    layout: "/dashboard"
-  },
+  // {
+  //   path: "/AddUser",
+  //   name: "Add New User",
+  //   icon: "nc-icon nc-simple-add",
+  //   component: KeyPerson,//needed to be changed for adding user
+  //   sidebar: true,
+  //   layout: "/dashboard"
+  // },
   {
     path: "/edit-questions",
     name: "Questions",
     icon: "nc-icon nc-paper",
     component: Questions,
+    sidebar: true,
     layout: "/dashboard"
   },
 ];
@@ -80,6 +93,7 @@ var routesClient = [
     name: "Survey Result",
     icon: "nc-icon nc-alert-circle-i",
     component: SurveyResult,
+    sidebar: true,
     layout: "/dashboard"
   },
   {
@@ -87,6 +101,7 @@ var routesClient = [
     name: "Edit Profile",
     icon: "nc-icon nc-badge",
     component: EditProfile,
+    sidebar: true,
     layout: "/dashboard"
   },
   {
@@ -94,6 +109,7 @@ var routesClient = [
     name: "Subscribed Policies",
     icon: "nc-icon nc-book-bookmark",
     component: SubscribedPolicy,
+    sidebar: true,
     layout: "/dashboard"
   },
   {
@@ -101,11 +117,19 @@ var routesClient = [
     name: "Key Contact Person",
     icon: "nc-icon nc-simple-add",
     component: keyContactPerson,
+    sidebar: true,
+    layout: "/dashboard"
+  },
+  {
+    path: "/subscribed-policy-review",
+    component: ReviewPage,
+    sidebar: false,
     layout: "/dashboard"
   },
   {
     path: "/AddkeyContacts",
-    component:AddKeyContacts,//needed to be changed for adding user
+    component:AddKeyContacts,
+    sidebar: false,
     layout: "/dashboard"
   },
 ];
