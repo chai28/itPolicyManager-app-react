@@ -32,6 +32,15 @@ import {
 } from "reactstrap";
 
 class SubscribedPolicies extends React.Component {
+  constructor(props){
+    super(props);
+    this.tableDisplay = this.tableDisplay.bind(this);
+    this.displayPage = this.displayPage.bind(this);
+    this.state = ({
+      sub_policy: []
+    });
+  }
+
   componentDidMount() {
     const idInfo = {
       user_id: localStorage.getItem("session_id")
@@ -39,18 +48,75 @@ class SubscribedPolicies extends React.Component {
     console.log("ID: " + idInfo.user_id);
 
     Axios.get("http://localhost:5000/subscribedPolicy", {
-      params: { companyName: localStorage.getItem("session_name") }
+      params: { company_name: localStorage.getItem("session_name") }
     })
       .then(response => {
-        console.log("response", response);
+        // console.log("response", response);
         this.setState({
-          sub_policy: response.data.sub_policy
+          sub_policy: response.data
         });
+        console.log(this.state.sub_policy);
       })
       .catch(function(error) {
         console.log(error);
       });
   }
+
+  tableDisplay(){
+    return(
+        <Table responsive>
+          <thead>
+            <tr>
+              <th>Policy Name</th>
+              <th>Status</th>
+              <th className="text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              this.state.sub_policy.map(function(policy, policyIndex){
+                console.log("policies: " + policy);
+                let buttonValue
+                if(policy.status === "not reviewed"){
+                  buttonValue = "Start Review";
+                }else if(policy.status !== "not reviewed"){
+                  buttonValue = "Edit Workflow";
+                }
+                return (
+                  <>
+                    <tr key={policyIndex}>
+                      <td>{policy.name}</td>
+                      <td>{policy.status}</td>
+                      <td className="text-center">
+                        <Button className="btn-round"
+                          style={{'marginRight':'7px'}}
+                          color="success">
+                            {buttonValue}
+                        </Button>
+                      </td>
+                    </tr>
+                  </>
+                )
+              })
+            }
+          </tbody>
+        </Table>  
+    )
+  }
+
+  displayPage(){
+    if(this.state.sub_policy.length !== 0){
+      return (this.tableDisplay());
+    }else{
+      return(
+        <p>
+          <span style={{color: "red"}}>No Subscription yet!</span><br></br><br></br>
+          You can subscribed to any IT policy you need by taking the survey and purchasing suggested policy/ies.
+        </p>
+      )
+    }
+  }
+
   render() {
     return (
       <>
@@ -65,45 +131,7 @@ class SubscribedPolicies extends React.Component {
                   </p>
                 </CardHeader>
                 <CardBody>
-                  <Table responsive>
-                    <thead>
-                      <tr>
-                        <th>Policy Name</th>
-                        <th>Status</th>
-                        <th className="text-center">Action</th>
-
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Micro Policy</td>
-                        <td>Confirmation</td>
-                        <td className="text-center">
-                          <Button className="btn-round"
-                    style={{'marginRight':'7px'}}
-                    color="success">Edit</Button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Data Privacy Policy</td>
-                        <td>Not Yet Reviewed</td>
-                        <td className="text-center" style={{ width: "25%" }}>
-                          <Button className="btn-round"
-                    style={{'marginRight':'7px'}}
-                    color="success">Start Process</Button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Technology Usage Policy</td>
-                        <td>On Awareness</td>
-                        <td className="text-center" style={{ width: "25%" }}>
-                        <Button className="btn-round"
-                    style={{'marginRight':'7px'}}
-                    color="success">Edit</Button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </Table>
+                  {this.displayPage()}
                 </CardBody>
               </Card>
             </Col>
