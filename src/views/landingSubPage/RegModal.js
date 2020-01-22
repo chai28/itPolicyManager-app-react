@@ -19,17 +19,15 @@
 import React, {Component} from "react";
 import { NavLink, Link} from "react-router-dom";
 import Axios from "axios";
+import { toast } from "react-toastify";
 
 // reactstrap components
 import {
     Button,
     Modal,
-    Card,
     Form,
     FormGroup, 
     Input,
-    InputGroupAddon,
-    InputGroupText,
     InputGroup,
     Container,
     Row,
@@ -38,7 +36,9 @@ import {
 
 // core components
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
+import DemoFooter from "components/Footers/DemoFooter.js";
 
+toast.configure();
 
 class RegModal extends Component {
   constructor(props) {
@@ -48,12 +48,9 @@ class RegModal extends Component {
       this.onRegisterClick = this.onRegisterClick.bind(this);
       this.toggleModal = this.toggleModal.bind(this);
       this.routeChange = this.routeChange.bind(this);
-      this.toggleNotificationModal = this.toggleNotificationModal.bind(this);
-      this.handleClickOutside = this.handleClickOutside.bind(this);
       
       this.state = {
         modal: true,
-        regNotification: false,
         bNameInput: '',
         nzbnInput: '',
         bEmail: '',
@@ -64,10 +61,6 @@ class RegModal extends Component {
         bState: '',
         bZip: '',
         bDescription: '',
-        pop:'',
-        pop2:'',
-        message:'',
-        messageHeader:''
       }
 
     document.documentElement.classList.remove("nav-open"); 
@@ -91,27 +84,12 @@ class RegModal extends Component {
     document.removeEventListener('mousedown', this.handleClickOutside, true);
 }
 
-/**
- * close modal if clicked outside of element
- */
-handleClickOutside(event) {
-  if ((this.pop!==null?!this.pop.contains(event.target):false) 
-    || (this.pop2!==undefined?!this.pop2.contains(event.target):false)) {
-    this.routeChange();
-  }
-}
-
   toggleModal(){
     this.setState({
       modal: !this.state.modal
     });
   };
 
-  toggleNotificationModal(){
-    this.setState({
-      regNotification: !this.state.regNotification
-    });
-  }
 
   //button handler
   onRegisterClick(e) {
@@ -134,20 +112,23 @@ handleClickOutside(event) {
     Axios.post('http://localhost:5000/register', RegisterDetails)
     .then(res => {console.log(res.data);
       if(res.data.value === true){
-        this.setState({
-          message: "Please check your email for your login credentials and update you password.",
-          messageHeader: "Thank You for registering"
+        toast("Thank You for registering!\n Please check your email for your login credentials and update you password.", { 
+          type: "success", 
+          position: toast.POSITION.TOP_CENTER,
+          onClose: ()=> {
+            window.location.href = '/landing-page'
+          }
         });
-        
       }else{
-        this.setState({
-          message: "Company already exist, login instead.",
-          messageHeader: "Registration Failed"
+        toast("Registration Failed!\n Company already exist, login instead.", { 
+          type: "error", 
+          position: toast.POSITION.TOP_CENTER,
+          onClose: ()=> {
+            window.location.href = '/signin-page'
+          }
         });
       }
     });
-
-    this.toggleNotificationModal();
   }
 
   onChangeInput(e) {
@@ -172,7 +153,7 @@ handleClickOutside(event) {
       >
         <div className="filter" />
         <Container>
-          <Row>
+          {/* <Row>
             <Col className="ml-auto mr-auto" lg="4">
               <Card className="card-register ml-auto mr-auto">
                 <h3 className="title mx-auto">Welcome</h3>
@@ -240,18 +221,13 @@ handleClickOutside(event) {
               </div>
               </Card>
             </Col>
-          </Row>
+          </Row> */}
         </Container>
-        <div className="footer register-footer text-center">
-          <h6>
-            © {new Date().getFullYear()}, by IT Psychiatrist
-          </h6>
-        </div>
       </div>
          {/* Modal */}
          <Container>   
           <Modal isOpen={this.state.modal} toggle={this.toggleModal} size="xl">
-            <div id='pop' ref={node=>{this.pop = node;}}>
+            <div>
               <div  className="modal-header">
                   <NavLink to="/signin-page" 
                       tag={Link}
@@ -390,37 +366,7 @@ handleClickOutside(event) {
               </div>
             </Modal>
           </Container>
-          {/* modal for notification */}
-          <Container>
-            <Card className="ml-auto mr-auto">
-              <Row>
-                <Col className="ml-auto mr-auto" lg="4">
-                  <Modal 
-                    isOpen={this.state.regNotification}
-                    toggle={this.toggleNotificationModal} 
-                    size="l" 
-                  >
-                    <div id='pop2' ref={node=>{this.pop2 = node;}}>
-                      <div className="modal-header">
-                        <NavLink to="/signin-page" 
-                            tag={Link}
-                            aria-label="Close"
-                            className="close"
-                        >
-                            <span aria-hidden={true}>×</span>
-                        </NavLink>
-                        <label><h6>{this.state.messageHeader}</h6></label>
-                      </div>
-                      <div className="modal-body">
-                        <p>{this.state.message}</p>
-                      </div>
-                    </div>
-                    </Modal>
-                  </Col>
-                </Row>
-              </Card>
-            </Container>
-         
+          <DemoFooter />
       </>
     );
   }
