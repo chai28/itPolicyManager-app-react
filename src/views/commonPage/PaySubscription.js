@@ -20,13 +20,6 @@ class MySubscription extends React.Component {
     document.documentElement.classList.remove("nav-open");
   }
 
-  componentDidMount() {
-    document.body.classList.add("register-page");
-  }
-
-  componentDidUpdate() {  
-      document.body.classList.remove("register-page");
-  }
 
 
   render() {

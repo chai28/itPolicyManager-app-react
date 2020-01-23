@@ -57,30 +57,24 @@ class SubscribedPolicies extends React.Component {
   reviewButtonHandler(e) {
     localStorage.setItem('reviewPolicy', e.target.value)
     // console.log(localStorage.getItem('reviewPolicy')); //Testing
-    this.props.history.push("subscribed-policy-review");
+    this.props.history.push("subscribed-policy-action");
   }
 
   tableDataDisplay(){
     return this.state.sub_policy.map(policy => {
-      console.log("policies: " + policy);
-      let buttonValue
-      if(policy.status === "not reviewed"){
-        buttonValue = "Start Review";
-      }else if(policy.status !== "not reviewed"){
-        buttonValue = "Edit Workflow";
-      }
+      // console.log("policies: " + policy);
       return (
         <>
-          <tr key={policy.name}>
-            <td>{policy.name}</td>
-            <td>{policy.status}</td>
-            <td className="text-center">
+          <tr key={policy._id}>
+            <td key={policy.name}>{policy.name}</td>
+            <td key={policy.status}>{policy.status}</td>
+            <td key={policy._id} className="text-center">
               <Button className="btn-round"
                 style={{'marginRight':'7px'}}
                 color="success"
                 value= {policy.name}
                 onClick={this.reviewButtonHandler}>
-                  {buttonValue}
+                  View Details
               </Button>
             </td>
           </tr>

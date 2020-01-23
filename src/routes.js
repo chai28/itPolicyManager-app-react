@@ -31,6 +31,7 @@ import SurveyResult from "views/dashboardUserSubPage/SurveyResult.jsx";
 import SubscribedPolicy from "views/dashboardUserSubPage/SubscribedPolicies.jsx";
 import keyContactPerson from "views/dashboardUserSubPage/keyContactPerson.jsx";
 import AddKeyContacts from "views/dashboardUserSubPage/AddKeyContact.jsx";
+import ActionPage from "views/dashboardUserSubPage/policyActionViewPage.jsx";
 import ReviewPage from "views/dashboardUserSubPage/reviewPage.jsx";
 import DisplayPolicies from "views/commonPage/DisplayPolicies.jsx";
 
@@ -123,7 +124,13 @@ var routesClient = [
     layout: "/dashboard"
   },
   {
-    path: "/subscribed-policy-review",
+    path: "/subscribed-policy-action",
+    component: ActionPage,
+    sidebar: false,
+    layout: "/dashboard"
+  },
+  {
+    path: "/subscribed-policy-action-start-workflow",
     component: ReviewPage,
     sidebar: false,
     layout: "/dashboard"

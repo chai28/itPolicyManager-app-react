@@ -93,7 +93,7 @@ class Sidebar extends React.Component {
           <Nav>
             {this.props.routes.map((prop, key) => {
               if(prop.sidebar === true){
-                return (
+                return ( 
                   <li
                     className={
                       this.activeRoute(prop.path) +
@@ -110,10 +110,9 @@ class Sidebar extends React.Component {
                       <p>{prop.name}</p>
                     </NavLink>
                   </li>
-                );
-              }else{
-                //nothing to do
+                ); 
               }
+              return "error sidebar";
             })}
           </Nav>
         </div>

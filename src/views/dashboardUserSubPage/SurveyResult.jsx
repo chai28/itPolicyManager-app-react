@@ -128,7 +128,10 @@ class MatchedPolicies extends React.Component {
                         color="success"
                         style={{ float: "right" }}
                         to={{
-                          pathname: "/subscription-payment"
+                          pathname: "/subscription-payment",
+                          state: {
+                            test: 'testing',
+                          }
                         }}
                         title="to Survey Page"
                         target="blank"
