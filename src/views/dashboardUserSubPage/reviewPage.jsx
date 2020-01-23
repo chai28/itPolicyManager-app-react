@@ -177,35 +177,6 @@ import {
                         </CardTitle>
                         </CardHeader>
                         <CardBody>
-                            <ul>
-                                <li>
-                                <Button
-                                      className="btn-round"
-                                      color="neutral"
-                                      style={{textDecoration: "underline", fontSize: "16px", fontWeight: "bold"}}
-                                      to={{
-                                           pathname: "DisplayPolicies"
-                                         }}
-                                    title="to Policy display page"
-                                   tag={Link}>
-                                   View {this.state.policy} details
-                                </Button>
-                                </li><br></br>
-                                <li> 
-                                    <Link
-                                        style={{textDecoration: "underline", fontSize: "16px", fontWeight: "bold"}}
-                                        to={{
-                                            pathname: "/policyDisplay",
-                                            state: {modal: true}
-
-                                        }}
-                                        title="to Register Modal"
-                                        tag={Link}>
-                                            Start Workflow
-                                    </Link>
-                                </li>
-                            </ul>
-                            
                             <Table responsive>
                                 <thead>
                                 <tr>
