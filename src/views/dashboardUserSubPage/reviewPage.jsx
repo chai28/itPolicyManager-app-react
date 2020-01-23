@@ -40,15 +40,17 @@ import {
                         <CardBody>
                             <ul>
                                 <li>
-                                    <Link
-                                        style={{textDecoration: "underline", fontSize: "16px", fontWeight: "bold"}}
-                                        to={{
-                                        pathname: "/policyDisplay"
-                                        }}
-                                        title="to Register Modal"
-                                        tag={Link}>
-                                            View {this.state.policy} details
-                                    </Link>
+                                <Button
+                                      className="btn-round"
+                                      color="neutral"
+                                      style={{textDecoration: "underline", fontSize: "16px", fontWeight: "bold"}}
+                                      to={{
+                                           pathname: "DisplayPolicies"
+                                         }}
+                                    title="to Policy display page"
+                                   tag={Link}>
+                                   View {this.state.policy} details
+                                </Button>
                                 </li><br></br>
                                 <li> 
                                     <Link

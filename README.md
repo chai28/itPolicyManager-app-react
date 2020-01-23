@@ -19,3 +19,7 @@ npm install react-stripe-checkout
 
 npm install react-toastify
 
+npm install react-pdf
+
+npm install antd
+

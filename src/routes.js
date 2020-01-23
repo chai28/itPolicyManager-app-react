@@ -32,6 +32,8 @@ import SubscribedPolicy from "views/dashboardUserSubPage/SubscribedPolicies.jsx"
 import keyContactPerson from "views/dashboardUserSubPage/keyContactPerson.jsx";
 import AddKeyContacts from "views/dashboardUserSubPage/AddKeyContact.jsx";
 import ReviewPage from "views/dashboardUserSubPage/reviewPage.jsx";
+import DisplayPolicies from "views/commonPage/DisplayPolicies.jsx";
+
 
   const userType = localStorage.getItem('session_type')
   console.log("userType" + userType);
@@ -129,6 +131,12 @@ var routesClient = [
   {
     path: "/AddkeyContacts",
     component:AddKeyContacts,
+    sidebar: false,
+    layout: "/dashboard"
+  },
+  {
+    path: "/DisplayPolicies",
+    component:DisplayPolicies,
     sidebar: false,
     layout: "/dashboard"
   },
