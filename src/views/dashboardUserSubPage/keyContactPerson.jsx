@@ -61,7 +61,6 @@ class keyContactPerson extends React.Component {
           params: { companyId: response.data.company }
         })
           .then(response => {
-            console.log("response: " + response.data);
             this.setState({
               users: response.data
             });
