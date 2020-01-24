@@ -122,9 +122,9 @@ class keyContactPerson extends React.Component {
         return (
           <>
             <tr key={keyContact._id}>
-              <td>{keyContact.fname + " " + keyContact.lname}</td>
-              <td>{keyContact.email}</td>
-              <td>{keyContact.position}</td>
+              <td key={keyContact._id}>{keyContact.fname + " " + keyContact.lname}</td>
+              <td key={keyContact._id}>{keyContact.email}</td>
+              <td key={keyContact._id}>{keyContact.position}</td>
               {/* <td className="text-center" style={{ width: "25%" }}>
                 <Button
                   className="btn-round"
@@ -136,7 +136,7 @@ class keyContactPerson extends React.Component {
                   Edit
                 </Button>
               </td> */}
-              <td className="text-center" style={{ width: "25%" }}>
+              <td key={keyContact._id} className="text-center" style={{ width: "25%" }}>
                 <Button
                   className="btn-round"
                   style={{ marginRight: "7px" }}
