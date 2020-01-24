@@ -43,6 +43,7 @@ var routesAdmin = [{
     path: "/dashboardcontent",
     pro: "true",
     name: "Dashboard",
+    name2:"Dashboard",
     icon: "nc-icon nc-bank",
     component: DashboardContent,
     sidebar: true,
@@ -51,6 +52,7 @@ var routesAdmin = [{
   {
     path: "/policies",
     name: "Policies",
+    name2:"Policies",
     icon: "nc-icon nc-paper",
     component: Policies,
     sidebar: true,
@@ -59,6 +61,7 @@ var routesAdmin = [{
   {
     path: "/subscribers",
     name: "Subscribers",
+    name2:"Subscribers",
     icon: "nc-icon nc-single-02",
     component: Subscribers,
     sidebar: true,
@@ -67,6 +70,7 @@ var routesAdmin = [{
   {
     path: "/edit-profile",
     name: "Edit Profile",
+    name2:"Edit Profile",
     icon: "nc-icon nc-badge",
     component: EditProfile,
     sidebar: true,
@@ -83,6 +87,7 @@ var routesAdmin = [{
   {
     path: "/edit-questions",
     name: "Questions",
+    name2:"Questions",
     icon: "nc-icon nc-paper",
     component: Questions,
     sidebar: true,
@@ -94,6 +99,7 @@ var routesClient = [
   {
     path: "/survey-result",
     name: "Survey Result",
+    name2:"Survey Result",
     icon: "nc-icon nc-alert-circle-i",
     component: SurveyResult,
     sidebar: true,
@@ -102,6 +108,7 @@ var routesClient = [
   {
     path: "/edit-profile",
     name: "Edit Profile",
+    name2:"Edit Profile",
     icon: "nc-icon nc-badge",
     component: EditProfile,
     sidebar: true,
@@ -110,6 +117,7 @@ var routesClient = [
   {
     path: "/subscribed-policies",
     name: "Subscribed Policies",
+    name2:"Subscribed Policies",
     icon: "nc-icon nc-book-bookmark",
     component: SubscribedPolicy,
     sidebar: true,
@@ -118,6 +126,7 @@ var routesClient = [
   {
     path: "/keyContactPerson",
     name: "Key Contact Person",
+    name2:"Key Contact Person",
     icon: "nc-icon nc-simple-add",
     component: keyContactPerson,
     sidebar: true,
@@ -125,24 +134,28 @@ var routesClient = [
   },
   {
     path: "/subscribed-policy-action",
+    name2:"Policy Details",
     component: ActionPage,
     sidebar: false,
     layout: "/dashboard"
   },
   {
     path: "/subscribed-policy-action-start-workflow",
+    name2:"Review Details",
     component: ReviewPage,
     sidebar: false,
     layout: "/dashboard"
   },
   {
     path: "/AddkeyContacts",
+    name2:"Add Key Contacts",
     component:AddKeyContacts,
     sidebar: false,
     layout: "/dashboard"
   },
   {
     path: "/DisplayPolicies",
+    name2:"Policy Informtion",
     component:DisplayPolicies,
     sidebar: false,
     layout: "/dashboard"

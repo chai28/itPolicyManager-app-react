@@ -77,10 +77,10 @@ class Header extends React.Component {
     });
   }
   getBrand() {
-    let brandName = "Dashboard";
+    let brandName = "IT Policy Manager";
     routes.map((prop, key) => {
       if (window.location.href.indexOf(prop.layout + prop.path) !== -1) {
-        brandName = prop.name;
+        brandName = prop.name2;
       }
       return null;
     });
