@@ -20,6 +20,7 @@ import {
             this.renderPolicyDetails = this.renderPolicyDetails.bind(this);
             this.renderReviewDetails = this.renderReviewDetails.bind(this);
             this.displayStartWorkflowBtn = this.displayStartWorkflowBtn.bind(this);
+            this.getPolicyData = this.getPolicyData.bind(this);
           this.state = ({
             policyName: localStorage.getItem('reviewPolicy'),
             companyDetails: [],
@@ -41,6 +42,7 @@ import {
                     this.setState({
                         reviewers: response.data.reviewer
                     })
+                    this.getPolicyData();
                 })
                 .catch(function(error) {
                     console.log(error);
@@ -51,7 +53,7 @@ import {
             });
       }
 
-      renderReviewDetails(){
+      getPolicyData(){
         let requests = this.state.reviewers.map(reviewer =>
             Axios.get("http://localhost:5000/company", {
                 params: { _id: reviewer, type: "user" }
@@ -60,7 +62,9 @@ import {
           Promise.all(requests).then(reviewerData => {
             this.setState({ reviewers: reviewerData.map(x => x.data) });
           });
-          
+      }
+
+      renderReviewDetails(){  
         return this.state.reviewers.map(user => {
             console.log("this.state.reviewers ===>" + user)
             return(
@@ -72,7 +76,8 @@ import {
       }
 
       displayStartWorkflowBtn(){
-          if(this.state.reviewers.legnth === 0){
+          console.log("this.state.reviewers.legnth" + this.state.reviewers.legnth)
+          if(this.state.reviewers.length === 0){
            return(
                 <li> 
                     <Button
