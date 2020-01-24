@@ -71,7 +71,7 @@ import {
 
       renderDisplayPolicyStatus(){
           let status
-          console.log("STATUS!!!" + this.state.singlePolicy.status);
+          // console.log("STATUS!!!" + this.state.singlePolicy.status);
           if(this.state.singlePolicy.status === "not reviewed"){
             status = "confirmation";
           }else if(this.state.singlePolicy.status === "confirmation"){
@@ -86,7 +86,8 @@ import {
 
       renderDisplayReviewers() {
         const displayReviewers = keyContact => {
-            if (keyContact.user_type !== "comp_initiator") {
+          // console.log("keyContact.user_type ====>" + keyContact.user_type)
+            if (keyContact.user_type === undefined) {
                 return (
                     <tr key={keyContact._id}>
                         <td><Input
