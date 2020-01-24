@@ -34,7 +34,7 @@ import AddKeyContacts from "views/dashboardUserSubPage/AddKeyContact.jsx";
 import ActionPage from "views/dashboardUserSubPage/policyActionViewPage.jsx";
 import ReviewPage from "views/dashboardUserSubPage/reviewPage.jsx";
 import DisplayPolicies from "views/commonPage/DisplayPolicies.jsx";
-
+import DisplayPolicyTest from "views/commonPage/DisplayPolicyTest.jsx";
 
   const userType = localStorage.getItem('session_type')
   console.log("userType" + userType);
@@ -144,6 +144,12 @@ var routesClient = [
   {
     path: "/DisplayPolicies",
     component:DisplayPolicies,
+    sidebar: false,
+    layout: "/dashboard"
+  },
+  {
+    path: "/DisplayPolicyTest",
+    component:DisplayPolicyTest,
     sidebar: false,
     layout: "/dashboard"
   },

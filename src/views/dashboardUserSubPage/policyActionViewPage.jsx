@@ -41,7 +41,7 @@ import {
                                         color="neutral"
                                         style={{textDecoration: "underline", fontSize: "16px", fontWeight: "bold"}}
                                         to={{
-                                            pathname: "policyDisplay"
+                                            pathname: "DisplayPolicyTest"
                                         }}
                                         title="to Policy display page"
                                         tag={Link}>
