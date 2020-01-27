@@ -15,7 +15,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 
 
 
-// export default class DisplayPolicies extends Component {
+export default class DisplayPolicies extends Component {
 //   constructor(props){
 //     super(props);
 //     this.state = ({
@@ -91,4 +91,4 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 //      </div>
 //     );
 //   }
-// }
+}

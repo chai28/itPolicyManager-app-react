@@ -17,6 +17,10 @@ export default class DisplayPolicyTest extends Component {
       super(props);
       this. renderContent = this. renderContent.bind(this);
       this.handleSaveContent = this.handleSaveContent.bind(this);
+      this.handlePrint = this.handlePrint.bind(this);
+      this.renderPDF = this.renderPDF.bind(this);
+      this.getDate = this.getDate.bind(this);
+      //this.getPDF = this.getPDF.bind(this);
       this.state = {
         contents: [],
         tempcontents:[],
@@ -25,6 +29,7 @@ export default class DisplayPolicyTest extends Component {
       };
   }
     componentDidMount() {
+      console.log(localStorage.getItem("session_name"));
       Axios.get("http://localhost:5000/reviewPolicy", {
         params: {company_name: localStorage.getItem("session_name"), policy_name: localStorage.getItem('reviewPolicy')}
       })
@@ -33,7 +38,6 @@ export default class DisplayPolicyTest extends Component {
           this.setState({
                 policy: response.data,
               contents: response.data.content,
-              test: ""
             });
             // console.log(this.state.contents);
         })
@@ -57,31 +61,60 @@ export default class DisplayPolicyTest extends Component {
           }
         );
       }
+
+
 //handle print button
-      handlePrint(e){
+      handlePrint =(e) =>{
         e.preventDefault();
         console.log("print clicked! ");
-        let input =  
+        console.log(this.state.contents);
+       let input = document.getElementById("renderPDF");
         html2canvas(input)
-    .then((canvas) => {
-        //   const imgData = canvas.toDataURL('image/png');
-          const pdf = new jsPDF();
-        //   pdf.addImage(imgData, 'PNG', 0, 0);
-          pdf.save("policy.pdf");  
+         .then((canvas) => {
+          const imgData = canvas.toDataURL('image/png');
+          // const pdf = new jsPDF();
+          const pdf = new jsPDF('p', 'mm');
+          pdf.addImage(imgData, 'PNG', 0, 0,200,300);
+          pdf.save( localStorage.getItem('reviewPolicy'));  
        });
 
-        // const updatedContent = {
-        //   updatedcontent: this.state.contents,
-        //   company_name: localStorage.getItem("session_name"), 
-        //   policy_name: localStorage.getItem('reviewPolicy')
-        // };
-    
-        // Axios.post("http://localhost:5000/subscribedPolicy", updatedContent).then(
-        //   res => {
-        //     console.log(res.data);
-        //   }
-        // );
-      }
+
+     //puppeteer
+    //  Axios.get("http://localhost:5000/pdfGeneration", {
+    //         responseType: 'arraybuffer',
+    //         headers: {
+    //           'Accept': 'application/pdf'
+    //         }
+    //       }).then( 
+    //         res => {
+    //         const blob = new Blob([res.data], {type: 'application/pdf'})
+    //         const link = document.createElement('a')
+    //         link.href = window.URL.createObjectURL(blob)
+    //         link.download = localStorage.getItem('reviewPolicy')
+    //         link.click()
+    //     }) .catch(function(error) {
+    //       console.log(error);
+    //   });
+    }
+
+    getDate(){
+      var tempDate = new Date();
+      var date = tempDate.getFullYear() + '-' + (tempDate.getMonth()+1) + '-' + tempDate.getDate();
+      return date;
+    }
+
+    renderPDF(){
+      return this.state.contents.map((content) => {
+        return (
+          <>
+           <p style={{fontFamily: 'Verdana', fontSize: 16}}>{'\t'}{content}</p>
+          <br></br>
+          </>
+        );
+      });
+    }
+   
+
    
     renderContent (content,contentIndex){
         const onChangeInput = (e) => {
@@ -91,7 +124,6 @@ export default class DisplayPolicyTest extends Component {
              this.setState({contents:content_temp});
         };
         return (
-          
             <FormGroup>
               <InputGroup className="form-group-no-border">
                 <Input
@@ -99,11 +131,11 @@ export default class DisplayPolicyTest extends Component {
                   type="textarea"
                   onChange={onChangeInput}
                   rows="12"
+                  id= {contentIndex}
                   name={contentIndex}
                 />
               </InputGroup>
              </FormGroup> 
-            
         )
     }
       
@@ -120,11 +152,11 @@ export default class DisplayPolicyTest extends Component {
       render() {
         return (
           <>
-            <div className="content">
+            <div className="content" id="policy">
               <Row>
                 <Col className="ml-auto mr-auto" md="10">
-                     <h1 className="text-center">{localStorage.getItem('reviewPolicy')}</h1>  
-                      <Form className="edit-profile-form">
+                     <h3 className="text-center">{localStorage.getItem('reviewPolicy')}</h3>  
+                      <Form className="edit-profile-form" id="content">
                         {this.content()}
                         <Button className="btn-round"
                                 color="success"
@@ -140,6 +172,12 @@ export default class DisplayPolicyTest extends Component {
                                Print
                             </Button>
                          </Form>   
+                         <div id="renderPDF" >
+                           <p style={{fontFamily: 'Verdana', fontSize: 12}}>{localStorage.getItem("session_name")}</p>
+                           <p style={{fontFamily: 'Verdana', fontSize: 12}}>{this.getDate()}</p>
+                           <h3 className="text-center">{localStorage.getItem('reviewPolicy')}</h3>
+                           {this.renderPDF()}
+                         </div>
                 </Col>
               </Row>
             </div>
