@@ -8,18 +8,17 @@ import {
       InputGroup,
     } from "reactstrap";
 import React, { Component, useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import Axios from "axios";
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
 
 export default class DisplayPolicyTest extends Component {
     constructor(props){
       super(props);
       this. renderContent = this. renderContent.bind(this);
       this.handleSaveContent = this.handleSaveContent.bind(this);
-      this.handlePrint = this.handlePrint.bind(this);
-      this.renderPDF = this.renderPDF.bind(this);
-      this.getDate = this.getDate.bind(this);
+      // this.handlePrint = this.handlePrint.bind(this);
+      // this.renderPDF = this.renderPDF.bind(this);
+      // this.getDate = this.getDate.bind(this);
       //this.getPDF = this.getPDF.bind(this);
       this.state = {
         contents: [],
@@ -63,59 +62,6 @@ export default class DisplayPolicyTest extends Component {
       }
 
 
-//handle print button
-      handlePrint =(e) =>{
-        e.preventDefault();
-        console.log("print clicked! ");
-        console.log(this.state.contents);
-       let input = document.getElementById("renderPDF");
-        html2canvas(input)
-         .then((canvas) => {
-          const imgData = canvas.toDataURL('image/png');
-          // const pdf = new jsPDF();
-          const pdf = new jsPDF('p', 'mm');
-          pdf.addImage(imgData, 'PNG', 0, 0,200,300);
-          pdf.save( localStorage.getItem('reviewPolicy'));  
-       });
-
-
-     //puppeteer
-    //  Axios.get("http://localhost:5000/pdfGeneration", {
-    //         responseType: 'arraybuffer',
-    //         headers: {
-    //           'Accept': 'application/pdf'
-    //         }
-    //       }).then( 
-    //         res => {
-    //         const blob = new Blob([res.data], {type: 'application/pdf'})
-    //         const link = document.createElement('a')
-    //         link.href = window.URL.createObjectURL(blob)
-    //         link.download = localStorage.getItem('reviewPolicy')
-    //         link.click()
-    //     }) .catch(function(error) {
-    //       console.log(error);
-    //   });
-    }
-
-    getDate(){
-      var tempDate = new Date();
-      var date = tempDate.getFullYear() + '-' + (tempDate.getMonth()+1) + '-' + tempDate.getDate();
-      return date;
-    }
-
-    renderPDF(){
-      return this.state.contents.map((content) => {
-        return (
-          <>
-           <p style={{fontFamily: 'Verdana', fontSize: 16}}>{'\t'}{content}</p>
-          <br></br>
-          </>
-        );
-      });
-    }
-   
-
-   
     renderContent (content,contentIndex){
         const onChangeInput = (e) => {
             console.log( "bbbb " +e.target.value)
@@ -123,6 +69,7 @@ export default class DisplayPolicyTest extends Component {
             content_temp[contentIndex]=e.target.value;
              this.setState({contents:content_temp});
         };
+
         return (
             <FormGroup>
               <InputGroup className="form-group-no-border">
@@ -167,17 +114,20 @@ export default class DisplayPolicyTest extends Component {
                         <Button className="btn-round"
                                 color="info"
                                 style={{ float: "center" }}
-                                type="submit"
-                                onClick={this.handlePrint}>
+                                to={{
+                                        pathname: "printPreview"
+                                        }}
+                                title="to print preview page"
+                                tag={Link}>
                                Print
                             </Button>
                          </Form>   
-                         <div id="renderPDF" >
+                         {/* <div id="renderPDF" >
                            <p style={{fontFamily: 'Verdana', fontSize: 12}}>{localStorage.getItem("session_name")}</p>
                            <p style={{fontFamily: 'Verdana', fontSize: 12}}>{this.getDate()}</p>
                            <h3 className="text-center">{localStorage.getItem('reviewPolicy')}</h3>
                            {this.renderPDF()}
-                         </div>
+                         </div> */}
                 </Col>
               </Row>
             </div>

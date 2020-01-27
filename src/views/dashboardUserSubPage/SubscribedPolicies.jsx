@@ -68,6 +68,7 @@ class SubscribedPolicies extends React.Component {
           <tr key={policy._id}>
             <td key={policy.name}>{policy.name}</td>
             <td key={policy.status}>{policy.status}</td>
+            <td key={policy.version} className="text-center">{policy.version}</td>
             <td key={policy._id} className="text-center">
               <Button className="btn-round"
                 style={{'marginRight':'7px'}}
@@ -90,6 +91,7 @@ class SubscribedPolicies extends React.Component {
             <tr>
               <th>Policy Name</th>
               <th>Status</th>
+              <th>Version</th>
               <th className="text-center">Action</th>
             </tr>
           </thead>
