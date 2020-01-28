@@ -10,6 +10,7 @@ import {
 import React, { Component, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import Axios from "axios";
+import { toast } from "react-toastify";
 
 export default class DisplayPolicyTest extends Component {
     constructor(props){
@@ -57,6 +58,20 @@ export default class DisplayPolicyTest extends Component {
         Axios.post("http://localhost:5000/subscribedPolicy", updatedContent).then(
           res => {
             console.log(res.data);
+            if (res.data.status === "success") {
+              toast("Save successfully", { 
+                type: "success", 
+                position: toast.POSITION.TOP_CENTER,
+                onClose: ()=> {
+                  window.location.href = 'DisplayPolicyTest'
+                }
+              });
+            } else {
+              toast("Unsuccessful save. Something went wrong, Try again", { 
+                type: "error",
+                position: toast.POSITION.TOP_CENTER,
+              });
+            }
           }
         );
       }
