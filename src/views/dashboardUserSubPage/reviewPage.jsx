@@ -53,7 +53,7 @@ import {
                 }
                 }).then(response => {
                     this.setState({
-                        singlePolicy: response. singlePolicy.data
+                        singlePolicy: response.data.singlePolicy
                     });
                 })
                 .catch(function(error) {
