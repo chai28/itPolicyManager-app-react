@@ -1,20 +1,21 @@
-// import {
-//   Button,
-//     Row,
-//     Col
-//   } from "reactstrap";
-// import Axios from "axios";
-// import React, { Component } from "react";
-// import { Document, Page } from "react-pdf";
-// import { Pagination } from 'antd';
-// // import { saveAs,FileSaver } from 'file-saver';
-// import { pdfjs } from 'react-pdf';
-// pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+import {
+  Input,
+  Button,
+    Row,
+    Col
+  } from "reactstrap";
+import Axios from "axios";
+import React, { Component } from "react";
+import { Document, Page } from "react-pdf";
+import { Pagination } from 'antd';
+// import { saveAs,FileSaver } from 'file-saver';
+import { pdfjs } from 'react-pdf';
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 
 
 
-// export default class DisplayPolicies extends Component {
+export default class DisplayPolicies extends Component {
 //   constructor(props){
 //     super(props);
 //     this.state = ({
@@ -90,4 +91,4 @@
 //      </div>
 //     );
 //   }
-// }
+}

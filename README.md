@@ -23,3 +23,9 @@ npm install react-pdf
 
 npm install antd
 
+npm install jodit-react --save
+
+npm install --save html2canvas
+
+npm install jspdf --saves
+

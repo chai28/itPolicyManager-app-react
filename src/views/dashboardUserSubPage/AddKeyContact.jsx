@@ -18,6 +18,7 @@
 */
 import React from "react";
 import Axios from "axios";
+import { toast } from "react-toastify";
 
 // reactstrap components
 import {
@@ -113,27 +114,25 @@ toggleNotificationModal(){
     
     Axios.post('http://localhost:5000/addKeyContact',addKeyContactDetails)
     .then(res => {console.log(res.data);
-      if(res.data.value === true){
-        console.log("added successfully")
-        this.setState({
-          target: "/dashboard/dashboardcontent",
-          message: "Contact added succesfully",
-          messageHeader: "Adding Key Contact"
+      if (res.data.status === "success") {
+        toast("Save successfully", { 
+          type: "success", 
+          position: toast.POSITION.TOP_CENTER,
+          onClose: ()=> {
+            window.location.href = 'AddkeyContacts'
+          }
         });
-        
-      }else{
-        console.log("contact already exist")
-        this.setState({
-          target: "/dashboard/AddKeyContact",
-          message: "This contact akready exist.",
-          messageHeader: "Adding Key Contact Failed"
+      } else {
+        toast("Unsuccessful save. the email may already exist", { 
+          type: "error",
+          position: toast.POSITION.TOP_CENTER,
         });
       }
     });
-    console.log("call the modal")
-    this.setState({
-      Notification: true,
-    });
+    // console.log("call the modal")
+    // this.setState({
+    //   Notification: true,
+    // });
   }
 
   render() {

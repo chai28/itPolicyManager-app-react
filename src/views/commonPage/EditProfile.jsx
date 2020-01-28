@@ -18,7 +18,7 @@
 */
 import React from "react";
 import Axios from "axios";
-
+import { toast } from "react-toastify";
 // reactstrap components
 import {
   Row,
@@ -29,6 +29,7 @@ import {
   InputGroup,
   Button
 } from "reactstrap";
+
 
 class Policies extends React.Component {
   constructor(props) {
@@ -66,7 +67,7 @@ class Policies extends React.Component {
           bEmail: response.data.companyDetails.company_email,
           bContact: response.data.companyDetails.contact,
           bAddr: response.data.companyDetails.address,
-          bDescription: response.data.companyDetails.descption
+          bDescription: response.data.companyDetails.description
         });
         console.log("companyDetails", this.state.companyDetails);
       })
@@ -101,7 +102,22 @@ class Policies extends React.Component {
 
     Axios.post("http://localhost:5000/editprofile", companyDetails).then(
       res => {
+        if (res.data.status === "success") {
+          toast("Save successfully", { 
+            type: "success", 
+            position: toast.POSITION.TOP_CENTER,
+            onClose: ()=> {
+              window.location.href = 'edit-profile'
+            }
+          });
+        } else {
+          toast("Unsuccessful save. Something went wrong, Try again", { 
+            type: "error",
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
         console.log(res.data);
+
       }
     );
   }
