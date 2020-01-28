@@ -19,6 +19,7 @@
 import React from "react";
 import Axios from "axios";
 import { toast } from "react-toastify";
+
 // reactstrap components
 import {
   Row,
@@ -45,7 +46,8 @@ class Policies extends React.Component {
       bEmail: "",
       bContact: "",
       bAddr: "",
-      bDescription: ""
+      bDescription: "",
+      bLogo :""
     };
   }
 
@@ -67,7 +69,8 @@ class Policies extends React.Component {
           bEmail: response.data.companyDetails.company_email,
           bContact: response.data.companyDetails.contact,
           bAddr: response.data.companyDetails.address,
-          bDescription: response.data.companyDetails.description
+          bDescription: response.data.companyDetails.description,
+          bLogo : response.data.logo
         });
         console.log("companyDetails", this.state.companyDetails);
       })
@@ -89,6 +92,7 @@ class Policies extends React.Component {
   //Save button handler
   handleSaveProfile(e) {
     e.preventDefault();
+    var realpath = "/"+document.getElementById('file_upl').files[0].name; 
     console.log("handleSaveProfile clicked! ");
     const companyDetails = {
       _id: this.state.companyDetails._id,
@@ -97,7 +101,8 @@ class Policies extends React.Component {
       company_email: this.state.bEmail,
       contact: this.state.bContact,
       address: this.state.bAddr,
-      description: this.state.bDescription
+      description: this.state.bDescription,
+      logo : realpath
     };
 
     Axios.post("http://localhost:5000/editprofile", companyDetails).then(
@@ -168,6 +173,24 @@ class Policies extends React.Component {
                       </Col>
                     </InputGroup>
                   </Row>
+                </FormGroup>
+                <FormGroup>
+                  <label>
+                    <h6>Business Logo</h6>
+                  </label>
+                  <InputGroup className="form-group-no-border">
+                    <Input
+                      id="file_upl"
+                      type="file"
+                      name="bLogo"
+                      onChange={this.onChangeInput}
+                    />
+                     {/* <ReactCoreImageUpload
+                        text="Upload Your logo"
+                        className='pure-button'
+                        inputOfFile={this.state.bLogo}>
+                    </ReactCoreImageUpload> */}
+                  </InputGroup>
                 </FormGroup>
                 <FormGroup>
                   <label>

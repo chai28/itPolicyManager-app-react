@@ -22,7 +22,8 @@ export default class printPreview extends Component {
       contents: [],
       tempcontents:[],
       policy:[],
-      updatedContent:[]
+      updatedContent:[],
+      company:{}
     };
 }
   componentDidMount() {
@@ -33,8 +34,9 @@ export default class printPreview extends Component {
       .then(response => {
         console.log(response)
         this.setState({
-              policy: response.data,
-              contents: response.data.content,
+              company: response.data.company,
+              policy: response.data.singlePolicy,
+              contents: response.data.singlePolicy.content,
           });
           // console.log(this.state.contents);
       })
@@ -89,8 +91,13 @@ export default class printPreview extends Component {
          <div className="content" id="policy">
             <Row>
              <Col className="ml-auto mr-auto" md="10">
-                <h1>Preview</h1>
                 <div id="renderPDF" >
+                <img className="img-fluid" 
+                   src={this.state.company.logo} 
+                   alt="logo"
+                   width="200px"
+                   height="100px"
+                   />
                 <p style={{fontFamily: 'Verdana', fontSize: 12}}>Company name: {localStorage.getItem("session_name")}</p>
                 <p style={{fontFamily: 'Verdana', fontSize: 12}}>Subscribed Date: {this.state.policy.date_subscribed}</p>
                 <p style={{fontFamily: 'Verdana', fontSize: 12}}>Version: {this.state.policy.version}</p>

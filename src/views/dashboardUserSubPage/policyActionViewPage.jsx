@@ -40,7 +40,7 @@ import {
                         policy_name:  this.state.policyName}
                 }).then(response => {
                     this.setState({
-                        reviewers: response.data.reviewer
+                        reviewers: response.data.singlePolicy.reviewer
                     })
                     this.getPolicyData();
                 })
