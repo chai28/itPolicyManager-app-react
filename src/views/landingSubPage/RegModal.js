@@ -1,21 +1,4 @@
-/*!
 
-=========================================================
-* Paper Kit React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-kit-react
-
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/paper-kit-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React, {Component} from "react";
 import { NavLink, Link} from "react-router-dom";
 import Axios from "axios";
@@ -36,6 +19,7 @@ import {
 
 // core components
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
+import LandingPageHeader from "components/Headers/LandingPageHeader.js";
 import DemoFooter from "components/Footers/DemoFooter.js";
 
 toast.configure();
@@ -145,6 +129,7 @@ class RegModal extends Component {
     return (
       <>
         <ExamplesNavbar />
+        <LandingPageHeader />
         <div
         className="page-header"
         style={{
@@ -158,7 +143,7 @@ class RegModal extends Component {
           <Modal isOpen={this.state.modal} toggle={this.toggleModal} size="xl">
             <div>
               <div  className="modal-header">
-                  <NavLink to="/signin-page" 
+                  <NavLink to="/landing-page" 
                       tag={Link}
                       aria-label="Close"
                       className="close"
