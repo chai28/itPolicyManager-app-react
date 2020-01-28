@@ -30,7 +30,7 @@ import "perfect-scrollbar/css/perfect-scrollbar.css";
 
 // pages
 import LandingPage from "views/LandingPage.js";
-import ProfilePage from "views/landingSubPage/ProfilePage.js";
+// import ProfilePage from "views/landingSubPage/ProfilePage.js";
 import ContactUsPage from "views/landingSubPage/ContactUsPage.js";
 import SurveyPage from "views/landingSubPage/SurveyPage.js";
 import SignIn from "views/landingSubPage/SignIn.js";
@@ -46,10 +46,10 @@ ReactDOM.render(
       <Route 
         path="/landing-page" 
         render={props => <LandingPage  {...props} />} />
-      <Route
+      {/* <Route
         path="/profile-page"
         render={props => <ProfilePage {...props} />}
-      />
+      /> */}
       <Route
         path="/signin-page"
         render={props => <SignIn {...props} />}
@@ -80,7 +80,7 @@ ReactDOM.render(
       />
       <Route
         path="/review-policy/:companyId/:policyName/:userId"
-        render={props => <DisplayReviewPolicy {...props} />}
+        render={props => <DisplayReviewPolicy key = {props.match.params.userId} {...props} />}
       />
       <Redirect to="/landing-page" />
     </Switch>
