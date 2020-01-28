@@ -66,7 +66,7 @@ class Policies extends React.Component {
           bEmail: response.data.companyDetails.company_email,
           bContact: response.data.companyDetails.contact,
           bAddr: response.data.companyDetails.address,
-          bDescription: response.data.companyDetails.descption
+          bDescription: response.data.companyDetails.description
         });
         console.log("companyDetails", this.state.companyDetails);
       })

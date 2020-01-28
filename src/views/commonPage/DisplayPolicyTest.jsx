@@ -134,7 +134,7 @@ export default class DisplayPolicyTest extends Component {
                                         }}
                                 title="to print preview page"
                                 tag={Link}>
-                               Print
+                               Preview
                             </Button>
                          </Form>   
                          {/* <div id="renderPDF" >

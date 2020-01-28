@@ -102,7 +102,7 @@ export default class printPreview extends Component {
                     style={{ float: "center" }}
                     type="submit"
                     onClick={this.handlePrint}>
-                    PrevieW
+                    Print
                 </Button>
             </Col>
           </Row>
