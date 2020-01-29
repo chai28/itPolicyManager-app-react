@@ -79,7 +79,7 @@ export default class DisplayPolicyTest extends Component {
 
     renderContent (content,contentIndex){
         const onChangeInput = (e) => {
-            console.log( "bbbb " +e.target.value)
+            // console.log( "bbbb " +e.target.value)
             let content_temp = this.state.contents;
             content_temp[contentIndex]=e.target.value;
              this.setState({contents:content_temp});

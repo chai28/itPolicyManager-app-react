@@ -50,8 +50,8 @@ export default class printPreview extends Component {
 //handle print button
     handlePrint =(e) =>{
       e.preventDefault();
-      console.log("print clicked! ");
-      console.log(this.state.policy);
+      // console.log("print clicked! ");
+      // console.log(this.state.policy);
      let input = document.getElementById("renderPDF");
       html2canvas(input)
        .then((canvas) => {

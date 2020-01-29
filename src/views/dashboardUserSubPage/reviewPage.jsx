@@ -73,12 +73,23 @@ import {
           let status
           // console.log("STATUS!!!" + this.state.singlePolicy.status);
           if(this.state.singlePolicy.status === "not reviewed"){
-            status = "confirmation";
+            status= "confirmation";
           }else if(this.state.singlePolicy.status === "confirmation"){
-            status = "adoption";
-          }else{
+            status= "adoption";
+          }else if(this.state.singlePolicy.status === "adoption"){
+            status = "awareness";
+          }else if(this.state.singlePolicy.status === "awareness"){
+            status = "reporting";
+          }else if(this.state.singlePolicy.status === "awareness"){
+            status = "done";
+          }
+          else{
             status  = this.state.singlePolicy.status
           }
+          console.log("===> " + status)
+          // this.setState({
+          //   status: status
+          // });
         return(
             <span className="text-primary">{status}</span>
         )
@@ -112,7 +123,7 @@ import {
 
     startReviewButtonHandler(e){
         e.preventDefault()
-        console.log("#####" + this.state.singlePolicy.status);
+        // console.log("#####" + this.state.singlePolicy.status);
         const data = {
             company_name: localStorage.getItem("session_name"),
             policyName: this.state.singlePolicy.name,
