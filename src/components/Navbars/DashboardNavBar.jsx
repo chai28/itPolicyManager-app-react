@@ -53,7 +53,6 @@ class Header extends React.Component {
     const userDetails = {
       userId: this.state.userId
     };
-    Axios.get('http://localhost:5000/logout', userDetails);
     let path = `/landing-page`;
     this.props.history.push(path);
   }

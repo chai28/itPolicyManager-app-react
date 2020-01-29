@@ -57,7 +57,7 @@ export default class printPreview extends Component {
        .then((canvas) => {
         const imgData = canvas.toDataURL('image/png');
         // const pdf = new jsPDF();
-        const pdf = new jsPDF('p', 'mm' ,[660,1500]);
+        const pdf = new jsPDF('p', 'mm' ,[950,1700]);
         pdf.addImage(imgData, 'PNG', 0, 0);
         pdf.save( localStorage.getItem('reviewPolicy'));  
      });
@@ -94,7 +94,7 @@ export default class printPreview extends Component {
                 <div id="renderPDF" >
                 <img className="img-fluid" 
                    src={this.state.company.logo} 
-                   alt="logo"
+                   
                    width="200px"
                    height="100px"
                    />

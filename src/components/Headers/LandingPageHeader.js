@@ -54,7 +54,7 @@ function LandingPageHeader() {
         <Container>
           <div className="motto text-center">
             <h1>IT Policy Manager</h1>
-            <h3>Ypur ultimate help in IT Policy generation and management.</h3>
+            <h3>Your ultimate help in IT Policy generation and management.</h3>
             <br />
             <Button
               href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
