@@ -28,10 +28,7 @@ class SubscribedPolicies extends React.Component {
 
   componentDidMount() {
     localStorage.removeItem('reviewPolicy');
-    const idInfo = {
-      user_id: localStorage.getItem("session_id")
-    };
-    console.log("ID: " + idInfo.user_id);
+    // console.log("ID: " + localStorage.getItem("session_id"));
 
     Axios.get("http://localhost:5000/subscribedPolicy", {
       params: { company_name: localStorage.getItem("session_name") }
@@ -41,7 +38,7 @@ class SubscribedPolicies extends React.Component {
         this.setState({
           sub_policy: response.data
         });
-        console.log(this.state.sub_policy);
+        // console.log(this.state.sub_policy);
       })
       .catch(function(error) {
         console.log(error);
@@ -62,15 +59,15 @@ class SubscribedPolicies extends React.Component {
 
   tableDataDisplay(){
     return this.state.sub_policy.map(policy => {
-      // console.log("policies: " + policy);
+      // console.log("policies: " + policy.version);
       return (
         <>
           <tr key={policy._id}>
-            <td key={policy.name}>{policy.name}</td>
-            <td key={policy.status}>{policy.status}</td>
-            <td key={policy.version} className="text-center">{policy.version}</td>
+            <td key={policy._id}>{policy.name}</td>
+            <td key={policy._id}>{policy.status}</td>
+            <td key={policy._id} className="text-center">{policy.version}</td>
             <td key={policy._id} className="text-center">
-              <Button className="btn-round"
+              <Button key={policy._id} className="btn-round"
                 style={{'marginRight':'7px'}}
                 color="success"
                 value= {policy.name}

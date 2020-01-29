@@ -25,6 +25,7 @@ import {
             policyName: localStorage.getItem('reviewPolicy'),
             companyDetails: [],
             reviewers:[],
+            status: ""
           });
       }
 
@@ -40,7 +41,8 @@ import {
                         policy_name:  this.state.policyName}
                 }).then(response => {
                     this.setState({
-                        reviewers: response.data.singlePolicy.reviewer
+                        reviewers: response.data.singlePolicy.reviewer,
+                        status: response.data.singlePolicy.status
                     })
                     this.getPolicyData();
                 })
@@ -66,7 +68,7 @@ import {
 
       renderReviewDetails(){  
         return this.state.reviewers.map(user => {
-            console.log("this.state.reviewers ===>" + user)
+            // console.log("this.state.reviewers ===>" + user)
             return(
                 <span key={user._id}><strong> - {
                     user.fname + " " + user.lname}</strong>
@@ -76,23 +78,33 @@ import {
       }
 
       displayStartWorkflowBtn(){
-          console.log("this.state.reviewers.legnth" + this.state.reviewers.legnth)
-          if(this.state.reviewers.length === 0){
-           return(
-                <li> 
-                    <Button
-                        className="btn-round"
-                        color="primary"
-                        style={{fontSize: "16px", fontWeight: "bold"}}
-                        to={{
-                            pathname: "subscribed-policy-action-start-workflow"
-                        }}
-                        title="to review page"
-                        tag={Link}>
-                            Start Review Workflow
-                    </Button>
-                </li>
+        //   console.log("this.state.reviewers.legnth" + this.state.reviewers.legnth)
+          if(this.state.reviewers.length === 0 && 
+                (this.state.status === "done" || this.state.status === "awareness" || this.state.status === "reporting")){
+            return(
+                <><br></br>
+                <span style={{color: "red"}}>
+                    <strong>cannot start workflow for this policy</strong>
+                </span></>
             );
+          }else if(this.state.reviewers.length === 0 && 
+            (this.state.status !== "done" || this.state.status !== "awareness" || 
+                this.state.status !== "reporting")){
+                    return(
+                        <li> 
+                            <Button
+                                className="btn-round"
+                                color="primary"
+                                style={{fontSize: "16px", fontWeight: "bold"}}
+                                to={{
+                                    pathname: "subscribed-policy-action-start-workflow"
+                                }}
+                                title="to review page"
+                                tag={Link}>
+                                    Start Review Workflow
+                            </Button>
+                        </li>
+                    );
           }else{
             return(
                 <><br></br>
@@ -116,10 +128,20 @@ import {
                 </>
             )
         }else{//review done/not yet started
-            return(
-                <p className="text-center danger" style={{color: "red", fontStyle: "italic"}}>
-                    No workflow has started yet for the current stage of this policy. </p>
-            )
+            if(this.state.status === "done" || this.state.status === "awareness" 
+                || this.state.status === "reporting"){
+                return(
+                    <>
+                        <p className="text-center">
+                            This policy has finished it's review</p>
+                    </>
+                )
+            }else{
+                return(
+                    <p className="text-center danger" style={{color: "red", fontStyle: "italic"}}>
+                        No workflow has started yet for the current stage of this policy. </p>
+                )
+            }
         }
       }
 

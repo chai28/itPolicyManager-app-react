@@ -112,7 +112,7 @@ class Sidebar extends React.Component {
                   </li>
                 ); 
               }
-              return "error sidebar";
+              return "";
             })}
           </Nav>
         </div>

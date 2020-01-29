@@ -1,3 +1,8 @@
+import React, { Component} from "react";
+import { Link } from "react-router-dom";
+import Axios from "axios";
+import { toast } from "react-toastify";
+
 import {
       Button,
       Row,
@@ -7,15 +12,11 @@ import {
       Input,
       InputGroup,
     } from "reactstrap";
-import React, { Component, useState, useRef } from "react";
-import { Link } from "react-router-dom";
-import Axios from "axios";
-import { toast } from "react-toastify";
 
 export default class DisplayPolicyTest extends Component {
     constructor(props){
       super(props);
-      this. renderContent = this. renderContent.bind(this);
+      this.renderContent = this.renderContent.bind(this);
       this.handleSaveContent = this.handleSaveContent.bind(this);
       // this.handlePrint = this.handlePrint.bind(this);
       // this.renderPDF = this.renderPDF.bind(this);

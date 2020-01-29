@@ -2,12 +2,8 @@ import {
     Button,
     Row,
     Col,
-    Form,
-    FormGroup,
-    Input,
-    InputGroup,
   } from "reactstrap";
-import React, { Component, useState, useRef } from "react";
+import React, { Component } from "react";
 import Axios from "axios";
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
@@ -94,7 +90,7 @@ export default class printPreview extends Component {
                 <div id="renderPDF" >
                 <img className="img-fluid" 
                    src={this.state.company.logo} 
-                   
+                   alt="company logo"
                    width="200px"
                    height="100px"
                    />
