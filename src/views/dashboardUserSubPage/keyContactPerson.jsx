@@ -57,7 +57,7 @@ class keyContactPerson extends React.Component {
     })
       .then(response => {
         console.log("user: " + response.data.company);
-        Axios.get("http://localhost:5000/keyContact", {
+        Axios.get("http://localhost:5000/user", {
           params: { companyId: response.data.company }
         })
           .then(response => {
@@ -91,7 +91,7 @@ class keyContactPerson extends React.Component {
       action: "delete"
     };
 
-    Axios.post("http://localhost:5000/keyContact", keyContactDetails).then(
+    Axios.post("http://localhost:5000/user", keyContactDetails).then(
       res => {
         console.log(res.data);
         console.log("Response Status:", res.data.status);

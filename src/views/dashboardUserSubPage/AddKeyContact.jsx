@@ -1,21 +1,4 @@
-/*!
 
-=========================================================
-* Paper Dashboard React - v1.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-dashboard-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-
-* Licensed under MIT (https://github.com/creativetimofficial/paper-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 import Axios from "axios";
 import { toast } from "react-toastify";
@@ -36,8 +19,6 @@ import {
   Modal,
   Container,
 } from "reactstrap";
-
-// import Modals from "components/Forms/QuestionForm.js";
 
 class AddKeyContacts extends React.Component {
   constructor(props) {
@@ -62,14 +43,14 @@ class AddKeyContacts extends React.Component {
     }
 }
   
-//temp modal
+//modal handler
   componentDidMount() {
     document.body.classList.add("register-page");
     //temp Modal
     document.addEventListener('mousedown', this.handleClickOutside, true);
   }
 
-  //temp Modal
+//Modal handler
 componentWillUnmount() {
     document.removeEventListener('mousedown', this.handleClickOutside, true);
 }
@@ -89,7 +70,7 @@ toggleNotificationModal(){
 
     console.log("Modal must display" + this.state.Notification)
 }
-/**** End of Temp Modal ****/
+/**** End of modal handler****/
 
   onChangeInput(e) {
     const target = e.target;
@@ -109,30 +90,30 @@ toggleNotificationModal(){
       lname: this.state.lname,
       email: this.state.email,
       position: this.state.position,
-      userId: this.state.userId
+      userId: this.state.userId,
+      action: "add"
     };
     
-    Axios.post('http://localhost:5000/addKeyContact',addKeyContactDetails)
+    Axios.post('http://localhost:5000/user',addKeyContactDetails)
     .then(res => {console.log(res.data);
       if (res.data.status === "success") {
         toast("Save successfully", { 
           type: "success", 
           position: toast.POSITION.TOP_CENTER,
           onClose: ()=> {
-            window.location.href = 'AddkeyContacts'
+            window.location.href = 'keyContactPerson'
           }
         });
       } else {
-        toast("Unsuccessful save. the email may already exist", { 
+        toast("Unsuccessful save! the email may already exist", { 
           type: "error",
           position: toast.POSITION.TOP_CENTER,
+          onClose: ()=> {
+            window.location.reload()
+          }
         });
       }
     });
-    // console.log("call the modal")
-    // this.setState({
-    //   Notification: true,
-    // });
   }
 
   render() {

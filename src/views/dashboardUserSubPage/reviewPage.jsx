@@ -40,7 +40,7 @@ import {
         })
           .then(response => {
             console.log("companyID: " + response.data.company);
-            Axios.get("http://localhost:5000/keyContact", {
+            Axios.get("http://localhost:5000/user", {
               params: { companyId: response.data.company }
             })
               .then(response => {
