@@ -121,11 +121,12 @@ class keyContactPerson extends React.Component {
       if (keyContact.user_type !== "comp_initiator") {
         return (
           <>
-            <tr key={keyContact._id}>
-              <td key={keyContact._id}>{keyContact.fname + " " + keyContact.lname}</td>
-              <td key={keyContact._id}>{keyContact.email}</td>
-              <td key={keyContact._id}>{keyContact.position}</td>
-              {/* <td className="text-center" style={{ width: "25%" }}>
+            <tr>
+              <td key={keyContact._id + 0}>
+                {keyContact.fname + " " + keyContact.lname}</td>
+              <td key={keyContact._id + 1}>{keyContact.email}</td>
+              <td key={keyContact._id + 2}>{keyContact.position}</td>
+              {/* <td className="text-center" style={{ width: "25%" }}> //for edit button
                 <Button
                   className="btn-round"
                   style={{ marginRight: "7px" }}
@@ -136,14 +137,15 @@ class keyContactPerson extends React.Component {
                   Edit
                 </Button>
               </td> */}
-              <td key={keyContact._id} className="text-center" style={{ width: "25%" }}>
+              <td key={keyContact._id + 3} className="text-center" style={{ width: "25%" }}>
                 <Button
                   className="btn-round"
-                  style={{ marginRight: "7px" }}
-                  color="warning"
+                  // style={{ marginRight: "2px" }}
+                  color="danger"
+                  outline
                   onClick={e => this.onDeleteClick(keyContact._id)}
                 >
-                  Delete
+                  <i className="nc-icon nc-basket" style={{fontSize: "18px", color: "red"}}/>
                 </Button>
               </td>
             </tr>

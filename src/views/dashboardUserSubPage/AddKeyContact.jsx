@@ -16,8 +16,8 @@ import {
   CardHeader,
   CardBody,
   CardTitle,
-  Modal,
-  Container,
+  // Modal,
+  // Container,
 } from "reactstrap";
 
 class AddKeyContacts extends React.Component {
@@ -190,7 +190,7 @@ toggleNotificationModal(){
                     href="#pablo"
                     onClick={this.onAddKeyContactClick}
                   >
-                    Submit
+                    Add New Contact
                   </Button>
                 </Form> 
               </CardBody>
@@ -198,7 +198,7 @@ toggleNotificationModal(){
           </Col>
         </Row>
       </div>
-      {/* modal for notification Temporary*/}
+      {/* modal for notification Temporary
       <Container>
             <Card className="ml-auto mr-auto">
               <Row>
@@ -229,7 +229,7 @@ toggleNotificationModal(){
                   </Col>
                 </Row>
               </Card>
-            </Container>
+            </Container> */}
       {/* <Modals onModalDisplay={(show, messageHeader, message) => this.setState({ 
           showmodal: show,
           messageHeader: messageHeader,

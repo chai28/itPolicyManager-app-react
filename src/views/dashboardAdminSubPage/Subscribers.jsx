@@ -1,22 +1,6 @@
-/*!
 
-=========================================================
-* Paper Dashboard React - v1.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-dashboard-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-
-* Licensed under MIT (https://github.com/creativetimofficial/paper-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
+import Axios from "axios";
 
 // reactstrap components
 import {
@@ -31,6 +15,67 @@ import {
 } from "reactstrap";
 
 class Subscribers extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.displaySubscribers = this.displaySubscribers.bind(this);
+    this.state = {
+      companies: []
+    };
+  }
+
+  componentDidMount() {
+    Axios.get("http://localhost:5000/company", {
+      params: {type: "companyAll" }
+    })
+      .then(response => {
+        this.setState({
+          companies: response.data
+        });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }
+
+  displaySubscribers() {
+    return this.state.companies.map((company, index) => {
+      let subscription
+      // console.log(company.company_name)
+      let name = company.company_name;
+      let length = company.subscribed_policy.length
+      if(length !== 0){
+        subscription = <i className="nc-icon nc-check-2 text-success" />
+      }else{
+        subscription = <i className="nc-icon nc-simple-remove text-warning" />
+      }
+      if(company.company_name !== "IT_policy manager"){
+        return (
+            <tr key={index}>
+              <td key={index + 1} className="text-center">{name}</td>
+              <td key={index + 2} className="text-center">{subscription}</td>
+              <td key={index + 3} className="text-center">
+                  <Button
+                      className="btn-round"
+                      style={{'marginRight':'7px'}}
+                      color="info"
+                      href="#pablo"
+                      onClick={e => e.preventDefault()}//needs to implement
+                  >
+                      Details
+                  </Button>
+              </td>
+            </tr>
+        )
+      }else {
+        return(
+          <>
+          </>
+        );
+      }
+    });
+  }
+
   render() {
     return (
       <>
@@ -54,145 +99,7 @@ class Subscribers extends React.Component {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>Components</td>
-                        <td className="text-center">
-                          <i className="nc-icon nc-check-2 text-success" />
-                        </td>
-                        <td className="text-center">
-                            <Button
-                                className="btn-round"
-                                style={{'margin-right':'7px'}}
-                                color="info"
-                                href="#pablo"
-                                onClick={e => e.preventDefault()}
-                            >
-                                Renew
-                            </Button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Plugins</td>
-                        <td className="text-center">
-                          <i className="nc-icon nc-simple-remove text-danger" />
-                        </td>
-                        <td className="text-center">
-                            <Button
-                                className="btn-round"
-                                style={{'margin-right':'7px'}}
-                                color="success"
-                                href="#pablo"
-                                onClick={e => e.preventDefault()}
-                            >
-                                Subscribe
-                            </Button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Example Pages</td>
-                        <td className="text-center">
-                          <i className="nc-icon nc-check-2 text-success" />
-                        </td>
-                        <td className="text-center">
-                            <Button
-                                className="btn-round"
-                                style={{'margin-right':'7px'}}
-                                color="info"
-                                href="#pablo"
-                                onClick={e => e.preventDefault()}
-                            >
-                                Renew
-                            </Button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Login, Register, Pricing, Lock Pages</td>
-                        <td className="text-center">
-                          <i className="nc-icon nc-check-2 text-success" />
-                        </td>
-                        <td className="text-center">
-                            <Button
-                                className="btn-round"
-                                style={{'margin-right':'7px'}}
-                                color="info"
-                                href="#pablo"
-                                onClick={e => e.preventDefault()}
-                            >
-                                Renew
-                            </Button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          DataTables, VectorMap, SweetAlert, Wizard,
-                          jQueryValidation, FullCalendar etc...
-                        </td>
-                        <td className="text-center">
-                          <i className="nc-icon nc-simple-remove text-danger" />
-                        </td>
-                        <td className="text-center">
-                            <Button
-                                className="btn-round"
-                                style={{'margin-right':'7px'}}
-                                color="success"
-                                href="#pablo"
-                                onClick={e => e.preventDefault()}
-                            >
-                                Subscribe
-                            </Button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Mini Sidebar</td>
-                        <td className="text-center">
-                          <i className="nc-icon nc-simple-remove text-danger" />
-                        </td>
-                        <td className="text-center">
-                            <Button
-                                className="btn-round"
-                                style={{'margin-right':'7px'}}
-                                color="success"
-                                href="#pablo"
-                                onClick={e => e.preventDefault()}
-                            >
-                                Subscribe
-                            </Button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Premium Support</td>
-                        <td className="text-center">
-                          <i className="nc-icon nc-simple-remove text-danger" />
-                        </td>
-                        <td className="text-center">
-                            <Button
-                                className="btn-round"
-                                style={{'margin-right':'7px'}}
-                                color="success"
-                                href="#pablo"
-                                onClick={e => e.preventDefault()}
-                            >
-                                Subscribe
-                            </Button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td />
-                        <td className="text-center">
-                          <i className="nc-icon nc-check-2 text-success" />
-                        </td>
-                        <td className="text-center">
-                            <Button
-                                className="btn-round"
-                                style={{'margin-right':'7px'}}
-                                color="info"
-                                href="#pablo"
-                                onClick={e => e.preventDefault()}
-                            >
-                                Renew
-                            </Button>
-                        </td>
-                      </tr>
+                      {this.displaySubscribers()}
                     </tbody>
                   </Table>
                 </CardBody>

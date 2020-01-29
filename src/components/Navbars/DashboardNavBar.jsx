@@ -57,7 +57,9 @@ class Header extends React.Component {
   getBrand() {
     let brandName = "IT Policy Manager";
     routes.map((prop, key) => {
+      // console.log(window.location.href.indexOf(prop.layout + prop.path))
       if (window.location.href.indexOf(prop.layout + prop.path) !== -1) {
+        // console.log("-> " + prop.name2)
         brandName = prop.name2;
       }
       return null;

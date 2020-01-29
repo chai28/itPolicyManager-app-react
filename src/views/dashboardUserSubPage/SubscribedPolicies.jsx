@@ -62,17 +62,17 @@ class SubscribedPolicies extends React.Component {
       // console.log("policies: " + policy.version);
       return (
         <>
-          <tr key={policy._id}>
-            <td key={policy._id}>{policy.name}</td>
-            <td key={policy._id}>{policy.status}</td>
-            <td key={policy._id} className="text-center">{policy.version}</td>
-            <td key={policy._id} className="text-center">
-              <Button key={policy._id} className="btn-round"
+          <tr>
+            <td key={policy.name}>{policy.name}</td>
+            <td key={policy.status}>{policy.status}</td>
+            <td key={policy.version} className="text-center">{policy.version}</td>
+            <td key={policy._id + 0} className="text-center">
+              <Button className="btn-round"
                 style={{'marginRight':'7px'}}
                 color="success"
                 value= {policy.name}
                 onClick={this.reviewButtonHandler}>
-                  View Details
+                  Details
               </Button>
             </td>
           </tr>

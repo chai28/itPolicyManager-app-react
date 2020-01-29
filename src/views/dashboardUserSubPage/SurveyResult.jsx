@@ -83,10 +83,11 @@ class MatchedPolicies extends React.Component {
     return this.state.policies.map(policy => {
       return (
         <>
-          <tr>
-            <td>
-              <label key={policy._id}>
+          <tr key={policy._id}>
+            <td key={policy._id + 1}>
+              <label key={policy.policy_name}>
                 <Input
+                  key={policy._id + 2}
                   type="checkbox"
                   value={policy._id}
                   defaultChecked={this.state.isSelected}
