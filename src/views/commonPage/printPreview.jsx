@@ -7,6 +7,7 @@ import React, { Component } from "react";
 import Axios from "axios";
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import "assets/css/pdf.css";
 
 export default class printPreview extends Component {
   constructor(props){
@@ -14,6 +15,7 @@ export default class printPreview extends Component {
     this.handlePrint = this.handlePrint.bind(this);
     this.renderPDF = this.renderPDF.bind(this);
     this.getDate = this.getDate.bind(this);
+    this.companyLogo = this.companyLogo.bind(this);
     this.state = {
       contents: [],
       tempcontents:[],
@@ -69,17 +71,40 @@ export default class printPreview extends Component {
     return this.state.contents.map((content) => {
       return (
         <>
-         <p style={{fontFamily: 'Verdana', fontSize: 16}}>{'\t'}{content}</p>
+         <p className="pdfForm-control">{'\t'}{content}</p>
         <br></br>
         </>
       );
     });
   }
  
-
+  companyLogo(){
+    console.log("--->" +this.state.company.logo)
+    if(this.state.company.logo === undefined){
+      console.log("here" +this.state.company.logo )
+      // const url = "./assets/busLogos/logo.jpg";
+      return(
+        <img className="img-fluid" 
+          src="/busLogos/ITPM-02.png"
+          alt="company logo"
+          width="200px"
+          height="100px"
+          style={{float: "right"}}  
+        />
+      )
+    }else{
+      return(
+        <img className="img-fluid" 
+          src={this.state.company.logo} 
+          alt="company logo"
+          width="200px"
+          height="100px"
+          style={{float: "right"}}  
+        />
+      )
+    }
+  }
  
- 
-
  
     render() {
       return (
@@ -87,16 +112,25 @@ export default class printPreview extends Component {
          <div className="content" id="policy">
             <Row>
              <Col className="ml-auto mr-auto" md="10">
-                <div id="renderPDF" >
-                <img className="img-fluid" 
-                   src={this.state.company.logo} 
-                   alt="company logo"
-                   width="200px"
-                   height="100px"
-                   />
-                <p style={{fontFamily: 'Verdana', fontSize: 12}}>Company name: {localStorage.getItem("session_name")}</p>
-                <p style={{fontFamily: 'Verdana', fontSize: 12}}>Subscribed Date: {this.state.policy.date_subscribed}</p>
-                <p style={{fontFamily: 'Verdana', fontSize: 12}}>Version: {this.state.policy.version}</p>
+                <div id="renderPDF">
+                  <Row>
+                    <Col className="ml-auto mr-auto" md="5">
+                      <div className="pdfForm-header" >
+                        <p>{localStorage.getItem("session_name")}</p>
+                        <p>Subscribed Date: {this.state.policy.date_subscribed}</p>
+                        <p>Version: {this.state.policy.version}</p>
+                      </div>
+                    </Col>
+                    <Col className="ml-auto mr-auto" md="5">
+                    <img className="img-fluid" 
+                      src={this.state.company.logo === undefined ? "/busLogos/ITPM-02.png":this.state.company.logo}
+                      alt="company logo"
+                      width="200px"
+                      height="100px"
+                      style={{float: "right"}}  
+                    />
+                    </Col>
+                  </Row>
                 <h3 className="text-center">{localStorage.getItem('reviewPolicy')}</h3>
                 {this.renderPDF()}
                 </div>

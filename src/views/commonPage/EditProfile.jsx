@@ -1,21 +1,4 @@
-/*!
 
-=========================================================
-* Paper Dashboard React - v1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-dashboard-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-
-* Licensed under MIT (https://github.com/creativetimofficial/paper-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 import Axios from "axios";
 import { toast } from "react-toastify";
@@ -92,7 +75,7 @@ class Policies extends React.Component {
   //Save button handler
   handleSaveProfile(e) {
     e.preventDefault();
-    var realpath = "/"+document.getElementById('file_upl').files[0].name; 
+    var realpath = "/busLogos"+document.getElementById('file_upl').files[0].name; 
     console.log("handleSaveProfile clicked! ");
     const companyDetails = {
       _id: this.state.companyDetails._id,

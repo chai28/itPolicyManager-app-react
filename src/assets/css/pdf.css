@@ -1,0 +1,18 @@
+/*************************************/
+/*  pdf formatting for printpreview  */
+/*************************************/
+
+.pdfForm-control{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
+    margin-left: 30px;
+    margin-right: 30px;
+    text-align: justify;
+  
+  }
+  
+  .pdfForm-header{ 
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 12px;
+    width: 100%;
+  }
