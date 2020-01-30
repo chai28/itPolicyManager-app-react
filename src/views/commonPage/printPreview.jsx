@@ -47,13 +47,11 @@ export default class printPreview extends Component {
 //handle print button
     handlePrint =(e) =>{
       e.preventDefault();
-      // console.log("print clicked! ");
-      // console.log(this.state.policy);
      let input = document.getElementById("renderPDF");
       html2canvas(input)
        .then((canvas) => {
-        const imgData = canvas.toDataURL('image/png');
-        // const pdf = new jsPDF();
+        let imgData = canvas.toDataURL('image/png');
+        // imgData = imgData.replace(/^data:image\/(png|jpg);base64,/, "")
         const pdf = new jsPDF('p', 'mm' ,[950,1700]);
         pdf.addImage(imgData, 'PNG', 0, 0);
         pdf.save( localStorage.getItem('reviewPolicy'));  
@@ -84,8 +82,8 @@ export default class printPreview extends Component {
          <div className="content" id="policy">
             <Row>
              <Col className="ml-auto mr-auto" md="10">
-                <div id="renderPDF">
-                  <Row>
+                <div id="renderPDF" style={{border: "1px solid", margin: "20px"}}>
+                  <Row style={{marginTop: "50px"}}>
                     <Col className="ml-auto mr-auto" md="5">
                       <div className="pdfForm-header" >
                         <p>{localStorage.getItem("session_name")}</p>
@@ -104,6 +102,7 @@ export default class printPreview extends Component {
                     />
                     </Col>
                   </Row>
+                <br></br><br></br>
                 <h3 className="text-center">{localStorage.getItem('reviewPolicy')}</h3>
                 {this.renderPDF()}
                 </div>
