@@ -15,7 +15,6 @@ export default class printPreview extends Component {
     this.handlePrint = this.handlePrint.bind(this);
     this.renderPDF = this.renderPDF.bind(this);
     this.getDate = this.getDate.bind(this);
-    this.companyLogo = this.companyLogo.bind(this);
     this.state = {
       contents: [],
       tempcontents:[],
@@ -78,34 +77,7 @@ export default class printPreview extends Component {
     });
   }
  
-  companyLogo(){
-    console.log("--->" +this.state.company.logo)
-    if(this.state.company.logo === undefined){
-      console.log("here" +this.state.company.logo )
-      // const url = "./assets/busLogos/logo.jpg";
-      return(
-        <img className="img-fluid" 
-          src="/busLogos/ITPM-02.png"
-          alt="company logo"
-          width="200px"
-          height="100px"
-          style={{float: "right"}}  
-        />
-      )
-    }else{
-      return(
-        <img className="img-fluid" 
-          src={this.state.company.logo} 
-          alt="company logo"
-          width="200px"
-          height="100px"
-          style={{float: "right"}}  
-        />
-      )
-    }
-  }
- 
- 
+  
     render() {
       return (
         <>
@@ -123,7 +95,8 @@ export default class printPreview extends Component {
                     </Col>
                     <Col className="ml-auto mr-auto" md="5">
                     <img className="img-fluid" 
-                      src={this.state.company.logo === undefined ? "/busLogos/ITPM-02.png":this.state.company.logo}
+                      src={this.state.company.logo === undefined ? 
+                        "/busLogos/ITPM-02.png":this.state.company.logo}
                       alt="company logo"
                       width="200px"
                       height="100px"
