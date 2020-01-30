@@ -5,7 +5,7 @@ import { Nav } from "reactstrap";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
 
-import logo from "assets/img/ITPM-04.png";
+import logo from "assets/img/ITPM-03.png";
 
 import routes from "routes.js";
 
@@ -61,8 +61,8 @@ class Sidebar extends React.Component {
             href="/dashboard/dashboardcontent"
             className="simple-text logo-mini"
           >
-            <div className="logo-img">
-              <img src={logo} alt="react-logo" style={{bacgroundColor:'black'}}/>
+            <div className="logo-mini">
+              <img src={logo} alt="react-logo"/>
             </div>
           </a>
           <a
