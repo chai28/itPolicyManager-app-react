@@ -52,8 +52,8 @@ export default class printPreview extends Component {
        .then((canvas) => {
         let imgData = canvas.toDataURL('image/png');
         // imgData = imgData.replace(/^data:image\/(png|jpg);base64,/, "")
-        const pdf = new jsPDF('p', 'mm' ,[950,1700]);
-        pdf.addImage(imgData, 'PNG', 0, 0);
+        const pdf = new jsPDF('p', 'mm' ,[950,1980]);
+        pdf.addImage(imgData, 'PNG', 10, 12);
         pdf.save( localStorage.getItem('reviewPolicy'));  
      });
   }
@@ -82,8 +82,8 @@ export default class printPreview extends Component {
          <div className="content" id="policy">
             <Row>
              <Col className="ml-auto mr-auto" md="10">
-                <div id="renderPDF" style={{border: "1px solid", margin: "20px"}}>
-                  <Row style={{marginTop: "50px"}}>
+                <div id="renderPDF" style={{ margin: "20px"}}>
+                  <Row style={{marginTop: "80px"}}>
                     <Col className="ml-auto mr-auto" md="5">
                       <div className="pdfForm-header" >
                         <p>{localStorage.getItem("session_name")}</p>
