@@ -20,6 +20,7 @@ class MatchedPolicies extends React.Component {
     super(props);
 
     this.policy = this.policy.bind(this);
+    this.subscribeBtn = this.subscribeBtn.bind(this)
     this.checkboxHandler = this.checkboxHandler.bind(this);
 
     this.state = {
@@ -83,7 +84,9 @@ class MatchedPolicies extends React.Component {
   }
 
   policy() {
-    if(this.state.policies.legnth === undefined){
+    console.log( this.state.policies.length)
+   
+    if(this.state.policies.length === 0){
       return(
         <p className="text-center">
         You don't have any match Policies available</p>
@@ -109,27 +112,36 @@ class MatchedPolicies extends React.Component {
               </td>
             </tr>
             </tbody>
-            <tfooter>
-              <Button
-                className="btn-round"
-                color="success"
-                style={{ float: "right" }}
-                to={{
-                  pathname: "/subscription-payment",
-                  state: {
-                    test: 'testing',
-                  }
-                }}
-                title="to Survey Page"
-                target="blank"
-                tag={Link}
-              >
-                Subscribe
-              </Button>
-            </tfooter>
           </>
         );
       });
+    }
+  }
+
+  subscribeBtn(){
+    if(this.state.policies.length === 0){
+      //button will not display.
+    }else{
+      return(
+        <tfooter>
+          <Button
+            className="btn-round"
+            color="success"
+            style={{ float: "right" }}
+            to={{
+              pathname: "/subscription-payment",
+              state: {
+                test: 'testing',
+              }
+            }}
+            title="to Survey Page"
+            target="blank"
+            tag={Link}
+          >
+            Subscribe
+          </Button>
+        </tfooter>
+      )
     }
   }
 
@@ -154,6 +166,7 @@ class MatchedPolicies extends React.Component {
                       </tr>
                     </thead>
                     {this.policy()}
+                    {this.subscribeBtn()}
                   </Table>
                 </CardBody>
               </Card>
