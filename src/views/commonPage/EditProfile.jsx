@@ -14,7 +14,6 @@ import {
   Button
 } from "reactstrap";
 
-
 class Policies extends React.Component {
   constructor(props) {
     super(props);
@@ -111,6 +110,14 @@ class Policies extends React.Component {
   }
 
   render() {
+    //Style
+    const uploadStyle ={
+      fontSize: "16px",
+      borderRadius: "5px",
+      borderStyle: "inherit",
+      padding: "10px",
+      backgroundColor: "white",
+    };
     return (
       <>
         <div className="content">
@@ -163,16 +170,15 @@ class Policies extends React.Component {
                   </label>
                   <InputGroup className="form-group-no-border">
                     <Input
+                      style={uploadStyle}
+                      color="info"
                       id="file_upl"
                       type="file"
                       name="bLogo"
                       onChange={this.onChangeInput}
-                    />
-                     {/* <ReactCoreImageUpload
-                        text="Upload Your logo"
-                        className='pure-button'
-                        inputOfFile={this.state.bLogo}>
-                    </ReactCoreImageUpload> */}
+                    >
+                      Upload Company Logo
+                   </Input>
                   </InputGroup>
                 </FormGroup>
                 <FormGroup>

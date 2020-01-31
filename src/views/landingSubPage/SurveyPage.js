@@ -58,7 +58,13 @@ import {
     }
 
     submitToDB(){
-        const matchPolicies = this.state.policies;
+        const matchPolicies = [];
+        this.state.policies.forEach(match => {
+          if(match !== "5df2a662c550f92dd4c02274"){
+            matchPolicies.push(match);
+          }
+        })
+        console.log(matchPolicies);
         const RegisterDetails = {
             bNameInput: this.state.bNameInput,
             nzbnInput: this.state.nzbnInput,

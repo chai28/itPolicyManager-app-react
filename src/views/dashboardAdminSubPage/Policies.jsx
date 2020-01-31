@@ -1,22 +1,6 @@
-/*!
 
-=========================================================
-* Paper Dashboard React - v1.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-dashboard-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-
-* Licensed under MIT (https://github.com/creativetimofficial/paper-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
+import Axios from "axios";
 
 // reactstrap components
 import {
@@ -31,6 +15,62 @@ import {
 } from "reactstrap";
 
 class Policies extends React.Component {
+  constructor(props){
+    super(props);
+    this.displayPolicies = this.displayPolicies.bind(this);
+    this.state = {
+      policies: []
+    };
+  }
+
+  componentDidMount() {
+    Axios.get("http://localhost:5000/policies", {
+      params: {type: "all" }
+    })
+      .then(response => {
+        this.setState({
+          policies: response.data
+        });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }
+
+  displayPolicies(policies){
+    return policies.map((policy, index) => {
+      return (
+        <tr>
+          <td>{policy.policy_name}</td>
+          <td className="text-center">
+              <Button
+                className="btn-round"
+                outline
+                color="info"
+                href="#pablo"
+                onClick={e => e.preventDefault()}
+              >
+                <i className="nc-icon nc-ruler-pencil" style={{fontSize: "15px", color: "info"}}/>
+                Edit
+              </Button>
+              {" "}
+              <Button
+                className="btn-round"
+                outline
+                color="danger"
+                href="#pablo"
+                onClick={e => e.preventDefault()}
+              >
+                <i className="nc-icon nc-basket" style={{fontSize: "15px", color: "danger"}}/>
+                Delete
+              </Button>
+          </td>
+        </tr>
+      );
+    })
+  }
+
+
   render() {
     return (
       <>
@@ -53,201 +93,7 @@ class Policies extends React.Component {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>Components</td>
-                        <td className="text-center" style={{ width: "25%" }}>
-                          <Row>
-                            <Button
-                              className="btn-round"
-                              style={{ "margin-right": "7px" }}
-                              color="info"
-                              href="#pablo"
-                              onClick={e => e.preventDefault()}
-                            >
-                              Edit
-                            </Button>
-                            <Button
-                              className="btn-round"
-                              color="danger"
-                              href="#pablo"
-                              onClick={e => e.preventDefault()}
-                            >
-                              Delete
-                            </Button>
-                          </Row>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Plugins</td>
-                        <td className="text-center" style={{ width: "25%" }}>
-                          <Row>
-                            <Button
-                              className="btn-round"
-                              style={{ "margin-right": "7px" }}
-                              color="info"
-                              href="#pablo"
-                              onClick={e => e.preventDefault()}
-                            >
-                              Edit
-                            </Button>
-                            <Button
-                              className="btn-round"
-                              color="danger"
-                              href="#pablo"
-                              onClick={e => e.preventDefault()}
-                            >
-                              Delete
-                            </Button>
-                          </Row>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Example Pages</td>
-                        <td className="text-center" style={{ width: "25%" }}>
-                          <Row>
-                            <Button
-                              className="btn-round"
-                              style={{ "margin-right": "7px" }}
-                              color="info"
-                              href="#pablo"
-                              onClick={e => e.preventDefault()}
-                            >
-                              Edit
-                            </Button>
-                            <Button
-                              className="btn-round"
-                              color="danger"
-                              href="#pablo"
-                              onClick={e => e.preventDefault()}
-                            >
-                              Delete
-                            </Button>
-                          </Row>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Login, Register, Pricing, Lock Pages</td>
-                        <td className="text-center" style={{ width: "25%" }}>
-                          <Row>
-                            <Button
-                              className="btn-round"
-                              style={{ "margin-right": "7px" }}
-                              color="info"
-                              href="#pablo"
-                              onClick={e => e.preventDefault()}
-                            >
-                              Edit
-                            </Button>
-                            <Button
-                              className="btn-round"
-                              color="danger"
-                              href="#pablo"
-                              onClick={e => e.preventDefault()}
-                            >
-                              Delete
-                            </Button>
-                          </Row>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          DataTables, VectorMap, SweetAlert, Wizard,
-                          jQueryValidation, FullCalendar etc...
-                        </td>
-                        <td className="text-center" style={{ width: "25%" }}>
-                          <Row>
-                            <Button
-                              className="btn-round"
-                              style={{ "margin-right": "7px" }}
-                              color="info"
-                              href="#pablo"
-                              onClick={e => e.preventDefault()}
-                            >
-                              Edit
-                            </Button>
-                            <Button
-                              className="btn-round"
-                              color="danger"
-                              href="#pablo"
-                              onClick={e => e.preventDefault()}
-                            >
-                              Delete
-                            </Button>
-                          </Row>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Mini Sidebar</td>
-                        <td className="text-center" style={{ width: "25%" }}>
-                          <Row>
-                            <Button
-                              className="btn-round"
-                              style={{ "margin-right": "7px" }}
-                              color="info"
-                              href="#pablo"
-                              onClick={e => e.preventDefault()}
-                            >
-                              Edit
-                            </Button>
-                            <Button
-                              className="btn-round"
-                              color="danger"
-                              href="#pablo"
-                              onClick={e => e.preventDefault()}
-                            >
-                              Delete
-                            </Button>
-                          </Row>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Premium Support</td>
-                        <td className="text-center" style={{ width: "25%" }}>
-                          <Row>
-                            <Button
-                              className="btn-round"
-                              style={{ "margin-right": "7px" }}
-                              color="info"
-                              href="#pablo"
-                              onClick={e => e.preventDefault()}
-                            >
-                              Edit
-                            </Button>
-                            <Button
-                              className="btn-round"
-                              color="danger"
-                              href="#pablo"
-                              onClick={e => e.preventDefault()}
-                            >
-                              Delete
-                            </Button>
-                          </Row>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td />
-                        <td className="text-center" style={{ width: "25%" }}>
-                          <Row>
-                            <Button
-                              className="btn-round"
-                              style={{ "margin-right": "7px" }}
-                              color="info"
-                              href="#pablo"
-                              onClick={e => e.preventDefault()}
-                            >
-                              Edit
-                            </Button>
-                            <Button
-                              className="btn-round"
-                              color="danger"
-                              href="#pablo"
-                              onClick={e => e.preventDefault()}
-                            >
-                              Delete
-                            </Button>
-                          </Row>
-                        </td>
-                      </tr>
+                     {this.displayPolicies(this.state.policies)}
                     </tbody>
                   </Table>
                 </CardBody>

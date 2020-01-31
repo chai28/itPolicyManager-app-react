@@ -53,7 +53,7 @@ class QuestionForm extends Component {
                         <div className = "form-check"> 
                         {
                             question.options.map(function (option, optionIndex) {
-                                console.log("option" + option.name);
+                                // console.log("option" + option.name);
                                 return ( 
                                     <>
                                     <div>

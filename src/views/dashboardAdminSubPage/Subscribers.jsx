@@ -11,16 +11,21 @@ import {
   CardTitle,
   Table,
   Row,
-  Col
+  Col,
+  Modal,
 } from "reactstrap";
 
 class Subscribers extends React.Component {
   constructor(props) {
     super(props);
 
+    this.getCompanyDetails = this.getCompanyDetails.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
     this.displaySubscribers = this.displaySubscribers.bind(this);
     this.state = {
-      companies: []
+      companies: [],
+      modal: false,
+      company: []
     };
   }
 
@@ -60,7 +65,10 @@ class Subscribers extends React.Component {
                       style={{'marginRight':'7px'}}
                       color="info"
                       href="#pablo"
-                      onClick={e => e.preventDefault()}//needs to implement
+                      onClick={this.getCompanyDetails}
+                      title="to details Modal"
+                      type="button"
+                      value={name}
                   >
                       Details
                   </Button>
@@ -75,6 +83,28 @@ class Subscribers extends React.Component {
       }
     });
   }
+
+
+  getCompanyDetails(e){
+    e.preventDefault();
+    console.log(e.target.value)
+    Axios.get("http://localhost:5000/company", {
+        params: { _id: e.target.value, type: "company" }
+      }).then(response => {
+        this.setState({
+          modal: !this.state.modal,
+          company: response.data
+        });
+      })
+      console.log(this.state.company.company_name);
+  }
+
+  toggleModal(e){
+    e.preventDefault();
+      this.setState({
+        modal: !this.state.modal,
+      });
+  };
 
   render() {
     return (
@@ -107,9 +137,28 @@ class Subscribers extends React.Component {
             </Col>
           </Row>
         </div>
+        {/* Modal Details */}
+        <Modal isOpen={this.state.modal} toggle={this.toggleModal} size="m">
+          <div className="modal-header">
+              <button
+                aria-label="Close"
+                className="close"
+                type="button"
+                onClick={this.toggleModal}
+              >
+                <span aria-hidden={true}>×</span>
+              </button>
+              <h5
+                className="modal-title text-center"
+              >
+                {/* {this.state.company.company_name} details */}
+              </h5>
+            </div>
+        </Modal>
       </>
     );
   }
 }
 
 export default Subscribers;
+ 

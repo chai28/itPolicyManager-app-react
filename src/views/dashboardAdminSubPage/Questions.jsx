@@ -102,7 +102,9 @@ class Questions extends React.Component {
           {question.options.map((option, optionIndex) => (
             <Row>
                 <Col md="2">
-                    <Button className="btn-round" color="danger" onClick={() => deleteOption(optionIndex)}>delete</Button>
+                    <Button className="btn-round" color="danger" outline onClick={() => deleteOption(optionIndex)}>
+                      <i className="nc-icon nc-basket" style={{fontSize: "18px", color: "red"}}/>
+                    </Button>
                 </Col>
                 <Col md="10">
                     <li style={{listStyleType: "none"}}>{this.renderOption(option, optionIndex, questionIndex)}</li>

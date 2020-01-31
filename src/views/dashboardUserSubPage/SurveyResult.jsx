@@ -36,11 +36,14 @@ class MatchedPolicies extends React.Component {
       params: { _id: localStorage.getItem("session_name"), type: "company" }
     })
       .then(response => {
-        console.log("response.data: " + response.data.match_policy);
-        this.setState({
-          matchedPolicies: response.data.match_policy
-        });
-        this.getMatchedPolicy();
+        // console.log("response.data: " + response.data.match_policy);
+        if(response.data.match_policy !== 0){
+          console.log("here" + response.data.match_policy)
+          this.setState({
+            matchedPolicies: response.data.match_policy
+          });
+          this.getMatchedPolicy();
+        }
       })
       .catch(function(error) {
         console.log(error);
@@ -80,26 +83,54 @@ class MatchedPolicies extends React.Component {
   }
 
   policy() {
-    return this.state.policies.map(policy => {
-      return (
-        <>
-          <tr key={policy._id}>
-            <td key={policy._id + 1}>
-              <label key={policy.policy_name}>
-                <Input
-                  key={policy._id + 2}
-                  type="checkbox"
-                  value={policy._id}
-                  defaultChecked={this.state.isSelected}
-                  onClick={this.checkboxHandler}
-                />
-                {policy.policy_name}
-              </label>
-            </td>
-          </tr>
-        </>
-      );
-    });
+    if(this.state.policies.legnth === undefined){
+      return(
+        <p className="text-center">
+        You don't have any match Policies available</p>
+        //offer to direct in taking the survey
+      )
+    }else{
+      return this.state.policies.map(policy => {
+        return (
+          <>
+          <tbody>
+            <tr key={policy._id}>
+              <td key={policy._id + 1}>
+                <label key={policy.policy_name}>
+                  <Input
+                    key={policy._id + 2}
+                    type="checkbox"
+                    value={policy._id}
+                    defaultChecked={this.state.isSelected}
+                    onClick={this.checkboxHandler}
+                  />
+                  {policy.policy_name}
+                </label>
+              </td>
+            </tr>
+            </tbody>
+            <tfooter>
+              <Button
+                className="btn-round"
+                color="success"
+                style={{ float: "right" }}
+                to={{
+                  pathname: "/subscription-payment",
+                  state: {
+                    test: 'testing',
+                  }
+                }}
+                title="to Survey Page"
+                target="blank"
+                tag={Link}
+              >
+                Subscribe
+              </Button>
+            </tfooter>
+          </>
+        );
+      });
+    }
   }
 
   render() {
@@ -122,25 +153,7 @@ class MatchedPolicies extends React.Component {
                         <th className="text-center">Policy Name</th>
                       </tr>
                     </thead>
-                    <tbody>{this.policy()}</tbody>
-                    <tfooter>
-                      <Button
-                        className="btn-round"
-                        color="success"
-                        style={{ float: "right" }}
-                        to={{
-                          pathname: "/subscription-payment",
-                          state: {
-                            test: 'testing',
-                          }
-                        }}
-                        title="to Survey Page"
-                        target="blank"
-                        tag={Link}
-                      >
-                        Subscribe
-                      </Button>
-                    </tfooter>
+                    {this.policy()}
                   </Table>
                 </CardBody>
               </Card>
