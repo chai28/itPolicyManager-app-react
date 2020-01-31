@@ -52,8 +52,8 @@ export default class printPreview extends Component {
        .then((canvas) => {
         let imgData = canvas.toDataURL('image/png');
         // imgData = imgData.replace(/^data:image\/(png|jpg);base64,/, "")
-        let pdf = new jsPDF('p', 'mm' ,[950,1980]);
-        pdf.addImage(imgData, 'JPEG', 10, 12);
+        let pdf = new jsPDF('p', 'mm' ,[950,2000]);
+        pdf.addImage(imgData, 'PNG', 10, 12);
         pdf.save( localStorage.getItem('reviewPolicy'));  
      });
   }
