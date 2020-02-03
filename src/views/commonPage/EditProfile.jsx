@@ -74,7 +74,12 @@ class Policies extends React.Component {
   //Save button handler
   handleSaveProfile(e) {
     e.preventDefault();
-    var realpath = "/busLogos/"+document.getElementById('file_upl').files[0].name; 
+    var realpath;
+    if(! document.getElementById('file_upl').files[0]==""){
+      var realpath = "/busLogos/"+document.getElementById('file_upl').files[0].name; 
+    }else{
+      var realpath ="";
+    }
     console.log("handleSaveProfile clicked! ");
     const companyDetails = {
       _id: this.state.companyDetails._id,
