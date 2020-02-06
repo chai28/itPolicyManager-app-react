@@ -135,7 +135,6 @@ class MatchedPolicies extends React.Component {
               }
             }}
             title="to Survey Page"
-            target="blank"
             tag={Link}
           >
             Subscribe

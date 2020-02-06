@@ -49,7 +49,7 @@ class PaymentForm extends React.Component {
           type: "success", 
           position: toast.POSITION.TOP_CENTER,
           onClose: ()=> {
-            window.location.href = '/landing-page'
+            window.location.href = '/dashboard/subscribed-policies'
           }
         });
       } else {
