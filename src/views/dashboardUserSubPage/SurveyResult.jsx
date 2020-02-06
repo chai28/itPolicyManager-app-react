@@ -88,9 +88,15 @@ class MatchedPolicies extends React.Component {
    
     if(this.state.policies.length === 0){
       return(
+        <>
         <p className="text-center">
         You don't have any match Policies available</p>
-        //offer to direct in taking the survey
+        <p className="text-center">
+          You can <a href="take-survey" style={{color: "blue"}}>
+            TAKE A SURVEY</a> to get suggested policies
+        </p>
+        {/* work on the link and data */}
+        </>
       )
     }else{
       return this.state.policies.map(policy => {

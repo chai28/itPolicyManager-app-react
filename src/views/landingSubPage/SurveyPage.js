@@ -76,6 +76,7 @@ import {
             const company = {
                 id: res.data.id,
                 policies: matchPolicies,
+                status: "new"
             }
             Axios.post('http://localhost:5000/company', company)
             .then(response => {

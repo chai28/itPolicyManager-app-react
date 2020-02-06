@@ -25,7 +25,6 @@ class AddKeyContacts extends React.Component {
     super(props);
     this.onChangeInput = this.onChangeInput.bind(this);
     this.onAddKeyContactClick = this.onAddKeyContactClick.bind(this);
-    this.toggleNotificationModal = this.toggleNotificationModal.bind(this);
 
     this.state = {
       fname: '',
@@ -33,42 +32,7 @@ class AddKeyContacts extends React.Component {
       email: '',
       position: '',
       userId: localStorage.getItem('session_id'),
-      //temp modal
-      Notification: false,
-      pop:'',
-      message:'',
-      messageHeader:'',
-      target:''
-
     }
-}
-  
-//modal handler
-  componentDidMount() {
-    document.body.classList.add("register-page");
-    //temp Modal
-    document.addEventListener('mousedown', this.handleClickOutside, true);
-  }
-
-//Modal handler
-componentWillUnmount() {
-    document.removeEventListener('mousedown', this.handleClickOutside, true);
-}
-
-handleClickOutside(event) {
-    if ((this.pop!==undefined?!this.pop.contains(event.target):false)) {
-      this.setState({
-        Notification: false
-      });
-    }
-}
-
-toggleNotificationModal(){
-    this.setState({
-      Notification: !this.state.Notification
-    });
-
-    console.log("Modal must display" + this.state.Notification)
 }
 /**** End of modal handler****/
 
@@ -198,43 +162,6 @@ toggleNotificationModal(){
           </Col>
         </Row>
       </div>
-      {/* modal for notification Temporary
-      <Container>
-            <Card className="ml-auto mr-auto">
-              <Row>
-                <Col className="ml-auto mr-auto" lg="4">
-                  <Modal 
-                    isOpen={this.state.Notification}
-                    toggle={this.toggleNotificationModal} 
-                    size="l" 
-                    role="dialog" 
-                  >
-                    <div id='pop' ref={node=>{this.pop = node;}}>
-                      <div className="modal-header">
-                      <button
-                        aria-label="Close"
-                        className="close"
-                        type="button"
-                        onClick={this.toggleNotificationModal}
-                      >
-                        <span aria-hidden={true}>×</span>
-                      </button>
-                      <h5 className="modal-title text-center">{this.state.messageHeader}</h5>
-                      </div>
-                      <div className="modal-body">
-                        <p>{this.state.message}</p>
-                      </div>
-                    </div>
-                    </Modal>
-                  </Col>
-                </Row>
-              </Card>
-            </Container> */}
-      {/* <Modals onModalDisplay={(show, messageHeader, message) => this.setState({ 
-          showmodal: show,
-          messageHeader: messageHeader,
-          message: message
-      })}/> */}
       </>
     );
   }

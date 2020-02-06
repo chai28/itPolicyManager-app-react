@@ -75,10 +75,10 @@ class Policies extends React.Component {
   handleSaveProfile(e) {
     e.preventDefault();
     var realpath;
-    if(! document.getElementById('file_upl').files[0]==""){
-      var realpath = "/busLogos/"+document.getElementById('file_upl').files[0].name; 
+    if(! document.getElementById('file_upl').files[0]===""){
+      realpath = "/busLogos/"+document.getElementById('file_upl').files[0].name; 
     }else{
-      var realpath ="";
+      realpath ="";
     }
     console.log("handleSaveProfile clicked! ");
     const companyDetails = {

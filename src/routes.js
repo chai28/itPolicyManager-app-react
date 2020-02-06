@@ -18,6 +18,7 @@ import ActionPage from "views/dashboardUserSubPage/policyActionViewPage.jsx";
 import ReviewPage from "views/dashboardUserSubPage/reviewPage.jsx";
 import DisplayPolicy from "views/commonPage/DisplayPolicy.jsx";
 import printPreview from "views/commonPage/printPreview.jsx";
+import takeSurvey from "views/dashboardUserSubPage/takeSurvey.jsx";
   const userType = localStorage.getItem('session_type')
   console.log("userType" + userType);
 
@@ -145,6 +146,13 @@ var routesClient = [
   {
     path: "/printPreview",
     component:printPreview,
+    sidebar: false,
+    layout: "/dashboard"
+  },
+  {
+    path: "/take-survey",
+    name2:"take survey",
+    component:takeSurvey,
     sidebar: false,
     layout: "/dashboard"
   },
