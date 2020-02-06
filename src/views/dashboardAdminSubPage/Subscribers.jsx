@@ -19,12 +19,14 @@ class Subscribers extends React.Component {
   constructor(props) {
     super(props);
 
-    this.getCompanyDetails = this.getCompanyDetails.bind(this);
+    this.openModal = this.openModal.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.displaySubscribers = this.displaySubscribers.bind(this);
+    this.displayDetails = this.displayDetails.bind(this);
     this.state = {
       companies: [],
       modal: false,
+      index: "",
       company: []
     };
   }
@@ -46,7 +48,7 @@ class Subscribers extends React.Component {
   displaySubscribers() {
     return this.state.companies.map((company, index) => {
       let subscription
-      // console.log(company.company_name)
+      // console.log(company._id)
       let name = company.company_name;
       let length = company.subscribed_policy.length
       if(length !== 0){
@@ -57,18 +59,16 @@ class Subscribers extends React.Component {
       if(company.company_name !== "IT_policy manager"){
         return (
             <tr key={index}>
-              <td key={index + 1} className="text-center">{name}</td>
+              <td key={name} className="text-center">{name}</td>
               <td key={index + 2} className="text-center">{subscription}</td>
               <td key={index + 3} className="text-center">
                   <Button
                       className="btn-round"
                       style={{'marginRight':'7px'}}
                       color="info"
-                      href="#pablo"
-                      onClick={this.getCompanyDetails}
+                      onClick={() => this.openModal(index)}
                       title="to details Modal"
                       type="button"
-                      value={name}
                   >
                       Details
                   </Button>
@@ -85,24 +85,83 @@ class Subscribers extends React.Component {
   }
 
 
-  getCompanyDetails(e){
-    e.preventDefault();
-    console.log(e.target.value)
-    Axios.get("http://localhost:5000/company", {
-        params: { _id: e.target.value, type: "company" }
-      }).then(response => {
-        this.setState({
-          modal: !this.state.modal,
-          company: response.data
-        });
-      })
-      console.log(this.state.company.company_name);
+  openModal(index){
+    this.setState({
+      modal: !this.state.modal,
+      index: index,
+      company:this.state.companies[index] 
+    });
+    console.log(this.state.companies[index].company_name)
+  }
+
+  displayDetails() {
+    console.log(this.state.company)
+    return(
+      <>
+        <div className="modal-header">
+          <button
+            aria-label="Close"
+            className="close"
+            type="button"
+            onClick={this.toggleModal}
+          >
+            <span aria-hidden={true}>×</span>
+          </button>
+          <h5>{this.state.company.company_name}</h5>
+        </div>
+        <div className="modal-body">
+          <label>
+            <strong>NZBN:</strong> {this.state.company.nzbn}
+          </label><br></br>
+          <label>
+            <strong>Email:</strong> {this.state.company.company_email}
+          </label><br></br>
+          <label>
+            <strong>Date Registered:</strong> {this.state.company.date_registered}
+          </label><br></br>
+          <label>
+            <strong>Address:</strong> {this.state.company.address}
+          </label><br></br>
+          <label>
+            <strong>Contact #:</strong> {this.state.company.contact}
+          </label><br></br>
+          <label>
+            <strong>Description:</strong> {this.state.company.description}
+          </label><br></br>
+        </div>
+        <div className="modal-footer">
+          <div>
+            <Button
+              className="btn-round"
+              outline
+              color="default"
+              type="button"
+            >
+              <i className="nc-icon nc-ruler-pencil" style={{fontSize: "15px", color: "info"}}/>
+              Edit
+            </Button>
+          </div>
+          <div>
+            <Button 
+              className="btn-round" 
+              outline
+              color="danger" 
+              type="button">
+              <i className="nc-icon nc-basket" style={{fontSize: "15px", color: "danger"}}/>  
+              Delete
+            </Button>
+          </div>
+        </div>
+      </>
+    )
+      
   }
 
   toggleModal(e){
     e.preventDefault();
       this.setState({
         modal: !this.state.modal,
+        index: ""
       });
   };
 
@@ -137,23 +196,8 @@ class Subscribers extends React.Component {
             </Col>
           </Row>
         </div>
-        {/* Modal Details */}
         <Modal isOpen={this.state.modal} toggle={this.toggleModal} size="m">
-          <div className="modal-header">
-              <button
-                aria-label="Close"
-                className="close"
-                type="button"
-                onClick={this.toggleModal}
-              >
-                <span aria-hidden={true}>×</span>
-              </button>
-              <h5
-                className="modal-title text-center"
-              >
-                {/* {this.state.company.company_name} details */}
-              </h5>
-            </div>
+        {this.displayDetails()}
         </Modal>
       </>
     );

@@ -36,6 +36,7 @@ import {
 
 // core components
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
+import DemoFooter from "components/Footers/DemoFooter.js";
 
 class SignIn extends Component {
   constructor(props) {
@@ -191,12 +192,8 @@ render(){
             </Col>
           </Row>
         </Container>
-        <div className="footer register-footer text-center">
-          <h6>
-            © {new Date().getFullYear()}, by IT Psychiatrist
-          </h6>
-        </div>
       </div>
+      <DemoFooter />
     </>
   );
 }

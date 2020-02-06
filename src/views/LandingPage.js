@@ -34,10 +34,13 @@ function LandingPage() {
   });
   return (
     <>
+      {/* Navigation Bar */}
       <ExamplesNavbar />
+      {/* Header */}
       <LandingPageHeader />
       <div className={styles.main}>
-        <div className="section text-center">
+        {/* Product Part */}
+        <div className="section text-center"> 
           <Container>
             <Row>
               <Col className="ml-auto mr-auto" md="8">
@@ -132,6 +135,7 @@ function LandingPage() {
             </Row>
           </Container>
         </div>
+        {/* Take a Survey */}
         <div className="section section-brown text-center">
           <Container>
             <h2 className="title">Take A free Survey</h2>
@@ -152,6 +156,7 @@ function LandingPage() {
             </Button>
           </Container>
         </div>
+        {/* Contact Us Area */}
         <div className="section landing-section">
           <Container>
             <Row>
