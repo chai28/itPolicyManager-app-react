@@ -71,7 +71,7 @@ class takeSurvey extends React.Component {
             <Col className="ml-auto mr-auto" md="10">
               <Card className="card-upgrade" style={{ transform: "none" }}>
                 <CardHeader className="text-center">
-                  <CardTitle tag="h4">Survey</CardTitle>
+                  <CardTitle tag="h4">Survey Form</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <QuestionForm
@@ -79,7 +79,8 @@ class takeSurvey extends React.Component {
                       this.setState({ policies: policies })
                     }
                   />
-                <Button className="btn-round" color="success" onClick={this.submitToDB}>
+                <Button className="btn-round" color="success" style={{float: "right"}}
+                    onClick={this.submitToDB}>
                     Submit
                 </Button>
                 </CardBody>

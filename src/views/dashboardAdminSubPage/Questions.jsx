@@ -1,5 +1,6 @@
 import React from "react";
 import Axios from "axios";
+import { toast } from "react-toastify";
 
 // reactstrap components
 import {
@@ -62,7 +63,24 @@ class Questions extends React.Component {
     
     Axios.post('http://localhost:5000/questions', questionDetails)
     .then(res => {console.log(res.data);
-     
+     //notification
+     if (res.data.result === "success") {
+      toast("Survey questions updated!", {
+        type: "success",
+        position: toast.POSITION.TOP_CENTER,
+        onClose: () => {
+          window.location.reload();
+        }
+      });
+    } else {
+      toast("Unable to update the Survey questions!", {
+        type: "error",
+        position: toast.POSITION.TOP_CENTER,
+        onClose: () => {
+          window.location.reload();
+        }
+      });
+    }
     });
   }
 
