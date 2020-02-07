@@ -99,13 +99,13 @@ class MatchedPolicies extends React.Component {
         </>
       )
     }else{
-      return this.state.policies.map(policy => {
+      return this.state.policies.map((policy, index) => {
         return (
           <>
           <tbody>
-            <tr key={policy._id}>
-              <td key={policy._id + 1}>
-                <label key={policy.policy_name}>
+            <tr>
+              <td key={index}>
+                <label>
                   <Input
                     key={policy._id + 2}
                     type="checkbox"
@@ -129,7 +129,6 @@ class MatchedPolicies extends React.Component {
       //button will not display.
     }else{
       return(
-        <tfooter>
           <Button
             className="btn-round"
             color="success"
@@ -145,7 +144,6 @@ class MatchedPolicies extends React.Component {
           >
             Subscribe
           </Button>
-        </tfooter>
       )
     }
   }
@@ -171,7 +169,7 @@ class MatchedPolicies extends React.Component {
                       </tr>
                     </thead>
                     {this.policy()}
-                    {this.subscribeBtn()}
+                    <tfooter>{this.subscribeBtn()}</tfooter>
                   </Table>
                 </CardBody>
               </Card>

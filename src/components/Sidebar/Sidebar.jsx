@@ -6,6 +6,7 @@ import { Nav } from "reactstrap";
 import PerfectScrollbar from "perfect-scrollbar";
 
 import logo from "assets/img/ITPM-03.png";
+//create functionality for getting the company's logo
 
 import routes from "routes.js";
 
@@ -62,7 +63,7 @@ class Sidebar extends React.Component {
             className="simple-text logo-mini"
           >
             <div className="logo-mini">
-              <img src={logo} alt="react-logo"/>
+              <img src={logo} alt="react-logo"/> 
             </div>
           </a>
           <a

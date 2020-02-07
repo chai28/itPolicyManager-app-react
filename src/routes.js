@@ -19,8 +19,9 @@ import ReviewPage from "views/dashboardUserSubPage/reviewPage.jsx";
 import DisplayPolicy from "views/commonPage/DisplayPolicy.jsx";
 import printPreview from "views/commonPage/printPreview.jsx";
 import takeSurvey from "views/dashboardUserSubPage/takeSurvey.jsx";
-  const userType = localStorage.getItem('session_type')
-  console.log("userType" + userType);
+  const userType = localStorage.getItem('session_type');
+  const userLogo = localStorage.getItem('session_logo');
+  console.log("userLogo" + userLogo);
 
 var routesAdmin = [{
     path: "/dashboardcontent",
@@ -85,6 +86,7 @@ var routesClient = [
     name2:"Survey Result",
     icon: "nc-icon nc-alert-circle-i",
     component: SurveyResult,
+    logo: userLogo,
     sidebar: true,
     layout: "/dashboard"
   },
@@ -94,6 +96,7 @@ var routesClient = [
     name2:"Edit Profile",
     icon: "nc-icon nc-badge",
     component: EditProfile,
+    logo: userLogo,
     sidebar: true,
     layout: "/dashboard"
   },
@@ -103,6 +106,7 @@ var routesClient = [
     name2:"Subscribed Policies",
     icon: "nc-icon nc-book-bookmark",
     component: SubscribedPolicy,
+    logo: userLogo,
     sidebar: true,
     layout: "/dashboard"
   },
@@ -112,6 +116,7 @@ var routesClient = [
     name2:"Key Contact Person",
     icon: "nc-icon nc-simple-add",
     component: keyContactPerson,
+    logo: userLogo,
     sidebar: true,
     layout: "/dashboard"
   },
@@ -119,6 +124,7 @@ var routesClient = [
     path: "/subscribed-policy-action",
     name2:"Policy Details",
     component: ActionPage,
+    logo: userLogo,
     sidebar: false,
     layout: "/dashboard"
   },
@@ -126,6 +132,7 @@ var routesClient = [
     path: "/subscribed-policy-action-start-workflow",
     name2:"Review Details",
     component: ReviewPage,
+    logo: userLogo,
     sidebar: false,
     layout: "/dashboard"
   },
@@ -133,6 +140,7 @@ var routesClient = [
     path: "/AddkeyContacts",
     name2:"Add Key Contacts",
     component:AddKeyContacts,
+    logo: userLogo,
     sidebar: false,
     layout: "/dashboard"
   },
@@ -140,12 +148,14 @@ var routesClient = [
     path: "/DisplayPolicy",
     name2:"Policy Informtion",
     component:DisplayPolicy,
+    logo: userLogo,
     sidebar: false,
     layout: "/dashboard"
   },
   {
     path: "/printPreview",
     component:printPreview,
+    logo: userLogo,
     sidebar: false,
     layout: "/dashboard"
   },
@@ -153,6 +163,7 @@ var routesClient = [
     path: "/take-survey",
     name2:"take survey",
     component:takeSurvey,
+    logo: userLogo,
     sidebar: false,
     layout: "/dashboard"
   },

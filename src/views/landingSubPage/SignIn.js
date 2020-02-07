@@ -82,7 +82,8 @@ class SignIn extends Component {
         localStorage.setItem('session_id', res.data.userId);
         localStorage.setItem('session_type', res.data.userType);
         localStorage.setItem('session_name', res.data.company_name);
-        console.log('session: ', localStorage.getItem('session_id') + (localStorage.getItem('session_type')));
+        localStorage.setItem('session_logo', res.data.logo);
+        // console.log('session: ', localStorage.getItem('session_id') + (localStorage.getItem('session_type')));
         
         if(localStorage.getItem('session_type') === 'admin'){
           this.routeChange('/dashboard/dashboardcontent');
