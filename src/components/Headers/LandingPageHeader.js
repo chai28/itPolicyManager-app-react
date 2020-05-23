@@ -27,7 +27,7 @@ function LandingPageHeader() {
     <>
       <div
         style={{
-          backgroundImage: "url(" + require("assets/img/office.jpg") + ")"
+          backgroundImage: "url(" + require("assets/img/main.jpg") + ")"
         }}
         className="page-header"
         data-parallax={true}
@@ -35,12 +35,12 @@ function LandingPageHeader() {
       >
         <div className="filter" />
         <Container>
-          <div className="motto text-center">
-            <h1>IT Policy Manager</h1>
-            <h3>Your ultimate help in IT Policy generation and management.</h3>
+          <div className="motto text-left">
+            <h1>Flowers---le-volume-sur-printemps</h1>
+            {/* <h3>Your ultimate help in IT Policy generation and management.</h3> */}
             <br />
             <Button
-              href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+              href="https://www.youtube.com/watch?v=pHZEOKtjzXA"
               className="btn-round mr-1"
               color="neutral"
               target="_blank"
@@ -48,14 +48,6 @@ function LandingPageHeader() {
             >
               <i className="fa fa-play" />
               Watch video
-            </Button>
-            <Button 
-              href="/survey-page"
-              className="btn-round" 
-              color="neutral"
-              outline
-            >
-              Try a free survey
             </Button>
           </div>
         </Container>

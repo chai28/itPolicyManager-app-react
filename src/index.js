@@ -13,13 +13,9 @@ import "perfect-scrollbar/css/perfect-scrollbar.css";
 
 // pages
 import LandingPage from "views/LandingPage.js";
-// import ProfilePage from "views/landingSubPage/ProfilePage.js";
-import ContactUsPage from "views/landingSubPage/ContactUsPage.js";
-import SurveyPage from "views/landingSubPage/SurveyPage.js";
+import Introduction from "views/commonPage/introduction.jsx";
 import SignIn from "views/landingSubPage/SignIn.js";
 import Modal from "views/landingSubPage/RegModal.js";
-import Dashboard from "views/Dashboard.jsx";
-import PaySubscription from 'views/commonPage/PaySubscription.js';
 import DisplayReviewPolicy from "views/commonPage/DisplayReviewPolicy.jsx";
 // others
 
@@ -41,7 +37,12 @@ ReactDOM.render(
         path="/register-modal"
         render={props => <Modal {...props} />}
       />
-      <Route
+       <Route
+        path="/introduction"
+        render={props => <Introduction {...props} />}
+      />
+
+      {/* <Route
         path="/contactus-page"
         render={props => <ContactUsPage {...props} />}
       />
@@ -60,7 +61,7 @@ ReactDOM.render(
           <PaySubscription {...props} />
         </StripeProvider>
         )}
-      />
+      /> */}
       <Route
         path="/review-policy/:companyId/:policyName/:userId"
         render={props => <DisplayReviewPolicy key = {props.match.params.userId} {...props} />}

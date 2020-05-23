@@ -32,7 +32,7 @@ export default class DisplayPolicyTest extends Component {
     componentDidMount() {
       console.log(localStorage.getItem("session_name"));
       Axios.get("http://localhost:5000/reviewPolicy", {
-        params: {company_name: localStorage.getItem("session_name"), policy_name: localStorage.getItem('reviewPolicy')}
+        params: {animeName: localStorage.getItem("session_name")}
       })
         .then(response => {
           console.log(response)

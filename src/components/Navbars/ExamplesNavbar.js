@@ -77,7 +77,7 @@ function ExamplesNavbar() {
             title="Coded by Charity"
             tag={Link}
           >
-            IT POLICY MANAGER
+            Let's yuri yuri
           </NavbarBrand>
           <button
             aria-expanded={navbarCollapse}

@@ -29,7 +29,7 @@ function DemoFooter() {
         <Row>
           <div className="credits ml-auto">
             <span className="copyright">
-              © {new Date().getFullYear()}, by IT Policy Manager
+              © {new Date().getFullYear()}, by Let's yuri yuri!
             </span>
           </div>
         </Row>
