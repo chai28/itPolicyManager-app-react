@@ -11,7 +11,7 @@
     "html2canvas": "^1.0.0-rc.5",
     "jodit-react": "^1.0.37",
     "jspdf": "^1.5.3",
-    "moment": "2.24.0",
+    "moment": "2.29.4",
     "node-sass": "4.12.0",
     "nouislider": "13.1.5",
     "perfect-scrollbar": "^1.4.0",
